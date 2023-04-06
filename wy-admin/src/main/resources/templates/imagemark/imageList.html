@@ -1,0 +1,99 @@
+<html layout:decorator="public/layout" xmlns:miguo="http://www.w3.org/1999/html">
+<div layout:fragment="content">
+
+    <!-- 表格工具栏 -->
+    <form class="layui-form toolbar">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">图片分组：</label>
+                <div class="layui-input-inline">
+                    <widget:singleSelect sql="select t.id as id,t.group_name as name from sys_image_groups t "
+                                         name="groupId|1|图片分组|name|id" value="0"/>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">图片标注：</label>
+                <div class="layui-input-inline">
+                    <widget:singleSelect name="imgMark|1|性别|name|id" th:data="${IMAGES_IMGMARK_LIST}" value="0"/>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <div class="layui-input-inline" style="width: auto;">
+                    <widget:btnQuery name="查询"/>
+                    <!--<widget:btnDAll name="批量删除"/>-->
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <!-- 数据表格 -->
+    <table class="layui-hide" id="tableList" lay-filter="tableList"></table>
+
+    <!-- 表格操作列 -->
+    <script type="text/html" id="toolBar">
+        <widget:btnFunc name="标注|mark|layui-icon-templeate-1|layui-bg-cyan|2"/>
+        <widget:btnDel name="删除"/>
+    </script>
+
+    <script type="text/javascript">
+        layui.use(['func'], function () {
+
+            //声明变量
+            var func = layui.func
+                , $ = layui.$;
+
+            //【TABLE列数组】
+            var cols = [
+                {type: 'checkbox', fixed: 'left'}
+                , {field: 'id', width: 80, title: 'ID', align: 'center', sort: true, fixed: 'left'}
+                /*, {field: 'imgUrl', width: 200, title: '图片', align: 'center'}*/
+                , {field: 'imgUrl', width: 100, title: '图片', align: 'center', templet: function (d) {
+                        var avatarStr = "";
+                        if (d.avatarUrl) {
+                            avatarStr = '<a href="' + d.avatarUrl + '" target="_blank"><img src="' + d.avatarUrl + '" height="26" /></a>';
+                        }
+                        return avatarStr;
+                    }
+                }
+                , {field: 'imgGroupName', width: 150, title: '图片分组', align: 'center'}
+                , {field: 'imgMark', width: 100, title: '图片标注', align: 'center', templet(d) {
+                    var cls = "";
+                    if (d.imgMark == 1) {
+                        // 已标注
+                        cls = "layui-btn-normal";
+                    } else if (d.imgMark == 2) {
+                        // 未标注
+                        cls = "layui-btn-danger";
+                    }
+                    return '<span class="layui-btn ' + cls + ' layui-btn-xs">'+d.imgMarkName+'</span>';
+                }}
+                /*, {field: 'imgDefect', width: 100, title: '图片缺陷', align: 'center'}
+                , {field: 'note', width: 100, title: '备注', align: 'center'}*/
+                /*, {field: 'sort', width: 100, title: '显示顺序', align: 'center'}*/
+                , {field: 'createUserName', width: 100, title: '添加人', align: 'center'}
+                , {field: 'createTime', width: 180, title: '创建时间', align: 'center'}
+                , {field: 'updateUserName', width: 100, title: '更新人', align: 'center'}
+                , {field: 'updateTime', width: 180, title: '更新时间', align: 'center'}
+                , {fixed: 'right', width: 150, title: '功能操作', align: 'center', toolbar: '#toolBar'}
+            ];
+
+            //【渲染TABLE】
+            func.tableIns(cols, "tableList",function (layEvent, data) {
+                var id = data.id;
+                // 标注图片
+                if (layEvent == "mark") {
+                    func.showWin("图片标注", "/imagemark/editImage?id="+id);
+                }
+                //删除图片
+                if (layEvent == "delImage") {
+                    func.ajaxPost("/imagemark/delImage", id, function (res, success) {
+                        // 刷新父页面
+                        location.reload();
+                    }, "处理中。。。");
+                }
+            },"/images/list");
+        });
+    </script>
+
+</div>
+</html>

@@ -1,0 +1,451 @@
+<html layout:decorator="public/form" xmlns:miguo="http://www.w3.org/1999/html">
+<div layout:fragment="content">
+	<form class="layui-form model-form" action="" >
+		<input name="id" type="hidden" th:value="${info['id']}?:0">
+		<input id="bmqq" name="bmqq" type="hidden" th:value="${info['bmqq']}?:0">
+		<input id="jhxzqq" name="jhxzqq" type="hidden" th:value="${info['jhxzqq']}?:0">
+		<div class="layui-form-item">
+			<div class="layui-row layui-col-space15">
+				<div class="layui-col-xs12 layui-col-sm4" style="height: 850px;">
+					<div class="layui-col-md12">
+						<a th:href="${info['imgUrl']}" target="_blank" title="点击查看原图">
+							<img th:src="${info['imgUrl']}" style="width:450px; height:450px;margin-left: 5px;margin-top: 30px;"/>
+						</a>
+					</div>
+					<div class="layui-col-md12" style="text-align: center">
+						<a th:href="${info['imgUrl']}" target="_blank" title="点击查看原图">点击查看原图</a>
+					</div>
+				</div>
+				<div class="layui-col-xs12 layui-col-sm8">
+					<hr class="layui-bg-cyan" style="margin-left: 40px;">
+				</div>
+				<div class="layui-col-xs12 layui-col-sm8">
+					<label class="layui-form-label" style="width: 120px;">表面缺欠：</label>
+					<div class="layui-col-md12">
+						<div class="layui-input-block" style="width: 700px;margin-top: 10px;">
+							<div class="layui-input-inline" style="width: 700px;">
+								<div class="layui-col-md3">
+									<input type="checkbox" name="bmqq" value="1" title="裂纹" lay-skin="primary">
+								</div>
+								<div class="layui-col-md3">
+									<div style="width: 170px;">
+										<widget:singleSelect id="bmqq_lev_1" name="bmqq_lev_1|1|缺欠等级|name|id" th:value="${info['bmqq_lev_1']}?:0" th:data="${IMAGEMARK_IMGDEFECTLEVEL_LIST}"/>
+									</div>
+								</div>
+								<div class="layui-col-md3">
+									<input type="checkbox" name="bmqq" value="2" title="弧坑裂纹" lay-skin="primary">
+								</div>
+								<div class="layui-col-md3">
+									<div style="width: 170px;">
+										<widget:singleSelect id="bmqq_lev_2" name="bmqq_lev_2|1|缺欠等级|name|id" th:value="${info['bmqq_lev_2']}?:0" th:data="${IMAGEMARK_IMGDEFECTLEVEL_LIST}"/>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="layui-input-block" style="width: 700px;margin-top: 10px;">
+							<div class="layui-input-inline" style="width: 700px;">
+								<div class="layui-col-md3">
+									<input type="checkbox" name="bmqq" value="3" title="表面气孔" lay-skin="primary">
+								</div>
+								<div class="layui-col-md3">
+									<div style="width: 170px;">
+										<widget:singleSelect id="bmqq_lev_3" name="bmqq_lev_3|1|缺欠等级|name|id" th:value="${info['bmqq_lev_3']}?:0" th:data="${IMAGEMARK_IMGDEFECTLEVEL_LIST}"/>
+									</div>
+								</div>
+								<div class="layui-col-md3">
+									<input type="checkbox" name="bmqq" value="4" title="开口弧坑" lay-skin="primary">
+								</div>
+								<div class="layui-col-md3">
+									<div style="width: 170px;">
+										<widget:singleSelect id="bmqq_lev_4" name="bmqq_lev_4|1|缺欠等级|name|id" th:value="${info['bmqq_lev_4']}?:0" th:data="${IMAGEMARK_IMGDEFECTLEVEL_LIST}"/>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="layui-input-block" style="width: 700px;margin-top: 10px;">
+							<div class="layui-input-inline" style="width: 700px;">
+								<div class="layui-col-md3">
+									<input type="checkbox" name="bmqq" value="5" title="未熔合" lay-skin="primary">
+								</div>
+								<div class="layui-col-md3">
+									<div style="width: 170px;">
+										<widget:singleSelect id="bmqq_lev_5" name="bmqq_lev_5|1|缺欠等级|name|id" th:value="${info['bmqq_lev_5']}?:0" th:data="${IMAGEMARK_IMGDEFECTLEVEL_LIST}"/>
+									</div>
+								</div>
+								<div class="layui-col-md3">
+									<input type="checkbox" name="bmqq" value="6" title="微观未熔合" lay-skin="primary">
+								</div>
+								<div class="layui-col-md3">
+									<div style="width: 170px;">
+										<widget:singleSelect id="bmqq_lev_6" name="bmqq_lev_6|1|缺欠等级|name|id" th:value="${info['bmqq_lev_6']}?:0" th:data="${IMAGEMARK_IMGDEFECTLEVEL_LIST}"/>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="layui-input-block" style="width: 700px;margin-top: 10px;">
+							<div class="layui-input-inline" style="width: 700px;">
+								<div class="layui-col-md3">
+									<input type="checkbox" name="bmqq" value="7" title="根部熔深不够" lay-skin="primary">
+								</div>
+								<div class="layui-col-md3">
+									<div style="width: 170px;">
+										<widget:singleSelect id="bmqq_lev_7" name="bmqq_lev_7|1|缺欠等级|name|id" th:value="${info['bmqq_lev_7']}?:0" th:data="${IMAGEMARK_IMGDEFECTLEVEL_LIST}"/>
+									</div>
+								</div>
+								<div class="layui-col-md3">
+									<input type="checkbox" name="bmqq" value="8" title="盖面咬边" lay-skin="primary">
+								</div>
+								<div class="layui-col-md3">
+									<div style="width: 170px;">
+										<widget:singleSelect id="bmqq_lev_8" name="bmqq_lev_8|1|缺欠等级|name|id" th:value="${info['bmqq_lev_8']}?:0" th:data="${IMAGEMARK_IMGDEFECTLEVEL_LIST}"/>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="layui-input-block" style="width: 700px;margin-top: 10px;">
+							<div class="layui-input-inline" style="width: 700px;">
+								<div class="layui-col-md3">
+									<input type="checkbox" name="bmqq" value="9" title="根部咬边" lay-skin="primary">
+								</div>
+								<div class="layui-col-md3">
+									<div style="width: 170px;">
+										<widget:singleSelect id="bmqq_lev_9" name="bmqq_lev_9|1|缺欠等级|name|id" th:value="${info['bmqq_lev_9']}?:0" th:data="${IMAGEMARK_IMGDEFECTLEVEL_LIST}"/>
+									</div>
+								</div>
+								<div class="layui-col-md3">
+									<input type="checkbox" name="bmqq" value="10" title="余高过大" lay-skin="primary">
+								</div>
+								<div class="layui-col-md3">
+									<div style="width: 170px;">
+										<widget:singleSelect id="bmqq_lev_10" name="bmqq_lev_10|1|缺欠等级|name|id" th:value="${info['bmqq_lev_10']}?:0" th:data="${IMAGEMARK_IMGDEFECTLEVEL_LIST}"/>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="layui-input-block" style="width: 700px;margin-top: 10px;">
+							<div class="layui-input-inline" style="width: 700px;">
+								<div class="layui-col-md3">
+									<input type="checkbox" name="bmqq" value="11" title="盖面余高过大" lay-skin="primary">
+								</div>
+								<div class="layui-col-md3">
+									<div style="width: 170px;">
+										<widget:singleSelect id="bmqq_lev_11" name="bmqq_lev_11|1|缺欠等级|name|id" th:value="${info['bmqq_lev_11']}?:0" th:data="${IMAGEMARK_IMGDEFECTLEVEL_LIST}"/>
+									</div>
+								</div>
+								<div class="layui-col-md3">
+									<input type="checkbox" name="bmqq" value="12" title="根部余高过大" lay-skin="primary">
+								</div>
+								<div class="layui-col-md3">
+									<div style="width: 170px;">
+										<widget:singleSelect id="bmqq_lev_12" name="bmqq_lev_12|1|缺欠等级|name|id" th:value="${info['bmqq_lev_12']}?:0" th:data="${IMAGEMARK_IMGDEFECTLEVEL_LIST}"/>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="layui-input-block" style="width: 700px;margin-top: 10px;">
+							<div class="layui-input-inline" style="width: 700px;">
+								<div class="layui-col-md3">
+									<input type="checkbox" name="bmqq" value="13" title="焊缝过渡过陡" lay-skin="primary">
+								</div>
+								<div class="layui-col-md3">
+									<div style="width: 170px;">
+										<widget:singleSelect id="bmqq_lev_13" name="bmqq_lev_13|1|缺欠等级|name|id" th:value="${info['bmqq_lev_13']}?:0" th:data="${IMAGEMARK_IMGDEFECTLEVEL_LIST}"/>
+									</div>
+								</div>
+								<div class="layui-col-md3">
+									<input type="checkbox" name="bmqq" value="14" title="焊缝金属溢出" lay-skin="primary">
+								</div>
+								<div class="layui-col-md3">
+									<div style="width: 170px;">
+										<widget:singleSelect id="bmqq_lev_14" name="bmqq_lev_14|1|缺欠等级|name|id" th:value="${info['bmqq_lev_14']}?:0" th:data="${IMAGEMARK_IMGDEFECTLEVEL_LIST}"/>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="layui-input-block" style="width: 700px;margin-top: 10px;">
+							<div class="layui-input-inline" style="width: 700px;">
+								<div class="layui-col-md3">
+									<input type="checkbox" name="bmqq" value="15" title="盖面凹陷" lay-skin="primary">
+								</div>
+								<div class="layui-col-md3">
+									<div style="width: 170px;">
+										<widget:singleSelect id="bmqq_lev_15" name="bmqq_lev_15|1|缺欠等级|name|id" th:value="${info['bmqq_lev_15']}?:0" th:data="${IMAGEMARK_IMGDEFECTLEVEL_LIST}"/>
+									</div>
+								</div>
+								<div class="layui-col-md3">
+									<input type="checkbox" name="bmqq" value="16" title="根部填充不足" lay-skin="primary">
+								</div>
+								<div class="layui-col-md3">
+									<div style="width: 170px;">
+										<widget:singleSelect id="bmqq_lev_16" name="bmqq_lev_16|1|缺欠等级|name|id" th:value="${info['bmqq_lev_16']}?:0" th:data="${IMAGEMARK_IMGDEFECTLEVEL_LIST}"/>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="layui-input-block" style="width: 700px;margin-top: 10px;">
+							<div class="layui-input-inline" style="width: 700px;">
+								<div class="layui-col-md3">
+									<input type="checkbox" name="bmqq" value="17" title="烧穿" lay-skin="primary">
+								</div>
+								<div class="layui-col-md3">
+									<div style="width: 170px;">
+										<widget:singleSelect id="bmqq_lev_17" name="bmqq_lev_17|1|缺欠等级|name|id" th:value="${info['bmqq_lev_17']}?:0" th:data="${IMAGEMARK_IMGDEFECTLEVEL_LIST}"/>
+									</div>
+								</div>
+								<div class="layui-col-md3">
+									<input type="checkbox" name="bmqq" value="18" title="角焊缝过渡不对称" lay-skin="primary">
+								</div>
+								<div class="layui-col-md3">
+									<div style="width: 170px;">
+										<widget:singleSelect id="bmqq_lev_18" name="bmqq_lev_18|1|缺欠等级|name|id" th:value="${info['bmqq_lev_18']}?:0" th:data="${IMAGEMARK_IMGDEFECTLEVEL_LIST}"/>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="layui-input-block" style="width: 700px;margin-top: 10px;">
+							<div class="layui-input-inline" style="width: 700px;">
+								<div class="layui-col-md3">
+									<input type="checkbox" name="bmqq" value="19" title="根部凹陷" lay-skin="primary">
+								</div>
+								<div class="layui-col-md3">
+									<div style="width: 170px;">
+										<widget:singleSelect id="bmqq_lev_19" name="bmqq_lev_19|1|缺欠等级|name|id" th:value="${info['bmqq_lev_19']}?:0" th:data="${IMAGEMARK_IMGDEFECTLEVEL_LIST}"/>
+									</div>
+								</div>
+								<div class="layui-col-md3">
+									<input type="checkbox" name="bmqq" value="20" title="根部弥散气孔" lay-skin="primary">
+								</div>
+								<div class="layui-col-md3">
+									<div style="width: 170px;">
+										<widget:singleSelect id="bmqq_lev_20" name="bmqq_lev_20|1|缺欠等级|name|id" th:value="${info['bmqq_lev_20']}?:0" th:data="${IMAGEMARK_IMGDEFECTLEVEL_LIST}"/>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="layui-input-block" style="width: 700px;margin-top: 10px;">
+							<div class="layui-input-inline" style="width: 700px;">
+								<div class="layui-col-md3">
+									<input type="checkbox" name="bmqq" value="21" title="接头缼欠" lay-skin="primary">
+								</div>
+								<div class="layui-col-md3">
+									<div style="width: 170px;">
+										<widget:singleSelect id="bmqq_lev_21" name="bmqq_lev_21|1|缺欠等级|name|id" th:value="${info['bmqq_lev_21']}?:0" th:data="${IMAGEMARK_IMGDEFECTLEVEL_LIST}"/>
+									</div>
+								</div>
+								<div class="layui-col-md3">
+									<input type="checkbox" name="bmqq" value="22" title="角焊缝厚度过小" lay-skin="primary">
+								</div>
+								<div class="layui-col-md3">
+									<div style="width: 170px;">
+										<widget:singleSelect id="bmqq_lev_22" name="bmqq_lev_22|1|缺欠等级|name|id" th:value="${info['bmqq_lev_22']}?:0" th:data="${IMAGEMARK_IMGDEFECTLEVEL_LIST}"/>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="layui-input-block" style="width: 700px;margin-top: 10px;">
+							<div class="layui-input-inline" style="width: 700px;">
+								<div class="layui-col-md3">
+									<input type="checkbox" name="bmqq" value="23" title="角焊缝厚度过大" lay-skin="primary">
+								</div>
+								<div class="layui-col-md3">
+									<div style="width: 170px;">
+										<widget:singleSelect id="bmqq_lev_23" name="bmqq_lev_23|1|缺欠等级|name|id" th:value="${info['bmqq_lev_23']}?:0" th:data="${IMAGEMARK_IMGDEFECTLEVEL_LIST}"/>
+									</div>
+								</div>
+								<div class="layui-col-md3">
+									<input type="checkbox" name="bmqq" value="24" title="引弧点" lay-skin="primary">
+								</div>
+								<div class="layui-col-md3">
+									<div style="width: 170px;">
+										<widget:singleSelect id="bmqq_lev_24" name="bmqq_lev_24|1|缺欠等级|name|id" th:value="${info['bmqq_lev_24']}?:0" th:data="${IMAGEMARK_IMGDEFECTLEVEL_LIST}"/>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="layui-input-block" style="width: 700px;margin-top: 10px;">
+							<div class="layui-input-inline" style="width: 700px;">
+								<div class="layui-col-md3">
+									<input type="checkbox" name="bmqq" value="25" title="焊接飞溅" lay-skin="primary">
+								</div>
+								<div class="layui-col-md3">
+									<div style="width: 170px;">
+										<widget:singleSelect id="bmqq_lev_25" name="bmqq_lev_25|1|缺欠等级|name|id" th:value="${info['bmqq_lev_25']}?:0" th:data="${IMAGEMARK_IMGDEFECTLEVEL_LIST}"/>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="layui-col-xs12 layui-col-sm8">
+					<hr class="layui-bg-cyan" style="margin-left: 40px;">
+				</div>
+				<div class="layui-col-xs12 layui-col-sm8">
+					<label class="layui-form-label" style="width: 150px;">焊缝几何形状缺欠：</label>
+					<div class="layui-col-md12">
+						<div class="layui-input-block" style="width: 700px;">
+							<div class="layui-input-inline" style="width: 700px;">
+								<div class="layui-col-md3">
+									<input type="checkbox" name="jhxzqq" value="1" title="错边" lay-skin="primary">
+								</div>
+								<div class="layui-col-md3">
+									<div style="width: 170px;">
+										<widget:singleSelect id="jhxzqq_lev_1" name="jhxzqq_lev_1|1|缺欠等级|name|id" th:value="${info['jhxzqq_lev_1']}?:0" th:data="${IMAGEMARK_IMGDEFECTLEVEL_LIST}"/>
+									</div>
+								</div>
+								<div class="layui-col-md3">
+									<input type="checkbox" name="jhxzqq" value="2" title="角变形" lay-skin="primary">
+								</div>
+								<div class="layui-col-md3">
+									<div style="width: 170px;">
+										<widget:singleSelect id="jhxzqq_lev_2" name="jhxzqq_lev_2|1|缺欠等级|name|id" th:value="${info['jhxzqq_lev_2']}?:0" th:data="${IMAGEMARK_IMGDEFECTLEVEL_LIST}"/>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="layui-input-block" style="width: 700px;margin-top: 10px;">
+							<div class="layui-input-inline" style="width: 700px;">
+								<div class="layui-col-md3">
+									<input type="checkbox" name="jhxzqq" value="3" title="角焊缝" lay-skin="primary">
+								</div>
+								<div class="layui-col-md3">
+									<div style="width: 170px;">
+										<widget:singleSelect id="jhxzqq_lev_3" name="jhxzqq_lev_3|1|缺欠等级|name|id" th:value="${info['jhxzqq_lev_3']}?:0" th:data="${IMAGEMARK_IMGDEFECTLEVEL_LIST}"/>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="layui-col-xs12 layui-col-sm12">
+					<hr class="layui-bg-cyan" style="margin-left: 30px;">
+				</div>
+			</div>
+			<div class="layui-row layui-col-space15" style="text-align: center">
+				<button class="layui-btn" lay-submit lay-filter="formData">提交</button>
+				<widget:btnFunc name="关闭|close||layui-bg-green|1"/>
+			</div>
+		</div>
+	</form>
+
+	<script type="text/javascript">
+        layui.use(['func'], function () {
+
+            //声明变量
+            var func = layui.func
+                , form = layui.form
+                , $ = layui.$;
+
+            init();
+            function init(){
+                var bmqqObj = document.getElementsByName("bmqq"); //获取所有的复选框
+                var bmqqValue = $("#bmqq").val();
+                if(''!=bmqqValue){
+                    var bmqqArr = bmqqValue.split(','); //去掉它们之间的分割符“，”
+                    for(var i=0;i<bmqqObj.length;i++){
+                        for(var j=0;j<bmqqArr.length;j++){
+                            //如果值与修改前的值相等
+                            if(bmqqObj[i].value == bmqqArr[j]){
+                                bmqqObj[i].checked= true;
+                                break;
+                            }
+                        }
+                    }
+                }
+                var jhxzqqObj = document.getElementsByName("jhxzqq"); //获取所有的复选框
+                var jhxzqqValue = $("#jhxzqq").val();
+                if(''!=jhxzqqValue){
+                    var jhxzqqArr = jhxzqqValue.split(','); //去掉它们之间的分割符“，”
+                    for(var i=0;i<jhxzqqObj.length;i++){
+                        for(var j=0;j<jhxzqqArr.length;j++){
+                            //如果值与修改前的值相等
+                            if(jhxzqqObj[i].value == jhxzqqArr[j]){
+                                jhxzqqObj[i].checked= true;
+                                break;
+                            }
+                        }
+                    }
+                }
+                form.render();
+            }
+
+            form.on('submit(formData)', function (data) {
+                var id = data.field.id;
+                var arr_bmqq = [];
+                $('input[type=checkbox][name=bmqq]:checked').each(function() {
+                    arr_bmqq.push($(this).val());
+                });
+                var arr_bmqqlev = [];
+                for(var i=1;i<=25;i++){
+                    for(var a=0;a<arr_bmqq.length;a++){
+                        var bmqq = arr_bmqq[a];
+                        var tmp = document.getElementById("bmqq_lev_"+bmqq).value;
+                        if(tmp==""){
+                            layer.msg("已勾选的缼欠对应等级不能为空",{icon:2});
+                            return false;
+						}
+                    }
+                    var lev = document.getElementById("bmqq_lev_"+i).value;
+                    if(lev!=""){
+                        var obj = {};
+                        obj[i] = lev;
+                        arr_bmqqlev.push(obj);
+                    }
+                }
+
+                var arr_jhxzqq = [];
+                $('input[type=checkbox][name=jhxzqq]:checked').each(function() {
+                    arr_jhxzqq.push($(this).val());
+                });
+                var arr_jhxzqqlev = [];
+                for(var j=1;j<4;j++){
+                    for(var a=0;a<arr_jhxzqq.length;a++){
+                        var jhxzqq = arr_jhxzqq[a];
+                        var tmp = document.getElementById("jhxzqq_lev_"+jhxzqq).value;
+                        if(tmp==""){
+                            layer.msg("已勾选的缼欠对应等级不能为空",{icon:2});
+                            return false;
+                        }
+                    }
+                    var lev = document.getElementById("jhxzqq_lev_"+j).value;
+                    if(lev!=""){
+                        var obj = {};
+                        obj[j] = lev;
+                        arr_jhxzqqlev.push(obj);
+                    }
+                }
+                var data = {"id":id
+                    ,"bmqq":arr_bmqq.join(",")
+                    ,"bmqqLev":arr_bmqqlev
+                    ,"jhxzqq":arr_jhxzqq.join(",")
+                    ,"jhxzqqLev":arr_jhxzqqlev
+                };
+                console.log(data);
+                layer.confirm('您确定要提交图片标注修改信息吗', {
+                    icon: 3,
+                    title: "提示"
+                }, function (index) {
+                    func.ajaxPost("/imagemark/saveMark", data, function (res, success) {
+                        if(success){
+                            close();
+                        }else{
+                            layer.msg("操作异常",{icon:2})
+                        }
+                    });
+                    layer.close(index);
+                });
+                return false;
+            });
+
+            $(".btnClose").click(function(){
+                close();
+            });
+
+            function close() {
+                var idx = parent.layer.getFrameIndex(window.name);
+                parent.layer.close(idx);
+                parent.location.reload();
+            }
+        })
+	</script>
+</div>
+</html>

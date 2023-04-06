@@ -1,0 +1,116 @@
+<html layout:decorator="public/layout" xmlns:miguo="http://www.w3.org/1999/html">
+<div layout:fragment="content">
+
+    <!-- 表格工具栏 -->
+    <form class="layui-form toolbar">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">图片分组：</label>
+                <div class="layui-input-inline">
+                    <widget:singleSelect id="groupId" sql="select t.id as id,t.group_name as name from sys_image_groups t "
+                                         name="groupId|1|图片分组|name|id" value="0"/>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">图片标注：</label>
+                <div class="layui-input-inline">
+                    <widget:singleSelect name="imgMark|1|性别|name|id" th:data="${IMAGES_IMGMARK_LIST}" value="0"/>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <div class="layui-input-inline" style="width: auto;">
+                    <widget:btnQuery name="查询"/>
+                    <widget:btnFunc name="批量下载图片|downloadImage|layui-icon-dowload|layui-bg-blue|1"/>
+                    <widget:btnFunc name="批量下载图片标注信息|exportExcel|layui-icon-dowload|layui-bg-orange|1"/>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <!-- 数据表格 -->
+    <table class="layui-hide" id="tableList" lay-filter="tableList"></table>
+
+    <script type="text/javascript">
+        layui.use(['func'], function () {
+
+            //声明变量
+            var func = layui.func
+                , $ = layui.$;
+
+            //【TABLE列数组】
+            var cols = [
+                {type: 'checkbox', fixed: 'left'}
+                , {field: 'id', width: 80, title: 'ID', align: 'center', sort: true, fixed: 'left'}
+                /*, {field: 'imgUrl', width: 200, title: '图片', align: 'center'}*/
+                , {field: 'imgUrl', width: 100, title: '图片', align: 'center', templet: function (d) {
+                        var avatarStr = "";
+                        if (d.avatarUrl) {
+                            avatarStr = '<a href="' + d.avatarUrl + '" target="_blank"><img src="' + d.avatarUrl + '" height="26" /></a>';
+                        }
+                        return avatarStr;
+                    }
+                }
+                , {field: 'imgGroupName', width: 150, title: '图片分组', align: 'center'}
+                , {field: 'imgMark', width: 100, title: '图片标注', align: 'center', templet(d) {
+                    var cls = "";
+                    if (d.imgMark == 1) {
+                        // 已标注
+                        cls = "layui-btn-normal";
+                    } else if (d.imgMark == 2) {
+                        // 未标注
+                        cls = "layui-btn-danger";
+                    }
+                    return '<span class="layui-btn ' + cls + ' layui-btn-xs">'+d.imgMarkName+'</span>';
+                }}
+                /*, {field: 'imgDefect', width: 100, title: '图片缺陷', align: 'center'}
+                , {field: 'note', width: 100, title: '备注', align: 'center'}*/
+                /*, {field: 'sort', width: 100, title: '显示顺序', align: 'center'}*/
+                , {field: 'createUserName', width: 100, title: '添加人', align: 'center'}
+                , {field: 'createTime', width: 180, title: '创建时间', align: 'center'}
+                , {field: 'updateUserName', width: 100, title: '更新人', align: 'center'}
+                , {field: 'updateTime', width: 180, title: '更新时间', align: 'center'}
+            ];
+
+            //【渲染TABLE】
+            func.tableIns(cols, "tableList",null,"/images/list");
+
+            $(".btnDownloadImage").click(function () {
+                var result = func.getCheckData("tableList");
+                if (result.length == 0) {
+                    layer.msg("请至少选择一条记录", {icon: 5});
+                    return false;
+                }
+                var arr = [];
+                result.forEach(function (item, index) {
+                    arr.push(item.id);
+                });
+                layer.confirm('您确定要下载选择的图片吗？', {icon: 3, title: '下载提示'}, function (index) {
+                    //layer.close(index);
+                    //var idx = top.layer.msg('文件加载中，请稍候', {icon: 16, time: false, shade: 0.8});
+                    window.location.href = "/imagesdownload/downloadImages?ids=" + arr.join(",");
+                    var msgId = layer.msg('正在下载，请稍候···', {
+                        icon: 16,
+                        shade: 0.4,
+                        time: 2000
+                    });
+                    //top.layer.close(idx);
+                });
+            });
+
+            $(".btnExportExcel").click(function () {
+                var groupId = $("#groupId").val();
+                layer.confirm('您确定要下载已标注图片信息吗？', {icon: 3, title: '下载提示'}, function (index) {
+                    //layer.close(index);
+                    window.location.href = "/imagesdownload/export?groupId="+groupId;
+                    var msgId = layer.msg('正在下载，请稍候···', {
+                        icon: 16,
+                        shade: 0.4,
+                        time: 2000
+                    });
+                });
+            });
+        });
+    </script>
+
+</div>
+</html>

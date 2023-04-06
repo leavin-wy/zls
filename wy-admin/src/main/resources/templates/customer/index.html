@@ -1,0 +1,76 @@
+<html layout:decorator="public/layout" xmlns:miguo="http://www.w3.org/1999/html">
+<div layout:fragment="content">
+
+    <!-- 表格工具栏 -->
+    <form class="layui-form toolbar">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <div class="layui-input-inline">
+                    <input type="text" name="keywords" placeholder="请输入姓名/昵称" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <!-- 性别下拉单选 -->
+            <div class="layui-inline">
+                <div class="layui-input-inline">
+                    <widget:singleSelect name="sex|0|性别|name|id" data="1=男,2=女,3=未知" value="0"/>
+                </div>
+            </div>
+            <!-- 客户类型下拉单选 -->
+            <div class="layui-inline">
+                <div class="layui-input-inline">
+                    <widget:singleSelect name="custType|0|客户类型|name|id" data="1=A,2=B,3=C,4=D,5=E,6=S,7=成交" value="0"/>
+                </div>
+            </div>
+            <!-- 渠道下拉单选 -->
+            <div class="layui-inline">
+                <div class="layui-input-inline">
+                    <widget:singleSelect name="source|0|渠道|name|id" data="1=美团,2=扫街,3=自然到店,4=转介绍,5=其他" value="0"/>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <div class="layui-input-inline">
+                    <input type="text" autocomplete="off" name="interactTimeStr" id="interactTimeStr" class="layui-input" placeholder="下次沟通时间">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <div class="layui-input-inline" style="width: auto;">
+                    <widget:btnQuery name="查询"/>
+                    <widget:btnAdd name="添加客户"/>
+                    <widget:btnImport name="批量导入" id="uploadExcel"/>
+                    <widget:btnExport name="下载Excel模板"/>
+                    <button type="reset" class="layui-btn btnOption layui-bg-black layui-btn-small btnReset"><i class="layui-icon layui-icon-util"></i>重置</button>
+                    <!--<widget:btnDAll name="批量删除"/>-->
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <!-- 数据表格 -->
+    <table class="layui-hide" id="tableList" lay-filter="tableList"></table>
+
+    <!-- 表格操作列 -->
+    <script type="text/html" id="toolBar">
+        <widget:btnEdit name="编辑"/>
+        <widget:btnDel name="删除"/>
+        <widget:btnFunc name="探店记录|tandian|layui-icon-share|layui-bg-blue|2"/>
+        <widget:btnFunc name="沟通记录|goutong|layui-icon-read|layui-bg-orange|2"/>
+    </script>
+
+    <script type="text/javascript">
+        layui.use(['func'], function () {
+
+            //声明变量
+            var form = layui.form
+                , laydate = layui.laydate;
+
+            laydate.render({
+                elem: '#interactTimeStr'
+                ,format:'yyyy-MM-dd'
+            });
+
+            form.render();
+        })
+    </script>
+
+</div>
+</html>

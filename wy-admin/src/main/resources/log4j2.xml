@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration monitorInterval="180" packages="">
+    <properties>
+        <property name="projectname">wy</property>
+        <!--<property name="logdir">D:\logs</property>-->
+        <property name="logdir">/home/wuyu/logs</property>
+        <property name="PATTERN"> %date{YYYY-MM-dd HH:mm:ss,SSS} %level [%thread][%file:%line] - %msg%n%throwable</property>
+    </properties>
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="${PATTERN}"/>
+        </Console>
+
+        <RollingFile name="ErrorAppender" fileName="${logdir}/${projectname}_error.log"
+                     filePattern="${logdir}/$${date:yyyy-MM-dd}/${projectname}_error.%d{yyyy-MM-dd-HH}.log" append="true">
+            <PatternLayout pattern="${PATTERN}"/>
+            <ThresholdFilter level="ERROR" onMatch="ACCEPT" onMismatch="DENY"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true" />
+            </Policies>
+        </RollingFile>
+
+        <RollingFile name="DebugAppender" fileName="${logdir}/${projectname}_info.log"
+                     filePattern="${logdir}/$${date:yyyy-MM-dd}/${projectname}_info.%d{yyyy-MM-dd-HH}.log" append="true">
+            <PatternLayout pattern="${PATTERN}"/>
+            <ThresholdFilter level="DEBUG" onMatch="ACCEPT" onMismatch="DENY"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true" />
+            </Policies>
+        </RollingFile>
+
+        <!--异步appender-->
+        <Async name="AsyncAppender" includeLocation="true">
+            <AppenderRef ref="ErrorAppender"/>
+            <AppenderRef ref="DebugAppender"/>
+        </Async>
+    </Appenders>
+
+    <Loggers>
+        <Root level="INFO" includeLocation="true">
+            <AppenderRef ref="AsyncAppender"/>
+            <AppenderRef ref="Console"/>
+        </Root>
+    </Loggers>
+</Configuration>

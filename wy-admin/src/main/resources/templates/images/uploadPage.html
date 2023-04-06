@@ -1,0 +1,21 @@
+<html layout:decorator="public/form" xmlns:miguo="http://www.w3.org/1999/html">
+<div layout:fragment="content">
+    <form class="layui-form model-form" action="/images/upload" >
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width: 120px;">选择l图片分组<font color="red">*</font>：</label>
+                <div class="layui-input-inline">
+                    <widget:singleSelect sql="select t.id as id,t.group_name as name from sys_image_groups t "
+                                         name="groupId|1|图片分组|name|id" value="0"/>
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label" style="width: 120px;">选择图片：</label>
+            <widget:uploadMultipleImage name="image|相册|250x250|pics|100" />
+        </div>
+        <widget:btnSubmit name="submit|立即保存,close|关闭"/>
+    </form>
+</div>
+</html>

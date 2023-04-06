@@ -1,0 +1,84 @@
+<html layout:decorator="public/form" xmlns:miguo="http://www.w3.org/1999/html">
+<div layout:fragment="content">
+	<form class="layui-form model-form" action="" style="width:80%;">
+		<input name="id" type="hidden" th:value="${info['id']}?:0">
+		<div class="layui-form-item">
+			<div class="layui-inline">
+				<label class="layui-form-label">客户名称：</label>
+				<div class="layui-input-inline">
+					<input name="custName" th:value="${info['custName']}" lay-verify="required" autocomplete="off" placeholder="请输入客户名称" class="layui-input" type="text">
+				</div>
+			</div>
+			<div class="layui-inline">
+				<label class="layui-form-label">客户昵称：</label>
+				<div class="layui-input-inline">
+					<input name="nickName" th:value="${info['nickName']}" lay-verify="required" autocomplete="off" placeholder="请输入客户昵称" class="layui-input" type="text">
+				</div>
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<div class="layui-inline">
+				<label class="layui-form-label">性别：</label>
+				<div class="layui-input-inline">
+					<widget:singleSelect name="sex|1|性别|name|id" data="1=男,2=女,3=未知" th:value="${info['sex']}?:3"/>
+				</div>
+			</div>
+			<div class="layui-inline">
+				<label class="layui-form-label">出生时间：</label>
+				<div class="layui-input-inline">
+					<widget:dateSelect name="birthday|出生时间|date" th:value="${#dates.format(info['birthday'], 'yyyy-MM-dd')}"/>
+				</div>
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<div class="layui-inline">
+				<label class="layui-form-label">联系电话：</label>
+				<div class="layui-input-inline">
+					<input name="phone" th:value="${info['phone']}" autocomplete="off" placeholder="请输入联系电话" class="layui-input" type="text">
+				</div>
+			</div>
+			<div class="layui-inline">
+				<label class="layui-form-label">渠道：</label>
+				<div class="layui-input-inline">
+					<widget:singleSelect name="source|1|渠道|name|id" data="1=美团,2=扫街,3=自然到店,4=转介绍,5=其他" th:value="${info['source']}?:0"/>
+				</div>
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<div class="layui-inline">
+				<label class="layui-form-label">客户类型：</label>
+				<div class="layui-input-inline">
+					<widget:singleSelect name="custType|1|客户类型|name|id" data="1=A,2=B,3=C,4=D,5=E,6=S,7=成交" th:value="${info['custType']}?:0"/>
+				</div>
+			</div>
+			<div class="layui-inline">
+				<label class="layui-form-label">成交时间：</label>
+				<div class="layui-input-inline">
+					<widget:dateSelect name="completeTime|成交时间|date" th:value="${#dates.format(info['completeTime'], 'yyyy-MM-dd')}"/>
+				</div>
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<div class="layui-inline">
+				<label class="layui-form-label">下次沟通时间：</label>
+				<div class="layui-input-inline">
+					<widget:dateSelect name="interactTime|下次沟通时间|date" th:value="${#dates.format(info['interactTime'], 'yyyy-MM-dd')}"/>
+				</div>
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">家庭住址：</label>
+			<div class="layui-input-block">
+				<textarea name="address" placeholder="请输入家庭住址" class="layui-textarea" th:text="${info['address']}"></textarea>
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">备注：</label>
+			<div class="layui-input-block">
+				<textarea name="remark" placeholder="请输入备注" class="layui-textarea" th:text="${info['remark']}"></textarea>
+			</div>
+		</div>
+		<widget:btnSubmit name="submit|立即保存,close|关闭"/>
+	</form>
+</div>
+</html>

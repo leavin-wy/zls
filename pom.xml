@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.2.6.RELEASE</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+    <groupId>com.wy</groupId>
+    <artifactId>wy</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <name>wy</name>
+    <description>Leavin project for Spring Boot</description>
+
+    <modules>
+        <module>wy-common</module>
+        <module>wy-generator</module>
+        <module>wy-system</module>
+        <module>wy-admin</module>
+        <module>wy-quartz</module>
+    </modules>
+
+    <properties>
+        <java.version>1.8</java.version>
+        <!--全局配置项目版本号-->
+        <version>0.0.1-SNAPSHOT</version>
+    </properties>
+
+    <!-- 依赖声明 -->
+    <dependencyManagement>
+        <dependencies>
+            <!-- 子模块依赖 -->
+            <dependency>
+                <groupId>com.wy</groupId>
+                <artifactId>wy-common</artifactId>
+                <version>${version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.wy</groupId>
+                <artifactId>wy-generator</artifactId>
+                <version>${version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.wy</groupId>
+                <artifactId>wy-system</artifactId>
+                <version>${version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.wy</groupId>
+                <artifactId>wy-admin</artifactId>
+                <version>${version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.wy</groupId>
+                <artifactId>wy-quartz</artifactId>
+                <version>${version}</version>
+            </dependency>
+
+            <!-- 第三方依赖 -->
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>1.18.10</version>
+                <optional>true</optional>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>1.2.62</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+</project>
