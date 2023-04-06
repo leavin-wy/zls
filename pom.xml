@@ -59,8 +59,6 @@
                 <artifactId>wy-quartz</artifactId>
                 <version>${version}</version>
             </dependency>
-
-            <!-- 第三方依赖 -->
             <dependency>
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>
