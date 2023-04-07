@@ -125,6 +125,21 @@ public class CustomerListVo {
     private String interactTimeStr;
 
     /**
+     * 下次沟通内容
+     */
+    @Excel(name = "下次沟通内容",width = 15)
+    private String interactDesc;
+
+    /**
+     * 邀约时间
+     */
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone="GMT+8")
+    private Date inviteTime;
+    @Excel(name = "邀约时间",width = 15)
+    private String inviteTimeStr;
+
+    /**
      * 备注
      */
     @Excel(name = "备注",width = 15)

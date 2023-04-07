@@ -65,6 +65,10 @@ public class GoutongServiceImpl extends BaseServiceImpl<GoutongMapper, Goutong> 
                 GoutongListVo goutongListVo = new GoutongListVo();
                 // 拷贝属性
                 BeanUtils.copyProperties(item, goutongListVo);
+                // 回复标志
+                if (goutongListVo.getReplyFlag()!=null&&goutongListVo.getReplyFlag()>0) {
+                    goutongListVo.setReplyFlagStr(GoutongConstant.GOUTONG_REPLY_LIST.get(goutongListVo.getReplyFlag()));
+                }
                 // 创建人名称
                 if (goutongListVo.getCreateUser() != null && goutongListVo.getCreateUser() > 0) {
                     goutongListVo.setCreateUserName(AdminUtils.getName((goutongListVo.getCreateUser())));

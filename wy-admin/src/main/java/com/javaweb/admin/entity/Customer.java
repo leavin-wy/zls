@@ -88,6 +88,18 @@ public class Customer extends BaseEntity {
     private Date interactTime;
 
     /**
+     * 下次沟通内容
+     */
+    private String interactDesc;
+
+    /**
+     * 邀约时间
+     */
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone="GMT+8")
+    private Date inviteTime;
+
+    /**
      * 备注
      */
     private String remark;

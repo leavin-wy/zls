@@ -277,13 +277,13 @@ public class CustomerServiceImpl extends BaseServiceImpl<CustomerMapper, Custome
                     }
                     if(StringUtils.isEmpty(customerListVo.getSourceName())
                             ||StringUtils.isEmpty(CustomerConstant.CUSTOMER_SOURCE_LIST.get(Integer.parseInt(customerListVo.getSourceName())))){
-                        customerListVo.setErrorMsg("请输入正确的渠道!");
+                        customerListVo.setErrorMsg("请填写正确的渠道!");
                         errorList.add(customerListVo);
                         continue;
                     }
                     if(StringUtils.isEmpty(customerListVo.getCustTypeName())
                             ||StringUtils.isEmpty(CustomerConstant.CUSTOMER_CUSTTYPE_LIST.get(Integer.parseInt(customerListVo.getCustTypeName())))){
-                        customerListVo.setErrorMsg("请输入正确的客户类型!");
+                        customerListVo.setErrorMsg("请填写正确的客户类型!");
                         errorList.add(customerListVo);
                         continue;
                     }
@@ -319,11 +319,22 @@ public class CustomerServiceImpl extends BaseServiceImpl<CustomerMapper, Custome
                             continue;
                         }
                     }
+                    Date inviteTime = DateUtils.parseDate(customerListVo.getInviteTimeStr());
+                    if(StringUtils.isNotEmpty(customerListVo.getInviteTimeStr())){
+                        if(inviteTime==null){
+                            customerListVo.setErrorMsg("邀请时间格式不正确!");
+                            errorList.add(customerListVo);
+                            continue;
+                        }
+                    }
                     BeanUtils.copyProperties(customerListVo, customer);
                     customer.setBirthday(birthday);
                     customer.setSex(Integer.valueOf(customerListVo.getSexName()));
+                    customer.setCustType(Integer.valueOf(customerListVo.getCustTypeName()));
+                    customer.setSource(Integer.valueOf(customerListVo.getSourceName()));
                     customer.setCompleteTime(completeTime);
                     customer.setInteractTime(interactTime);
+                    customer.setInviteTime(inviteTime);
                     customer.setCreateUser(ShiroUtils.getAdminId());
                     customer.setCreateTime(new Date());
                     super.add(customer);
@@ -346,7 +357,6 @@ public class CustomerServiceImpl extends BaseServiceImpl<CustomerMapper, Custome
                         goutong.setCreateTime(new Date());
                         goutongMapper.insert(goutong);
                     }
-                    logger.info("客户信息主键id ：{}",customer.getId());
                 }
             }
             logger.info("成功往表 SYS_CUSTOMER 插入 {} 条数据", success);
@@ -363,8 +373,8 @@ public class CustomerServiceImpl extends BaseServiceImpl<CustomerMapper, Custome
     public void downloadExcel(ExcelBaseParam excelBaseParam) {
         List<CustomerListVo> example = new ArrayList<>();
         CustomerListVo cust = new CustomerListVo();
-        cust.setCustName("张三");
-        cust.setNickName("zhangs");
+        cust.setCustName("宝宝");
+        cust.setNickName("baobao");
         cust.setBirthdayStr("填写格式：2021-05-18");
         cust.setSexName("输入性别代码:1=男,2=女,3=未知");
         cust.setPhone("如：13888888888");
@@ -376,6 +386,8 @@ public class CustomerServiceImpl extends BaseServiceImpl<CustomerMapper, Custome
         cust.setLastGoutongTime("填写格式：2021-05-18");
         cust.setLastGoutongDesc("");
         cust.setInteractTimeStr("填写格式：2023-05-18");
+        cust.setInteractDesc("");
+        cust.setInviteTimeStr("填写格式：2023-05-18");
         example.add(cust);
         try{
             Workbook workbook = ExcelSimpleUtil.exportExcel(excelBaseParam.getTitleName(), excelBaseParam.getSheetName(), example, CustomerListVo.class,true);

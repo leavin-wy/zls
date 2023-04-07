@@ -41,6 +41,13 @@ public class GoutongListVo {
     private String gtDesc;
 
     /**
+     * 回复标志:1=未回复 2=已回复
+     */
+    private Integer replyFlag;
+    private String replyFlagStr;
+
+
+    /**
      * 备注
      */
     private String remark;

@@ -1,0 +1,50 @@
+<html layout:decorator="public/form" xmlns:miguo="http://www.w3.org/1999/html">
+<div layout:fragment="content">
+	<form class="layui-form model-form" action="" style="width:80%;">
+		<input name="id" type="hidden" th:value="${info['id']}?:0">
+		<div class="layui-form-item">
+			<div class="layui-inline">
+				<label class="layui-form-label">用户编号：</label>
+				<div class="layui-input-inline">
+					<input name="userId" th:value="${info['userId']}" lay-verify="required|number" autocomplete="off" placeholder="请输入用户编号" class="layui-input" type="text">
+				</div>
+			</div>
+			<div class="layui-inline">
+				<label class="layui-form-label">用户名：</label>
+				<div class="layui-input-inline">
+					<input name="userName" th:value="${info['userName']}" lay-verify="required" autocomplete="off" placeholder="请输入用户名" class="layui-input" type="text">
+				</div>
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<div class="layui-inline">
+				<label class="layui-form-label">指标代码：</label>
+				<div class="layui-input-inline">
+					<input name="targetCode" th:value="${info['targetCode']}" lay-verify="required" autocomplete="off" placeholder="请输入指标代码" class="layui-input" type="text">
+				</div>
+			</div>
+			<div class="layui-inline">
+				<label class="layui-form-label">指标名称：</label>
+				<div class="layui-input-inline">
+					<input name="targetName" th:value="${info['targetName']}" lay-verify="required" autocomplete="off" placeholder="请输入指标名称" class="layui-input" type="text">
+				</div>
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<div class="layui-inline">
+				<label class="layui-form-label">指标值：</label>
+				<div class="layui-input-inline">
+					<input name="targetValue" th:value="${info['targetValue']}" lay-verify="required|number" autocomplete="off" placeholder="请输入指标值" class="layui-input" type="text">
+				</div>
+			</div>
+			<div class="layui-inline">
+				<label class="layui-form-label">数据日期：</label>
+				<div class="layui-input-inline">
+					<widget:dateSelect name="dataTime|数据日期|date" th:value="${info['dataTime']}"/>
+				</div>
+			</div>
+		</div>
+		<widget:btnSubmit name="submit|立即保存,close|关闭"/>
+	</form>
+</div>
+</html>

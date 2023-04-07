@@ -12,5 +12,13 @@ import java.util.Map;
  * @since 2023-04-01
  */
 public class GoutongConstant {
-
+    /**
+     * 回复标志
+     */
+    public static Map<Object, String> GOUTONG_REPLY_LIST = new HashMap<Object, String>() {
+        {
+            put(1, "未回复");
+            put(2, "已回复");
+        }
+    };
 }

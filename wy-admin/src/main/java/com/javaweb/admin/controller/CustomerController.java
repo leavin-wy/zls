@@ -142,14 +142,14 @@ public class CustomerController extends BaseController {
     /**
      * 下载Excel模板
      */
-    @Log(title = "客户信息模版下载", businessType = BusinessType.EXPORT)
+    @Log(title = "客资信息登记模版下载", businessType = BusinessType.EXPORT)
     @GetMapping("/btnExport")
     public void downloadExcel(HttpServletRequest request, HttpServletResponse response) {
 
         ExcelBaseParam excelBaseParam = new ExcelBaseParam();
         excelBaseParam.setResponse(response)
-                .setFileName("客户信息模板")
-                .setSheetName("客户信息");
+                .setFileName("客资信息登记模板")
+                .setSheetName("客资信息登记");
         customerService.downloadExcel(excelBaseParam);
     }
 

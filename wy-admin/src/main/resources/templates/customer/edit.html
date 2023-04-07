@@ -65,20 +65,54 @@
 					<widget:dateSelect name="interactTime|下次沟通时间|date" th:value="${#dates.format(info['interactTime'], 'yyyy-MM-dd')}"/>
 				</div>
 			</div>
+			<div class="layui-inline">
+				<label class="layui-form-label">邀约时间：</label>
+				<div class="layui-input-inline">
+					<widget:dateSelect name="inviteTime|邀约时间|date|||0" th:value="${#dates.format(info['inviteTime'], 'yyyy-MM-dd')}"/>
+				</div>
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">下次沟通内容：</label>
+			<div class="layui-input-block">
+				<textarea name="interactDesc" style="width: 400px;" placeholder="请输入下次沟通内容" class="layui-textarea" th:text="${info['interactDesc']}"></textarea>
+			</div>
 		</div>
 		<div class="layui-form-item">
 			<label class="layui-form-label">家庭住址：</label>
 			<div class="layui-input-block">
-				<textarea name="address" placeholder="请输入家庭住址" class="layui-textarea" th:text="${info['address']}"></textarea>
+				<textarea name="address" style="width: 400px;" placeholder="请输入家庭住址" class="layui-textarea" th:text="${info['address']}"></textarea>
 			</div>
 		</div>
 		<div class="layui-form-item">
 			<label class="layui-form-label">备注：</label>
 			<div class="layui-input-block">
-				<textarea name="remark" placeholder="请输入备注" class="layui-textarea" th:text="${info['remark']}"></textarea>
+				<textarea name="remark" style="width: 400px;" placeholder="请输入备注" class="layui-textarea" th:text="${info['remark']}"></textarea>
 			</div>
 		</div>
 		<widget:btnSubmit name="submit|立即保存,close|关闭"/>
 	</form>
+
+	<script type="text/javascript">
+        layui.use(['func'], function () {
+
+            //声明变量
+            var func = layui.func
+                , $ = layui.$
+                , form = layui.form;
+
+            form.on('select(custType)', function(data){
+                var val = data.value;
+                if(val == '7'){
+                    //document.getElementById("completeTime").style.display = "";//显示
+                    $("#completeTime").attr("lay-verify","required");
+                }else{
+                    //document.getElementById("completeTime").style.display = "none";//隐藏
+                    $("#completeTime").removeAttr("lay-verify");
+                    $("#completeTime").val("");
+                }
+            });
+        })
+	</script>
 </div>
 </html>

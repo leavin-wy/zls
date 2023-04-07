@@ -15,16 +15,22 @@
 				<widget:dateSelect name="gtTime|沟通时间|datetime" th:value="${#dates.format(info['gtTime'], 'yyyy-MM-dd HH:mm:ss')}"/>
 			</div>
 		</div>
+		<div class="layui-inline">
+			<label class="layui-form-label">回复标志：</label>
+			<div class="layui-input-inline">
+				<widget:singleSelect name="replyFlag|1|回复标志|name|id" data="1=未回复,2=已回复" th:value="${info['replyFlag']}?:0"/>
+			</div>
+		</div>
 		<div class="layui-form-item">
 			<label class="layui-form-label">沟通内容：</label>
 			<div class="layui-input-block">
-				<textarea name="gtDesc" placeholder="请输入沟通内容" class="layui-textarea" th:text="${info['gtDesc']}"></textarea>
+				<textarea name="gtDesc" style="width: 400px;" placeholder="请输入沟通内容" class="layui-textarea" th:text="${info['gtDesc']}"></textarea>
 			</div>
 		</div>
 		<div class="layui-form-item">
 			<label class="layui-form-label">备注：</label>
 			<div class="layui-input-block">
-				<textarea name="remark" placeholder="请输入备注" class="layui-textarea" th:text="${info['remark']}"></textarea>
+				<textarea name="remark" style="width: 400px;" placeholder="请输入备注" class="layui-textarea" th:text="${info['remark']}"></textarea>
 			</div>
 		</div>
 		<widget:btnSubmit name="submit|立即保存,close|关闭"/>
