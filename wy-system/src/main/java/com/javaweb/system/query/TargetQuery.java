@@ -1,4 +1,4 @@
-package com.javaweb.admin.query;
+package com.javaweb.system.query;
 
 import com.javaweb.common.common.BaseQuery;
 import lombok.Data;

@@ -2,7 +2,6 @@ package com.javaweb.system.controller;
 
 import com.javaweb.common.config.SystemConfig;
 import com.javaweb.common.utils.JsonResult;
-import com.javaweb.common.utils.RedisUtils;
 import com.javaweb.system.dto.LoginDto;
 import com.javaweb.system.service.ILoginService;
 import com.wf.captcha.utils.CaptchaUtil;

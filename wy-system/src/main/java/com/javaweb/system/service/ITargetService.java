@@ -1,6 +1,6 @@
-package com.javaweb.admin.service;
+package com.javaweb.system.service;
 
-import com.javaweb.admin.entity.Target;
+import com.javaweb.system.entity.Target;
 import com.javaweb.common.common.IBaseService;
 
 /**

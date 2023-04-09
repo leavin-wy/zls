@@ -1,19 +1,17 @@
-package com.javaweb.admin.controller;
+package com.javaweb.system.controller;
 
-
-import com.javaweb.common.utils.JsonResult;
 import com.javaweb.common.annotation.Log;
+import com.javaweb.common.common.BaseController;
 import com.javaweb.common.enums.BusinessType;
-import com.javaweb.admin.entity.Target;
-import com.javaweb.admin.query.TargetQuery;
-import com.javaweb.admin.service.ITargetService;
+import com.javaweb.common.utils.JsonResult;
+import com.javaweb.system.entity.Target;
+import com.javaweb.system.query.TargetQuery;
+import com.javaweb.system.service.ITargetService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import com.javaweb.common.common.BaseController;
 
 import java.util.HashMap;
 import java.util.Map;

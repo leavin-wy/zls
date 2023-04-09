@@ -5,6 +5,7 @@ import com.javaweb.common.utils.CommonUtils;
 import com.javaweb.common.utils.JsonResult;
 import com.javaweb.common.utils.StringUtils;
 import com.javaweb.system.entity.Admin;
+import com.javaweb.system.service.IIndexService;
 import com.javaweb.system.utils.ShiroUtils;
 import com.javaweb.system.dto.UpdatePasswordDto;
 import com.javaweb.system.dto.UpdateUserInfoDto;
@@ -15,10 +16,7 @@ import com.javaweb.system.vo.MenuListVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
@@ -40,6 +38,8 @@ public class IndexController {
     private AdminMapper adminMapper;
     @Autowired
     private IAdminService adminService;
+    @Autowired
+    private IIndexService indexService;
 
     /**
      * 列表页
@@ -148,5 +148,11 @@ public class IndexController {
             return JsonResult.error("密码修改失败");
         }
         return JsonResult.success("密码修改成功");
+    }
+
+    @ResponseBody
+    @GetMapping(value = "/maininitbase")
+    public JsonResult maininitbase(@RequestParam(value = "flag", required = false, defaultValue = "")String flag) {
+        return indexService.maininitbase(flag);
     }
 }

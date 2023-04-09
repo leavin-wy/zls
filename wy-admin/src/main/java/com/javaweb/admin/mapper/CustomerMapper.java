@@ -38,9 +38,64 @@ public interface CustomerMapper extends BaseMapper<Customer> {
             "group by source")
     List<Map> selectSourceCount(@Param("userId")Integer id, @Param("today")String today);
 
+    /**
+     * 当日沟通客户数
+     * @param id
+     * @param today
+     * @return
+     */
     @Select("select reply_flag 'replyFlag',count(1) 'lxCount' from sys_goutong\n" +
             "where create_user = #{userId}\n" +
             "and date_format(create_time,'%Y-%m-%d') = #{today}\n" +
             "group by reply_flag")
     List<Map>  selectGontongCount(@Param("userId")Integer id, @Param("today")String today);
+
+    /**
+     * 当日未到店联系数
+     * @param id
+     * @param today
+     * @return
+     */
+    @Select("select count(1) from sys_customer c\n" +
+            "where c.id in (select g.cust_id from sys_goutong g\n" +
+            "\t\t\t\t\t\t\twhere g.create_user = #{userId}\t\n" +
+            "\t\t\t\t\t\t\tand date_format(g.create_time,'%Y-%m-%d') = #{today})\n" +
+            "and c.id not in (select cust_id from sys_tandian t)")
+    int selectWddlxCount(@Param("userId")Integer id, @Param("today")String today);
+
+    /**
+     * 当日未到店回复数
+     * @param id
+     * @param today
+     * @return
+     */
+    @Select("select count(1) from sys_customer c\n" +
+            "where c.id in (select g.cust_id from sys_goutong g\n" +
+            "\t\t\t\t\t\t\twhere g.create_user = #{userId}\t\n" +
+            "\t\t\t\t\t\t\tand g.reply_flag = 2\n" +
+            "\t\t\t\t\t\t\tand date_format(g.create_time,'%Y-%m-%d') = #{today})\n" +
+            "and c.id not in (select cust_id from sys_tandian t)")
+    int selectWddhfCount(@Param("userId")Integer id, @Param("today")String today);
+
+    /**
+     * 当日到店数
+     * @return
+     */
+    @Select("select count(1) from sys_customer c\n" +
+            "where c.id in (select cust_id from sys_tandian t\n" +
+            "\t\t\t\t\t\t\twhere t.create_user = #{userId}\n" +
+            "\t\t\t\t\t\t\tand date_format(t.create_time,'%Y-%m-%d') = #{today})\n" +
+            "\n")
+    int selectDdCount(@Param("userId")Integer id, @Param("today")String today);
+
+    /**
+     * 当日首次到店数
+     * @return
+     */
+    @Select("select count(1) from sys_customer c\n" +
+            "where c.id in (select cust_id from sys_tandian t\n" +
+            "\t\t\t\t\t\t\twhere t.create_user = #{userId}\n" +
+            "\t\t\t\t\t\t\tand date_format(t.create_time,'%Y-%m-%d') = #{today})\n" +
+            "order by create_time limit 0,1 \n")
+    int selectScddCount(@Param("userId")Integer id, @Param("today")String today);
 }

@@ -1,4 +1,4 @@
-package com.javaweb.admin.constant;
+package com.javaweb.system.constant;
 
 import java.util.HashMap;
 import java.util.Map;

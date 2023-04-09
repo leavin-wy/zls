@@ -4,17 +4,15 @@ import com.alibaba.druid.support.logging.Log;
 import com.alibaba.druid.support.logging.LogFactory;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
-import com.javaweb.admin.constant.TargetConstant;
+import com.javaweb.system.constant.TargetConstant;
 import com.javaweb.admin.entity.Customer;
-import com.javaweb.admin.entity.Target;
+import com.javaweb.system.entity.Target;
 import com.javaweb.admin.mapper.CustomerMapper;
-import com.javaweb.admin.mapper.TargetMapper;
+import com.javaweb.system.mapper.TargetMapper;
 import com.javaweb.common.utils.DateUtils;
 import com.javaweb.system.entity.Admin;
 import com.javaweb.system.mapper.AdminMapper;
 import com.javaweb.system.utils.AdminUtils;
-import net.sf.saxon.query.UpdateAgent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -61,18 +59,40 @@ public class TargetTaskSchedule {
             int allCount = sourceCount.stream().mapToInt(map -> ((Long) map.get("count")).intValue()).sum();
             insertTarget(today,admin.getId(),admin.getRealname(),"1006","当日新增总数",allCount);
 
-            //联系客资    2001-当日联系总数  2002-当日回复数  2003-未到店联系数  2004-未到店回复数
+            //联系客资    2001-当日联系总数  2002-当日回复数  2003-未到店联系数  2004-未到店回复数  2005-成交数
             List<Map> goutongCount = customerMapper.selectGontongCount(admin.getId(),today);
 
-            //当日联系总数
+            //2001-当日联系总数
             int allGoutongCount = goutongCount.stream().mapToInt(map -> ((Long) map.get("lxCount")).intValue()).sum();
             insertTarget(today,admin.getId(),admin.getRealname(),"2001","当日联系总数",allGoutongCount);
 
-            //当日回复数
+            //2002-当日回复数
             int allReplyCount = goutongCount.stream().filter(map->(Integer) map.get("replyFlag")==2).mapToInt((map->((Long)map.get("lxCount")).intValue())).sum();
             insertTarget(today,admin.getId(),admin.getRealname(),"2002","当日回复数",allReplyCount);
 
-            //2003-未到店联系数
+            //2003-当日未到店联系数
+            int wddlxCount = customerMapper.selectWddlxCount(admin.getId(),today);
+            insertTarget(today,admin.getId(),admin.getRealname(),"2003","当日未到店联系数",wddlxCount);
+
+            //2004-当日未到店回复数
+            int wddhfCount = customerMapper.selectWddhfCount(admin.getId(),today);
+            insertTarget(today,admin.getId(),admin.getRealname(),"2004","当日未到店回复数",wddhfCount);
+
+            //2005-当日成交数
+            LambdaQueryWrapper<Customer> queryWrapper = new LambdaQueryWrapper<>();
+            queryWrapper.eq(Customer::getCustType,7);
+            queryWrapper.eq(Customer::getCompleteTime,today);
+            queryWrapper.eq(Customer::getCreateUser,admin.getId());
+            Integer completeCount = customerMapper.selectCount(queryWrapper);
+            insertTarget(today,admin.getId(),admin.getRealname(),"2005","当日成交数",completeCount);
+
+            //2006-当日到店数
+            int ddCount = customerMapper.selectDdCount(admin.getId(),today);
+            insertTarget(today,admin.getId(),admin.getRealname(),"2006","当日到店数",ddCount);
+
+            //2007-当日首次到店数
+            int scddCount = customerMapper.selectScddCount(admin.getId(),today);
+            insertTarget(today,admin.getId(),admin.getRealname(),"2007","当日首次到店数",scddCount);
 
         }
     }

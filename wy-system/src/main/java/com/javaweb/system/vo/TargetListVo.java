@@ -1,11 +1,6 @@
-package com.javaweb.admin.vo;
+package com.javaweb.system.vo;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
-import org.springframework.format.annotation.DateTimeFormat;
-
-import java.math.BigDecimal;
-import java.util.Date;
 
 /**
  * <p>
