@@ -147,6 +147,11 @@
             border-width: 2px;
             font-weight: 600;
         }
+
+        .graphic-card-drxzfb table > tbody > tr > td > a{
+            text-decoration:underline;
+            color: #00beff;
+        }
     </style>
 </head>
 <body>
@@ -206,7 +211,7 @@
                     <span class="layui-badge layui-badge-green pull-right">本周</span>
                 </div>
                 <div class="layui-card-body">
-                    <p class="lay-big-font">22 <span style="font-size: 24px;line-height: 1;">人</span></p>
+                    <p class="lay-big-font"><span style="font-size: 28px;line-height: 1;" id="1006_z">11人</span></p>
                     <!--<p>总客资<span class="pull-right">412 人</span></p>-->
                 </div>
             </div>
@@ -217,7 +222,7 @@
                     到店客资<span class="layui-badge layui-badge-gray pull-right">本周</span>
                 </div>
                 <div class="layui-card-body">
-                    <p class="lay-big-font">10</p>
+                    <p class="lay-big-font"><span style="font-size: 28px;line-height: 1;" id="2006_z">1人</span></p>
                     <!--<p>总到店客资<span class="pull-right">500</span></p>-->
                 </div>
             </div>
@@ -228,7 +233,7 @@
                     联系客资<span class="layui-badge layui-badge-blue pull-right">本周</span>
                 </div>
                 <div class="layui-card-body">
-                    <p class="lay-big-font">5</p>
+                    <p class="lay-big-font"><span style="font-size: 28px;line-height: 1;" id="2001_z">1人</span></p>
                     <!--<p>总联系客资<span class="pull-right">50</span></p>-->
                 </div>
             </div>
@@ -239,8 +244,88 @@
                     成交量<span class="layui-badge layui-badge-red pull-right">本周</span>
                 </div>
                 <div class="layui-card-body">
-                    <p class="lay-big-font">2</p>
+                    <p class="lay-big-font"><span style="font-size: 28px;line-height: 1;" id="2005_z">1人</span></p>
                     <!--<p>总成交量<span class="pull-right">200</span></p>-->
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-xs12 layui-col-sm6 layui-col-md3">
+            <div class="layui-card">
+                <div class="layui-card-header">
+                    新增客资
+                    <span class="layui-badge layui-badge-green pull-right">当月</span>
+                </div>
+                <div class="layui-card-body">
+                    <p class="lay-big-font"><span style="font-size: 28px;line-height: 1;" id="1006_y">11人</span></p>
+                    <!--<p>总客资<span class="pull-right">412 人</span></p>-->
+                </div>
+            </div>
+        </div>
+        <div class="layui-col-xs12 layui-col-sm6 layui-col-md3">
+            <div class="layui-card">
+                <div class="layui-card-header">
+                    到店客资<span class="layui-badge layui-badge-gray pull-right">当月</span>
+                </div>
+                <div class="layui-card-body">
+                    <p class="lay-big-font"><span style="font-size: 28px;line-height: 1;" id="2006_y">1人</span></p>
+                    <!--<p>总到店客资<span class="pull-right">500</span></p>-->
+                </div>
+            </div>
+        </div>
+        <div class="layui-col-xs12 layui-col-sm6 layui-col-md3">
+            <div class="layui-card">
+                <div class="layui-card-header">
+                    联系客资<span class="layui-badge layui-badge-blue pull-right">当月</span>
+                </div>
+                <div class="layui-card-body">
+                    <p class="lay-big-font"><span style="font-size: 28px;line-height: 1;" id="2001_y">1人</span></p>
+                    <!--<p>总联系客资<span class="pull-right">50</span></p>-->
+                </div>
+            </div>
+        </div>
+        <div class="layui-col-xs12 layui-col-sm6 layui-col-md3">
+            <div class="layui-card">
+                <div class="layui-card-header">
+                    成交量<span class="layui-badge layui-badge-red pull-right">当月</span>
+                </div>
+                <div class="layui-card-body">
+                    <p class="lay-big-font"><span style="font-size: 28px;line-height: 1;" id="2005_y">1人</span></p>
+                    <!--<p>总成交量<span class="pull-right">200</span></p>-->
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row layui-col-space10">
+        <div class="layui-col-md6 layui-col-sm6">
+            <div class="layui-card graphic-card" style="min-height: 300px">
+                <div class="layui-card-header">当日新增分布(人)</div>
+                <div class="layui-card-body dynamic-card-body mini-bar graphic-card-drxzfb">
+                    <table class="layui-table" lay-skin="line">
+                        <thead>
+                        <tr>
+                            <td>人员姓名</td>
+                            <td>美团</td>
+                            <td>扫街</td>
+                            <td>自然到店</td>
+                            <td>转介绍</td>
+                            <td>其他</td>
+                            <td>合计</td>
+                        </tr>
+                        </thead>
+                        <tbody id="drxz">
+                        <!--<tr>
+                            <td>阳阳</td>
+                            <td id="khxj_dz">0</td>
+                            <td id="khxj_dz_jsr">0</td>
+                            <td id="khxj_dz_jsy">0</td>
+                            <td id="khxj_dz_jsj">0</td>
+                            <td id="khxj_dz_jsn">0</td>
+                            <td id="khxj_dz_bl">0</td>
+                        </tr>-->
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
@@ -633,69 +718,68 @@
     layui.use(['func','layer', 'carousel', 'element'], function () {
         var $ = layui.jquery;
 
-
         console.info("index init....")
-        // 概要数据及灵活指标数据
+        // 首页当日指标数据
         $.get("/maininitbase",{"flag":1}, function(res, success) {
-            console.info(res.data);
             var data = res.data;
-            resultBindCommonFunc(data,["1006","2001","2005","2006"]);
-
-
+            resultBindDRFunc(data,["1006","2001","2005","2006"]);
+        });
+        // 首页本周指标数据
+        $.get("/maininitbase",{"flag":2}, function(res, success) {
+            var data = res.data;
+            resultBindFunc(data,["1006_z","2001_z","2005_z","2006_z"]);
+        });
+        // 首页当月指标数据
+        $.get("/maininitbase",{"flag":3}, function(res, success) {
+            var data = res.data;
+            resultBindFunc(data,["1006_y","2001_y","2005_y","2006_y"]);
         });
 
-        var resultBindCommonFunc = function (data,paramArr) {
+        $.get("/maininitxzfb",{"flag":1}, function(res, success) {
+            var data = res.data;
+            resultBindXZFBFunc(data,["userName_r","1001_r","1002_r","1003_r","1004_r","1005_r","total_r"]);
+        });
+
+        var resultBindDRFunc = function (data,paramArr) {
             for(var param in paramArr){
-                $("#"+paramArr[param]).text(data[paramArr[param]]+" 人");
+                if(data[paramArr[param]]===undefined) {
+                    $("#"+paramArr[param]).text("0 人");
+                }else{
+                    $("#"+paramArr[param]).text(data[paramArr[param]]+" 人");
+                }
+            }
+        };
+
+        var resultBindFunc = function (data,paramArr) {
+            for(var param in paramArr){
+                if(data[paramArr[param].substring(0,4)]===undefined) {
+                    $("#"+paramArr[param]).text("0 人");
+                }else{
+                    $("#"+paramArr[param]).text(data[paramArr[param].substring(0,4)]+" 人");
+                }
+            }
+        };
+
+        var resultBindXZFBFunc = function (data,paramArr) {
+            for(var i=0;i<data.length;i++){
+                var tr = document.createElement("tr");
+                document.getElementById("drxz").appendChild(tr);
+                for(var param in paramArr){
+                    var td = document.createElement("td");
+                    tr.appendChild(td);
+                    var value = "";
+                    if(data[i][paramArr[param].substring(0,4)]===undefined) {
+                        value = "0";
+                    }else{
+                        value = data[i][paramArr[param].substring(0,4)];
+                    }
+                    td.innerHTML = value;
+                }
             }
         };
 
     });
 </script>
-
-<!-- 正文开始 -->
-<!--<div class="layui-fluid ew-console-wrapper">
-    <div class="layui-row layui-col-space15">
-        <div style="text-align: center;margin: 40px;">
-            <h1>知了树园区管理系统</h1>
-        </div>
-    </div>
-    &lt;!&ndash; 快捷方式 &ndash;&gt;
-    &lt;!&ndash;<div class="layui-row layui-col-space15">
-        <div class="layui-col-sm12" style="padding-bottom: 0;">
-            <div class="layui-row layui-col-space15" style="text-align: center">
-                <div class="layui-col-xs layui-col-sm3">
-                    <div class="console-app-group" ew-href="/images/index" ew-title="招生管理">
-                        <i class="console-app-icon layui-icon layui-icon-upload"
-                           style="font-size: 26px;padding-top: 3px;margin-right: 6px;"></i>
-                        <div class="console-app-name">招生管理</div>
-                    </div>
-                </div>
-                <div class="layui-col-xs layui-col-sm3">
-                    <div class="console-app-group" ew-href="/imagegroups/index" ew-title="统计">
-                        <i class="console-app-icon layui-icon layui-icon-group"
-                           style="font-size: 26px;padding-top: 3px;margin-right: 6px;"></i>
-                        <div class="console-app-name">统计</div>
-                    </div>
-                </div>
-                <div class="layui-col-xs layui-col-sm3">
-                    <div class="console-app-group" ew-href="/imagemark/imageListPage" ew-title="提醒">
-                        <i class="console-app-icon layui-icon layui-icon-edit"
-                           style="font-size: 26px;padding-top: 3px;margin-right: 6px;"></i>
-                        <div class="console-app-name">提醒</div>
-                    </div>
-                </div>
-                <div class="layui-col-xs layui-col-sm3">
-                    <div class="console-app-group" ew-href="/imagesdownload/imageListPage" ew-title="计划">
-                        <i class="console-app-icon layui-icon layui-icon-download-circle"
-                           style="font-size: 26px;padding-top: 3px;margin-right: 6px;"></i>
-                        <div class="console-app-name">计划</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>&ndash;&gt;
-</div>-->
 
 </body>
 </html>

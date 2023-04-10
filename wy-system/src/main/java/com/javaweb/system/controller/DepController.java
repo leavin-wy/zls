@@ -52,7 +52,7 @@ public class DepController extends BaseController {
      * @param entity 实体对象
      * @return
      */
-//    @RequiresPermissions("sys:dep:add")
+    @RequiresPermissions("sys:dep:add")
     @Log(title = "部门", businessType = BusinessType.INSERT)
     @ResponseBody
     @PostMapping("/add")
@@ -66,7 +66,7 @@ public class DepController extends BaseController {
      * @param entity 实体对象
      * @return
      */
-//    @RequiresPermissions("sys:dep:update")
+    @RequiresPermissions("sys:dep:update")
     @Log(title = "部门", businessType = BusinessType.UPDATE)
     @ResponseBody
     @PostMapping("/update")
@@ -97,7 +97,7 @@ public class DepController extends BaseController {
      * @param id 记录ID
      * @return
      */
-//    @RequiresPermissions("sys:dep:delete")
+    @RequiresPermissions("sys:dep:delete")
     @Log(title = "部门", businessType = BusinessType.DELETE)
     @ResponseBody
     @GetMapping("/delete/{id}")
@@ -111,7 +111,7 @@ public class DepController extends BaseController {
      * @param ids 记录ID(多个使用逗号","分隔)
      * @return
      */
-//    @RequiresPermissions("sys:dep:batchDelete")
+    @RequiresPermissions("sys:dep:batchDelete")
     @Log(title = "部门", businessType = BusinessType.BATCH_DELETE)
     @ResponseBody
     @GetMapping("/batchDelete/{ids}")

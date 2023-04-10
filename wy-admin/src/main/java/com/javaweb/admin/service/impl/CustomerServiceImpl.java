@@ -438,7 +438,7 @@ public class CustomerServiceImpl extends BaseServiceImpl<CustomerMapper, Custome
      * 是否进行消息推送
      */
     private boolean ifSendMessage(Integer userId){
-        return AdminUtils.hasRoleAnyMatch(userId,"运营","管理员","超级管理员");
+        return AdminUtils.hasRoleAnyMatch(userId,"销售","运营","超级管理员");
     }
 
     @Override

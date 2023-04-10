@@ -36,15 +36,15 @@ public class TargetTaskSchedule {
     @Autowired
     private TargetMapper targetMapper;
 
-    @Scheduled(cron = "0 0/2 6-23 * * ? ")
+    @Scheduled(cron = "0 0/1 6-23 * * ? ")
     public void work(){
         List<Admin> admins = adminMapper.selectList(new QueryWrapper<>());
         for(Admin admin : admins){
-            boolean flag = AdminUtils.hasRoleAnyMatch(admin.getId(), "运营");
+            boolean flag = AdminUtils.hasRoleAnyMatch(admin.getId(), "运营","销售");
             if(!flag) continue;
             String today = DateUtils.getCurDateFormat(DateUtils.YYYY_MM_DD);
 
-            //今日新增数
+            //当日不同渠道新增数
             List<Map> sourceCount = customerMapper.selectSourceCount(admin.getId(),today);
             LambdaQueryWrapper<Target> targetDel = new LambdaQueryWrapper<>();
             targetDel.eq(Target::getDataTime,today);

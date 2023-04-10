@@ -209,4 +209,29 @@ public final class DateUtils extends org.apache.commons.lang3.time.DateUtils {
         SimpleDateFormat sdf=new SimpleDateFormat(format);
         return sdf.format(dNow);    //格式化前一天
     }
+
+    /**
+     * 获取当前日期的本周一是几号
+     *
+     * @return 本周一的日期
+     */
+    public static String getThisWeekMonday() {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(new Date());
+        // 获得当前日期是一个星期的第几天 使用cal.get(Calendar.DAY_OF_WEEK);
+        //获取的数表示的是每个星期的第几天，不能改变，其中星期日为第一天
+        // 如果是星期日则获取天数时获取到的数字为1 在后面进行相减的时候出错
+        int dayWeek = cal.get(Calendar.DAY_OF_WEEK);
+        if (1 == dayWeek) {
+            cal.add(Calendar.DAY_OF_MONTH, -1);
+        }
+        // 设置一个星期的第一天，按中国的习惯一个星期的第一天是星期一
+        cal.setFirstDayOfWeek(Calendar.MONDAY);
+        // 获得当前日期是一个星期的第几天
+        int day = cal.get(Calendar.DAY_OF_WEEK);
+        // 根据日历的规则，给当前日期减去星期几与一个星期第一天的差值
+        //  cal.getFirstDayOfWeek()根据前面的设置 来动态的改变此值
+        cal.add(Calendar.DATE, cal.getFirstDayOfWeek() - day);
+        return parseDateToStr(YYYY_MM_DD,cal.getTime());
+    }
 }

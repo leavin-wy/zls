@@ -52,7 +52,7 @@ public class LoginLogController extends BaseController {
      * @param id 记录ID
      * @return
      */
-//    @RequiresPermissions("sys:loginlog:delete")
+    @RequiresPermissions("sys:loginlog:delete")
     @Log(title = "登录日志", businessType = BusinessType.DELETE)
     @ResponseBody
     @GetMapping("/delete/{id}")
@@ -66,7 +66,7 @@ public class LoginLogController extends BaseController {
      * @param ids 记录ID(多个使用逗号","分隔)
      * @return
      */
-//    @RequiresPermissions("sys:loginlog:batchDelete")
+    @RequiresPermissions("sys:loginlog:batchDelete")
     @Log(title = "登录日志", businessType = BusinessType.BATCH_DELETE)
     @ResponseBody
     @GetMapping("/batchDelete/{ids}")
@@ -80,7 +80,7 @@ public class LoginLogController extends BaseController {
      * @param entity 实体对象
      * @return
      */
-//    @RequiresPermissions("sys:loginlog:status")
+    @RequiresPermissions("sys:loginlog:status")
     @Log(title = "登录日志", businessType = BusinessType.STATUS)
     @ResponseBody
     @PostMapping("/setStatus")
