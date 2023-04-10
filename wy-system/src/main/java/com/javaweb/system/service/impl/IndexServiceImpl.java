@@ -15,6 +15,7 @@ import com.javaweb.system.utils.ShiroUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -72,6 +73,7 @@ public class IndexServiceImpl implements IIndexService {
      */
     @Override
     public JsonResult maininitxzfb(String flag) {
+        String[] codes = new String[]{"user","1001","1002","1003","1004","1005"};
         String today = DateUtils.getCurDateFormat(DateUtils.YYYY_MM_DD);
         String startDt = "";
         String endDt = "";
@@ -98,7 +100,11 @@ public class IndexServiceImpl implements IIndexService {
                 Map<String, Object> map = new HashMap<>();
                 map.put("user",admin.getRealname());
                 List<Map<String, Object>> targets = targetMapper.selectBaseListByUser(admin.getId(),startDt,endDt);
-                Map<String, Object> targetMap = targets.stream().collect(Collectors.toMap(t->(String)t.get("target_code"),t->t.get("target_value")));
+                Map<String, Object> targetMap = targets.stream().filter(t->Arrays.asList(codes).contains(t.get("target_code")))
+                        .collect(Collectors.toMap(t->(String)t.get("target_code"),t->t.get("target_value")));
+                int total = targets.stream().filter(t->Arrays.asList(codes).contains(t.get("target_code")))
+                        .mapToInt(t->((BigDecimal) t.get("target_value")).intValue()).sum();
+                map.put("total",total);
                 map.putAll(targetMap);
                 result.add(map);
             }
@@ -107,7 +113,11 @@ public class IndexServiceImpl implements IIndexService {
             Map<String, Object> map = new HashMap<>();
             map.put("user",ShiroUtils.getAdminInfo().getRealname());
             List<Map<String, Object>> targets = targetMapper.selectBaseListByUser(ShiroUtils.getAdminId(),startDt,endDt);
-            Map<String, Object> targetMap = targets.stream().collect(Collectors.toMap(t->(String)t.get("target_code"),t->t.get("target_value")));
+            Map<String, Object> targetMap = targets.stream().filter(t->Arrays.asList(codes).contains(t.get("target_code")))
+                    .collect(Collectors.toMap(t->(String)t.get("target_code"),t->t.get("target_value")));
+            int total = targets.stream().filter(t->Arrays.asList(codes).contains(t.get("target_code")))
+                    .mapToInt(t->((BigDecimal) t.get("target_value")).intValue()).sum();
+            map.put("total",total);
             map.putAll(targetMap);
             result.add(map);
         }

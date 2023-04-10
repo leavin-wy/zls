@@ -299,13 +299,13 @@
     </div>
     <div class="layui-row layui-col-space10">
         <div class="layui-col-md6 layui-col-sm6">
-            <div class="layui-card graphic-card" style="min-height: 300px">
-                <div class="layui-card-header">当日新增分布(人)</div>
+            <div class="layui-card graphic-card" style="min-height: 200px">
+                <div class="layui-card-header"><font style="color: #e74c3c;font-weight: bold">当日新增分布(单位:人)</font></div>
                 <div class="layui-card-body dynamic-card-body mini-bar graphic-card-drxzfb">
                     <table class="layui-table" lay-skin="line">
                         <thead>
                         <tr>
-                            <td>人员姓名</td>
+                            <td>销售人员</td>
                             <td>美团</td>
                             <td>扫街</td>
                             <td>自然到店</td>
@@ -315,6 +315,37 @@
                         </tr>
                         </thead>
                         <tbody id="drxz">
+                        <!--<tr>
+                            <td>阳阳</td>
+                            <td id="khxj_dz">0</td>
+                            <td id="khxj_dz_jsr">0</td>
+                            <td id="khxj_dz_jsy">0</td>
+                            <td id="khxj_dz_jsj">0</td>
+                            <td id="khxj_dz_jsn">0</td>
+                            <td id="khxj_dz_bl">0</td>
+                        </tr>-->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="layui-col-md6 layui-col-sm6">
+            <div class="layui-card graphic-card" style="min-height: 200px">
+                <div class="layui-card-header"><font style="color: #e74c3c;font-weight: bold">本周新增分布(单位:人)</font></div>
+                <div class="layui-card-body dynamic-card-body mini-bar graphic-card-drxzfb">
+                    <table class="layui-table" lay-skin="line">
+                        <thead>
+                        <tr>
+                            <td>销售人员</td>
+                            <td>美团</td>
+                            <td>扫街</td>
+                            <td>自然到店</td>
+                            <td>转介绍</td>
+                            <td>其他</td>
+                            <td>合计</td>
+                        </tr>
+                        </thead>
+                        <tbody id="bzxz">
                         <!--<tr>
                             <td>阳阳</td>
                             <td id="khxj_dz">0</td>
@@ -735,9 +766,16 @@
             resultBindFunc(data,["1006_y","2001_y","2005_y","2006_y"]);
         });
 
+        //当日新增
         $.get("/maininitxzfb",{"flag":1}, function(res, success) {
             var data = res.data;
-            resultBindXZFBFunc(data,["userName_r","1001_r","1002_r","1003_r","1004_r","1005_r","total_r"]);
+            resultBindXZFBFunc(data,["user","1001","1002","1003","1004","1005","total"],"drxz");
+        });
+
+        //本周新增
+        $.get("/maininitxzfb",{"flag":2}, function(res, success) {
+            var data = res.data;
+            resultBindXZFBFunc(data,["user","1001","1002","1003","1004","1005","total"],"bzxz");
         });
 
         var resultBindDRFunc = function (data,paramArr) {
@@ -760,18 +798,18 @@
             }
         };
 
-        var resultBindXZFBFunc = function (data,paramArr) {
+        var resultBindXZFBFunc = function (data,paramArr,id) {
             for(var i=0;i<data.length;i++){
                 var tr = document.createElement("tr");
-                document.getElementById("drxz").appendChild(tr);
+                document.getElementById(id).appendChild(tr);
                 for(var param in paramArr){
                     var td = document.createElement("td");
                     tr.appendChild(td);
                     var value = "";
-                    if(data[i][paramArr[param].substring(0,4)]===undefined) {
+                    if(data[i][paramArr[param]]===undefined) {
                         value = "0";
                     }else{
-                        value = data[i][paramArr[param].substring(0,4)];
+                        value = data[i][paramArr[param]];
                     }
                     td.innerHTML = value;
                 }
