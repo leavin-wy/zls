@@ -255,7 +255,7 @@
             <div class="layui-card">
                 <div class="layui-card-header">
                     新增客资
-                    <span class="layui-badge layui-badge-green pull-right">当月</span>
+                    <span class="layui-badge layui-badge-green pull-right">本月</span>
                 </div>
                 <div class="layui-card-body">
                     <p class="lay-big-font"><span style="font-size: 28px;line-height: 1;" id="1006_y">11人</span></p>
@@ -266,7 +266,7 @@
         <div class="layui-col-xs12 layui-col-sm6 layui-col-md3">
             <div class="layui-card">
                 <div class="layui-card-header">
-                    到店客资<span class="layui-badge layui-badge-gray pull-right">当月</span>
+                    到店客资<span class="layui-badge layui-badge-gray pull-right">本月</span>
                 </div>
                 <div class="layui-card-body">
                     <p class="lay-big-font"><span style="font-size: 28px;line-height: 1;" id="2006_y">1人</span></p>
@@ -277,7 +277,7 @@
         <div class="layui-col-xs12 layui-col-sm6 layui-col-md3">
             <div class="layui-card">
                 <div class="layui-card-header">
-                    联系客资<span class="layui-badge layui-badge-blue pull-right">当月</span>
+                    联系客资<span class="layui-badge layui-badge-blue pull-right">本月</span>
                 </div>
                 <div class="layui-card-body">
                     <p class="lay-big-font"><span style="font-size: 28px;line-height: 1;" id="2001_y">1人</span></p>
@@ -288,7 +288,7 @@
         <div class="layui-col-xs12 layui-col-sm6 layui-col-md3">
             <div class="layui-card">
                 <div class="layui-card-header">
-                    成交量<span class="layui-badge layui-badge-red pull-right">当月</span>
+                    成交量<span class="layui-badge layui-badge-red pull-right">本月</span>
                 </div>
                 <div class="layui-card-body">
                     <p class="lay-big-font"><span style="font-size: 28px;line-height: 1;" id="2005_y">1人</span></p>
@@ -300,7 +300,7 @@
     <div class="layui-row layui-col-space10">
         <div class="layui-col-md6 layui-col-sm6">
             <div class="layui-card graphic-card" style="min-height: 200px">
-                <div class="layui-card-header"><font style="color: #e74c3c;font-weight: bold">当日新增分布(单位:人)</font></div>
+                <div class="layui-card-header"><font style="color: #e74c3c;font-weight: bold">今日新增分布(单位:人)</font></div>
                 <div class="layui-card-body dynamic-card-body mini-bar graphic-card-drxzfb">
                     <table class="layui-table" lay-skin="line">
                         <thead>
@@ -315,15 +315,6 @@
                         </tr>
                         </thead>
                         <tbody id="drxz">
-                        <!--<tr>
-                            <td>阳阳</td>
-                            <td id="khxj_dz">0</td>
-                            <td id="khxj_dz_jsr">0</td>
-                            <td id="khxj_dz_jsy">0</td>
-                            <td id="khxj_dz_jsj">0</td>
-                            <td id="khxj_dz_jsn">0</td>
-                            <td id="khxj_dz_bl">0</td>
-                        </tr>-->
                         </tbody>
                     </table>
                 </div>
@@ -346,15 +337,6 @@
                         </tr>
                         </thead>
                         <tbody id="bzxz">
-                        <!--<tr>
-                            <td>阳阳</td>
-                            <td id="khxj_dz">0</td>
-                            <td id="khxj_dz_jsr">0</td>
-                            <td id="khxj_dz_jsy">0</td>
-                            <td id="khxj_dz_jsj">0</td>
-                            <td id="khxj_dz_jsn">0</td>
-                            <td id="khxj_dz_bl">0</td>
-                        </tr>-->
                         </tbody>
                     </table>
                 </div>
@@ -420,322 +402,6 @@
                     <div class="console-app-group">
                         <i class="console-app-icon layui-icon layui-icon-slider" style="color: #ffc069;"></i>
                         <div class="console-app-name">待定</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>-->
-
-    <!--<div class="layui-row layui-col-space15">
-        <div class="layui-col-md8 layui-col-sm6">
-            <div class="layui-row layui-col-space15">
-                <div class="layui-col-md6">
-                    <div class="layui-card">
-                        <div class="layui-card-header">最新动态</div>
-                        <div class="layui-card-body dynamic-card-body mini-bar" style="height: 265px;">
-                            <ul class="layui-timeline layui-timeline-dynamic">
-                                <li class="layui-timeline-item">
-                                    <i class="layui-icon layui-timeline-axis"></i>
-                                    <div class="layui-timeline-content layui-text">
-                                        <div class="layui-timeline-title">研发经理 指派了任务 陪客户吃饭
-                                            <span class="pull-right">14:30 </span></div>
-                                    </div>
-                                </li>
-                                <li class="layui-timeline-item">
-                                    <i class="layui-icon layui-timeline-axis active"></i>
-                                    <div class="layui-timeline-content layui-text">
-                                        <div class="layui-timeline-title">测试组长 提交了bug 代码错误
-                                            <span class="pull-right">14:00 </span></div>
-                                    </div>
-                                </li>
-                                <li class="layui-timeline-item">
-                                    <i class="layui-icon layui-timeline-axis"></i>
-                                    <div class="layui-timeline-content layui-text">
-                                        <div class="layui-timeline-title">管理员 登录了系统
-                                            <span class="pull-right">13:30 </span></div>
-                                    </div>
-                                </li>
-                                <li class="layui-timeline-item">
-                                    <i class="layui-icon layui-timeline-axis active"></i>
-                                    <div class="layui-timeline-content layui-text">
-                                        <div class="layui-timeline-title">开发一 解决了bug 代码错误
-                                            <span class="pull-right">11:30 </span></div>
-                                    </div>
-                                </li>
-                                <li class="layui-timeline-item">
-                                    <i class="layui-icon layui-timeline-axis active"></i>
-                                    <div class="layui-timeline-content layui-text">
-                                        <div class="layui-timeline-title">测试一 创建了用例 用户登录
-                                            <span class="pull-right">11:00 </span></div>
-                                    </div>
-                                </li>
-                                <li class="layui-timeline-item">
-                                    <i class="layui-icon layui-timeline-axis"></i>
-                                    <div class="layui-timeline-content layui-text">
-                                        <div class="layui-timeline-title">开发二 退出了系统
-                                            <span class="pull-right">10:30 </span></div>
-                                    </div>
-                                </li>
-                                <li class="layui-timeline-item">
-                                    <i class="layui-icon layui-timeline-axis"></i>
-                                    <div class="layui-timeline-content layui-text">
-                                        <div class="layui-timeline-title">研发经理 指派了任务 修改大bug
-                                            <span class="pull-right">10:00 </span></div>
-                                    </div>
-                                </li>
-                                <li class="layui-timeline-item">
-                                    <i class="layui-icon layui-timeline-axis"></i>
-                                    <div class="layui-timeline-content layui-text">
-                                        <div class="layui-timeline-title">研发经理 指派了任务 修改小bug
-                                            <span class="pull-right">09:30 </span></div>
-                                    </div>
-                                </li>
-                                <li class="layui-timeline-item">
-                                    <i class="layui-icon layui-timeline-axis active"></i>
-                                    <div class="layui-timeline-content layui-text">
-                                        <div class="layui-timeline-title">研发经理 指派了任务 修改小bug
-                                            <span class="pull-right">09:00 </span></div>
-                                    </div>
-                                </li>
-                                <li class="layui-timeline-item">
-                                    <i class="layui-icon layui-timeline-axis"></i>
-                                    <div class="layui-timeline-content layui-text">
-                                        <div class="layui-timeline-title">管理员 登录了系统
-                                            <span class="pull-right">08:30 </span></div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="layui-col-md6">
-                    <div class="layui-card">
-                        <div class="layui-card-header">我的任务</div>
-                        <div class="layui-card-body">
-                            <table class="layui-table" lay-skin="line">
-                                <colgroup>
-                                    <col width="80"/>
-                                    <col/>
-                                    <col width="80"/>
-                                </colgroup>
-                                <thead>
-                                <tr>
-                                    <td align="center">优先级</td>
-                                    <td>任务名称</td>
-                                    <td align="center">状态</td>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <td align="center">
-                                        <span class="layui-badge layui-badge-red layui-badge-priority">1</span>
-                                    </td>
-                                    <td><span class="layui-text"><a>参加股东大会</a></span></td>
-                                    <td align="center"><span class="text-warning">未开始</span></td>
-                                </tr>
-                                <tr>
-                                    <td align="center">
-                                        <span class="layui-badge layui-badge-yellow layui-badge-priority">2</span>
-                                    </td>
-                                    <td><span class="layui-text"><a>陪客户吃饭</a></span></td>
-                                    <td align="center"><span class="text-warning">未开始</span></td>
-                                </tr>
-                                <tr>
-                                    <td align="center">
-                                        <span class="layui-badge layui-badge-blue layui-badge-priority">3</span>
-                                    </td>
-                                    <td><span class="layui-text"><a>项目开发</a></span></td>
-                                    <td align="center"><span class="text-success">进行中</span></td>
-                                </tr>
-                                <tr>
-                                    <td align="center">
-                                        <span class="layui-badge layui-badge-blue layui-badge-priority">3</span>
-                                    </td>
-                                    <td><span class="layui-text"><a>修改大bug</a></span></td>
-                                    <td align="center">
-                                        <del class="text-muted">已完成</del>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td align="center">
-                                        <span class="layui-badge layui-badge-blue layui-badge-priority">3</span>
-                                    </td>
-                                    <td><span class="layui-text"><a>修改小bug</a></span></td>
-                                    <td align="center">
-                                        <del class="text-muted">已完成</del>
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-                &lt;!&ndash;<div class="layui-col-md12">
-                    <div class="layui-card">
-                        <div class="layui-card-header">项目进度</div>
-                        <div class="layui-card-body">
-                            <table class="layui-table" lay-skin="line">
-                                <colgroup>
-                                    <col width="40"/>
-                                    <col/>
-                                    <col/>
-                                    <col/>
-                                    <col/>
-                                    <col width="160"/>
-                                </colgroup>
-                                <thead>
-                                <tr>
-                                    <td></td>
-                                    <td>项目名称</td>
-                                    <td align="center">开始时间</td>
-                                    <td align="center">截至时间</td>
-                                    <td align="center">状态</td>
-                                    <td align="center">进度</td>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td><span class="layui-text"><a>仓库管理系统</a></span></td>
-                                    <td align="center">2020-03-01</td>
-                                    <td align="center">2020-06-01</td>
-                                    <td align="center"><span class="text-success">进行中</span></td>
-                                    <td>
-                                        <div class="layui-progress" lay-showPercent="yes">
-                                            <div class="layui-progress-bar" lay-percent="30%"></div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td><span class="layui-text"><a>档案管理系统</a></span></td>
-                                    <td align="center">2020-03-01</td>
-                                    <td align="center">2020-08-01</td>
-                                    <td align="center"><span class="text-success">进行中</span></td>
-                                    <td>
-                                        <div class="layui-progress" lay-showPercent="yes">
-                                            <div class="layui-progress-bar" lay-percent="10%"></div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td><span class="layui-text"><a>后台管理系统</a></span></td>
-                                    <td align="center">2020-01-01</td>
-                                    <td align="center">2020-05-01</td>
-                                    <td align="center"><span class="text-danger">已延期</span></td>
-                                    <td>
-                                        <div class="layui-progress" lay-showPercent="yes">
-                                            <div class="layui-progress-bar" lay-percent="60%"></div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>4</td>
-                                    <td><span class="layui-text"><a>粮情监测系统</a></span></td>
-                                    <td align="center">2020-06-01</td>
-                                    <td align="center">2020-10-01</td>
-                                    <td align="center"><span class="text-warning">未开始</span></td>
-                                    <td>
-                                        <div class="layui-progress" lay-showPercent="yes">
-                                            <div class="layui-progress-bar" lay-percent="0%"></div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>5</td>
-                                    <td><span class="layui-text"><a>项目00000001</a></span></td>
-                                    <td align="center">2020-01-01</td>
-                                    <td align="center">2020-04-01</td>
-                                    <td align="center"><span class="text-muted">已完成</span></td>
-                                    <td>
-                                        <div class="layui-progress" lay-showPercent="yes">
-                                            <div class="layui-progress-bar" lay-percent="90%"></div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>6</td>
-                                    <td><span class="layui-text"><a>项目00000002</a></span></td>
-                                    <td align="center">2020-01-01</td>
-                                    <td align="center">2020-03-01</td>
-                                    <td align="center"><span class="text-muted">已完成</span></td>
-                                    <td>
-                                        <div class="layui-progress" lay-showPercent="yes">
-                                            <div class="layui-progress-bar" lay-percent="100%"></div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>&ndash;&gt;
-            </div>
-        </div>
-        <div class="layui-col-md4 layui-col-sm6">
-            &lt;!&ndash;<div class="layui-card">
-                <div class="layui-card-header">版本信息</div>
-                <div class="layui-card-body">
-                    <table class="layui-table layui-text">
-                        <colgroup>
-                            <col width="90">
-                            <col>
-                        </colgroup>
-                        <tbody>
-                        <script type="text/html" ew-tpl>
-                            <tr>
-                                <td>当前版本</td>
-                                <td>v{{layui.admin.version}} &emsp; <a href="https://javaweb.vip/doc/" target="_blank">更新日志</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>基于框架</td>
-                                <td>layui-v{{layui.v}}</td>
-                            </tr>
-                        </script>
-                        <tr>
-                            <td>主要特色</td>
-                            <td>单页面 / 响应式 / 简约 / 易上手</td>
-                        </tr>
-                        <tr>
-                            <td>获取渠道</td>
-                            <td>
-                                <a href="tencent://message/?uin=1175401194" class="layui-btn layui-btn-sm layui-btn-danger"
-                                   target="_blank">获取授权</a>
-                                <a href="http://javaweb.vip" target="_blank" class="layui-btn layui-btn-sm">立即下载</a>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>&ndash;&gt;
-            <div class="layui-card">
-                <div class="layui-card-header">小组成员</div>
-                <div class="layui-card-body">
-                    <div class="console-user-group">
-                        <img src="/static/assets/images/head.jpg" class="console-user-group-head" alt=""/>
-                        <div class="console-user-group-name">阳阳老师</div>
-                        <div class="console-user-group-desc">产品负责人</div>
-                        <span class="layui-badge layui-badge-green">在线</span>
-                    </div>
-                    <div class="console-user-group">
-                        <img src="/static/assets/images/head.jpg" class="console-user-group-head" alt=""/>
-                        <div class="console-user-group-name">阳阳老师</div>
-                        <div class="console-user-group-desc">项目负责人</div>
-                        <span class="layui-badge layui-badge-green">在线</span>
-                    </div>
-                    <div class="console-user-group">
-                        <img src="/static/assets/images/head.jpg" class="console-user-group-head" alt=""/>
-                        <div class="console-user-group-name">阳阳老师</div>
-                        <div class="console-user-group-desc">产品负责人</div>
-                        <span class="layui-badge layui-badge-red">离线</span>
-                    </div>
-                    <div class="console-user-group">
-                        <img src="/static/assets/images/head.jpg" class="console-user-group-head" alt=""/>
-                        <div class="console-user-group-name">阳阳老师</div>
-                        <div class="console-user-group-desc">测试负责人</div>
-                        <span class="layui-badge layui-badge-red">离线</span>
                     </div>
                 </div>
             </div>

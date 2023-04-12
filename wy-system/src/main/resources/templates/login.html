@@ -247,6 +247,7 @@
                     } else {
                         // 错误信息
                         layer.msg(res.msg, {icon: 2, anim: 6});
+                        $("#captcha").val("");
                         // 刷新验证码
                         $('img.login-captcha').click(function () {
                             this.src = '/captcha?t=' + (new Date).getTime();
@@ -255,7 +256,7 @@
                         // 延迟3秒恢复可登录状态
                         setTimeout(function () {
                             // 设置按钮状态为登录”
-                            var login_text = $(data.elem).text().replace('登录中。。。', '');
+                            var login_text = $(data.elem).text().replace('中。。。', '');
                             // 设置按钮为可点击状态
                             $(data.elem).text(login_text).removeAttr('disabled');
                         }, 1000);

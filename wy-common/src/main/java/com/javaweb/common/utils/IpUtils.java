@@ -1,10 +1,13 @@
 package com.javaweb.common.utils;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.google.gson.JsonObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.StringUtils;
+import sun.applet.Main;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.BufferedReader;
@@ -289,6 +292,33 @@ public class IpUtils {
         String city = data.getString("city");
         address = region + " " + city;
         return address;
+    }
+
+    public static String getAddressByIp(String ip) {
+        try {
+            URL url = new URL("http://opendata.baidu.com/api.php?query="+ip+"&co=&resource_id=6006&t=1433920989928&ie=utf8&oe=utf-8&format=json");;
+            URLConnection conn = url.openConnection();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream(), "utf-8"));
+            String line = null;
+            StringBuffer result = new StringBuffer();
+            while ((line = reader.readLine()) != null) {
+                result.append(line);
+            }
+            reader.close();
+            JSONObject jsStr = JSONObject.parseObject(result.toString());
+            JSONArray jsData = (JSONArray) jsStr.get("data");
+            JSONObject data= (JSONObject) jsData.get(0);
+            String location = (String) data.get("location");
+            return location;
+        } catch (IOException e) {
+            log.error("获取IP地址失败");
+        }finally {
+            return "内网IP";
+        }
+    }
+
+    public static void main(String[] args) {
+        IpUtils.getAddressByIp("222.210.61.160");
     }
 
 }

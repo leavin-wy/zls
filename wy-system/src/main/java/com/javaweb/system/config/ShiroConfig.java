@@ -6,7 +6,6 @@ import com.javaweb.system.filter.KickoutSessionControlFilter;
 import com.javaweb.system.filter.ShiroLoginFilter;
 import com.javaweb.system.filter.ShiroLogoutFilter;
 import com.javaweb.system.shiro.CustomCredentialsMatcher;
-import com.javaweb.system.shiro.MySessionManager;
 import com.javaweb.system.shiro.MyShiroRealm;
 import lombok.Data;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
@@ -42,7 +41,7 @@ public class ShiroConfig {
 
     private final String CACHE_KEY = "shiro:cache:";
     private final String SESSION_KEY = "shiro:session:";
-    private Integer EXPIRE = 86400 * 7;
+    //private Integer EXPIRE = 86400 * 7;
 
     @Value("${spring.redis.host}")
     private String host;
@@ -52,6 +51,8 @@ public class ShiroConfig {
     private String password;
     @Value("${spring.redis.timeout}")
     private Integer timeout;
+    @Value("${spring.redis.expire}")
+    private Integer expire;
 
     //设置session过期时间
     @Value("${shiro.session.expireTime}")
@@ -195,7 +196,7 @@ public class ShiroConfig {
         redisSessionDAO.setRedisManager(redisManager());
         redisSessionDAO.setSessionIdGenerator(sessionIdGenerator());
         redisSessionDAO.setKeyPrefix(SESSION_KEY);
-        redisSessionDAO.setExpire(EXPIRE);
+        redisSessionDAO.setExpire(expire);
         return redisSessionDAO;
     }
 
