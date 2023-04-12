@@ -57,9 +57,8 @@ public class CustomerListVo {
      */
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @JsonFormat(pattern = "yyyy-MM-dd", timezone="GMT+8")
+    @Excel(name = "出生时间",width = 15,format = "yyyy/MM/dd")
     private Date birthday;
-
-    @Excel(name = "出生时间",width = 15)
     private String birthdayStr;
 
     /**
@@ -101,27 +100,29 @@ public class CustomerListVo {
      */
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @JsonFormat(pattern = "yyyy-MM-dd", timezone="GMT+8")
-    private Date completeTime;
     @Excel(name = "成交时间",width = 15)
+    private Date completeTime;
     private String completeTimeStr;
 
 
-    @Excel(name = "最后探店时间",width = 15)
-    private String lastTandianTime;//最后探店时间
+    @Excel(name = "最后探店时间",width = 15,format = "yyyy/MM/dd")
+    private Date lastTandianTime;//最后探店时间
+    private String lastTandianTimeStr;//最后探店时间
     private Integer tandianNum;//探店次数
 
     @Excel(name = "最后沟通内容",width = 15)
     private String lastGoutongDesc;//最后沟通内容
-    @Excel(name = "最后沟通时间",width = 15)
-    private String lastGoutongTime;//最后沟通时间
+    @Excel(name = "最后沟通时间",width = 15,format = "yyyy/MM/dd")
+    private Date lastGoutongTime;//最后沟通时间
+    private String lastGoutongTimeStr;//最后沟通时间
 
     /**
      * 下次沟通时间
      */
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @JsonFormat(pattern = "yyyy-MM-dd", timezone="GMT+8")
-    private Date interactTime;
     @Excel(name = "下次沟通时间",width = 15)
+    private Date interactTime;
     private String interactTimeStr;
 
     /**
@@ -135,8 +136,8 @@ public class CustomerListVo {
      */
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @JsonFormat(pattern = "yyyy-MM-dd", timezone="GMT+8")
-    private Date inviteTime;
     @Excel(name = "邀约时间",width = 15)
+    private Date inviteTime;
     private String inviteTimeStr;
 
     /**

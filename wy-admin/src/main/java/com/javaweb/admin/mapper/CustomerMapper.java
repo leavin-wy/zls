@@ -18,7 +18,7 @@ import java.util.Map;
  * @since 2023-03-31
  */
 public interface CustomerMapper extends BaseMapper<Customer> {
-    @Select("select date_format(td_time,'%Y-%m-%d %H:%i:%s') " +
+    @Select("select date_format(td_time,'%Y-%m-%d') " +
             "from sys_tandian where cust_id = ${custId} order by td_time desc limit 0,1")
     String getLastTandianTime(@Param("custId")Integer custId);
 
@@ -28,7 +28,7 @@ public interface CustomerMapper extends BaseMapper<Customer> {
     @Select("SELECT TIMESTAMPDIFF(month,#{birthday},now()) AS diffMonth")
     Integer getAgeForMonth(@Param("birthday")Date birthday );
 
-    @Select("select date_format(gt_time,'%Y-%m-%d %H:%i:%s') 'gtTime', gt_desc 'gtDesc' " +
+    @Select("select date_format(gt_time,'%Y-%m-%d') 'gtTime', gt_desc 'gtDesc' " +
             "from sys_goutong where cust_id = ${custId} order by gt_time desc limit 0,1")
     Map<String,Object> getLastGoutongInfo(@Param("custId")Integer custId);
 

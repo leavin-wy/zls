@@ -29,8 +29,6 @@ layui.use(['func'], function () {
             }}
             , {field: 'birthday', width: 120, title: '出生时间', align: 'center'}
             , {field: 'age', width: 100, title: '年龄', align: 'center'}
-            , {field: 'phone', width: 120, title: '联系电话', align: 'center'}
-            , {field: 'address', width: 180, title: '家庭住址', align: 'center'}
             , {field: 'source', width: 100, title: '渠道', align: 'center', templet(d) {
                     var cls = "";
                     if (d.source == 1) {
@@ -65,14 +63,16 @@ layui.use(['func'], function () {
                 }
                     return '<span class="layui-btn ' + cls + ' layui-btn-xs">'+d.custTypeName+'</span>';
             }}
-            , {field: 'inviteTime', width: 120, title: '邀约时间', align: 'center'}
-            , {field: 'completeTime', width: 120, title: '成交时间', align: 'center'}
-            , {field: 'lastTandianTime', width: 160, title: '最近探店时间', align: 'center'}
+            , {field: 'lastTandianTimeStr', width: 160, title: '最近探店时间', align: 'center'}
             , {field: 'tandianNum', width: 100, title: '探店次数', align: 'center'}
-            , {field: 'lastGoutongTime', width: 160, title: '最近沟通时间', align: 'center'}
+            , {field: 'lastGoutongTimeStr', width: 160, title: '最近沟通时间', align: 'center'}
             , {field: 'lastGoutongDesc', width: 200, title: '最近沟通内容', align: 'left'}
             , {field: 'interactTime', width: 120, title: '下次沟通时间', align: 'center'}
             , {field: 'interactDesc', width: 120, title: '下次沟通内容', align: 'center'}
+            , {field: 'phone', width: 120, title: '联系电话', align: 'center'}
+            , {field: 'address', width: 180, title: '家庭住址', align: 'center'}
+            , {field: 'inviteTime', width: 120, title: '邀约时间', align: 'center'}
+            , {field: 'completeTime', width: 120, title: '成交时间', align: 'center'}
             , {field: 'createUserName', width: 100, title: '创建人', align: 'center'}
             , {field: 'createTime', width: 160, title: '创建时间', align: 'center'}
             , {fixed: 'right', width: 330, title: '功能操作', align: 'center', toolbar: '#toolBar'}

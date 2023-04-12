@@ -148,7 +148,7 @@ public class CustomerServiceImpl extends BaseServiceImpl<CustomerMapper, Custome
                 }
                 //最后探店时间
                 String lastTandianTime = customerMapper.getLastTandianTime(customerListVo.getId());
-                customerListVo.setLastTandianTime(lastTandianTime);
+                customerListVo.setLastTandianTimeStr(lastTandianTime);
                 //探店次数
                 Integer tandianNum = customerMapper.getTandianNum(customerListVo.getId());
                 customerListVo.setTandianNum(tandianNum);
@@ -161,7 +161,7 @@ public class CustomerServiceImpl extends BaseServiceImpl<CustomerMapper, Custome
                 //最后沟通时间内容
                 Map<String, Object> lastGoutongInfo = customerMapper.getLastGoutongInfo(customerListVo.getId());
                 if(null != lastGoutongInfo){
-                    customerListVo.setLastGoutongTime((String) lastGoutongInfo.get("gtTime"));
+                    customerListVo.setLastGoutongTimeStr((String) lastGoutongInfo.get("gtTime"));
                     customerListVo.setLastGoutongDesc((String) lastGoutongInfo.get("gtDesc"));
                 }
                 customerListVoList.add(customerListVo);
@@ -247,7 +247,10 @@ public class CustomerServiceImpl extends BaseServiceImpl<CustomerMapper, Custome
                 }
                 for(CustomerListVo customerListVo:insertList){
                     Customer customer = new Customer();
-                    Date completeTime = DateUtils.parseDate(customerListVo.getCompleteTimeStr());
+                    //Date completeTime = DateUtils.parseDate(customerListVo.getCompleteTimeStr());
+                    if(null!=customerListVo.getBirthday()){
+                        customerListVo.setBirthdayStr(DateUtils.parseDateToStr(DateUtils.YYYY_MM_DD,customerListVo.getBirthday()));
+                    }
 
                     if(StringUtils.isEmpty(customerListVo.getCustName())){
                         customerListVo.setErrorMsg("请输入客户姓名!");
@@ -287,7 +290,7 @@ public class CustomerServiceImpl extends BaseServiceImpl<CustomerMapper, Custome
                         errorList.add(customerListVo);
                         continue;
                     }
-                    if(StringUtils.isNotEmpty(customerListVo.getLastGoutongTime())){
+                    /*if(null != customerListVo.getLastGoutongTime()){
                         Date goutong = DateUtils.parseDate(customerListVo.getLastGoutongTime());
                         if(goutong==null){
                             customerListVo.setErrorMsg("沟通时间格式不正确!");
@@ -326,33 +329,34 @@ public class CustomerServiceImpl extends BaseServiceImpl<CustomerMapper, Custome
                             errorList.add(customerListVo);
                             continue;
                         }
-                    }
+                    }*/
                     BeanUtils.copyProperties(customerListVo, customer);
-                    customer.setBirthday(birthday);
+                    //customer.setBirthday(birthday);
                     customer.setSex(Integer.valueOf(customerListVo.getSexName()));
                     customer.setCustType(Integer.valueOf(customerListVo.getCustTypeName()));
                     customer.setSource(Integer.valueOf(customerListVo.getSourceName()));
-                    customer.setCompleteTime(completeTime);
-                    customer.setInteractTime(interactTime);
-                    customer.setInviteTime(inviteTime);
+                    //customer.setCompleteTime(completeTime);
+                    //customer.setInteractTime(interactTime);
+                    //customer.setInviteTime(inviteTime);
                     customer.setCreateUser(ShiroUtils.getAdminId());
                     customer.setCreateTime(new Date());
                     super.add(customer);
                     success++;
-                    if(StringUtils.isNotEmpty(customerListVo.getLastTandianTime())){
+                    if(null!=customerListVo.getLastTandianTime()){
                         //探店记录
                         Tandian tandian = new Tandian();
                         tandian.setCustId(customer.getId());
-                        tandian.setTdTime(DateUtils.parseDate(customerListVo.getLastTandianTime()));
+                        tandian.setTdTime(customerListVo.getLastTandianTime());
                         tandian.setCreateUser(ShiroUtils.getAdminId());
                         tandian.setCreateTime(new Date());
                         tandianMapper.insert(tandian);
                     }
-                    if(StringUtils.isNotEmpty(customerListVo.getLastGoutongTime())){
+                    if(null!=customerListVo.getLastGoutongTime()
+                            ||null!=customerListVo.getLastGoutongDesc()){
                         Goutong goutong = new Goutong();
                         goutong.setCustId(customer.getId());
-                        goutong.setGtTime(DateUtils.parseDate(customerListVo.getLastGoutongTime()));
-                        goutong.setGtDesc(customerListVo.getLastGoutongDesc());
+                        goutong.setGtTime(null==customerListVo.getLastGoutongTime()?new Date():customerListVo.getLastGoutongTime());
+                        goutong.setGtDesc(StringUtils.isEmpty(customerListVo.getLastGoutongDesc())?"":customerListVo.getLastGoutongDesc());
                         goutong.setCreateUser(ShiroUtils.getAdminId());
                         goutong.setCreateTime(new Date());
                         goutongMapper.insert(goutong);
@@ -375,15 +379,15 @@ public class CustomerServiceImpl extends BaseServiceImpl<CustomerMapper, Custome
         CustomerListVo cust = new CustomerListVo();
         cust.setCustName("宝宝");
         cust.setNickName("baobao");
-        cust.setBirthdayStr("填写格式：2021-05-18");
+        cust.setBirthday(new Date());
         cust.setSexName("输入性别代码:1=男,2=女,3=未知");
         cust.setPhone("如：13888888888");
         cust.setAddress("");
         cust.setSourceName("输入渠道:1=美团,2=扫街,3=自然到店,4=转介绍,5=其他");
         cust.setCustTypeName("输入客户类型:1=A,2=B,3=C,4=D,5=E,6=S,7=成交");
         cust.setCompleteTimeStr("填写格式：2022-05-18");
-        cust.setLastTandianTime("填写格式：2020-05-18");
-        cust.setLastGoutongTime("填写格式：2021-05-18");
+        cust.setLastTandianTime(new Date());
+        cust.setLastGoutongTime(new Date());
         cust.setLastGoutongDesc("");
         cust.setInteractTimeStr("填写格式：2023-05-18");
         cust.setInteractDesc("");
@@ -401,14 +405,15 @@ public class CustomerServiceImpl extends BaseServiceImpl<CustomerMapper, Custome
     /**
      * cron： 每5分钟扫描一次
      */
-    @Scheduled(cron = "0 0/2 * * * ?")
+    @Scheduled(cron = "0 0/5 * * * ?")
     @SuppressWarnings(value = "unchecked")
     @Override
     public void pushCustGontongNotice() {
         logger.info("沟通计划消息推送定时任务执行开始......");
         LambdaQueryWrapper<Customer> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.ge(Customer::getInteractTime,new Date());
-        queryWrapper.le(Customer::getInteractTime,DateUtils.getDateByN(3));
+        //默认推送当天的
+        queryWrapper.le(Customer::getInteractTime,DateUtils.getDateByN(1));
         queryWrapper.orderByAsc(Customer::getInteractTime);
         List<Customer> list = customerMapper.selectList(queryWrapper);
         list.stream().forEach(customer -> {
