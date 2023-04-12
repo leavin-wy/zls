@@ -100,7 +100,7 @@ public class CustomerListVo {
      */
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @JsonFormat(pattern = "yyyy-MM-dd", timezone="GMT+8")
-    @Excel(name = "成交时间",width = 15)
+    @Excel(name = "成交时间",width = 15,format = "yyyy/MM/dd")
     private Date completeTime;
     private String completeTimeStr;
 
@@ -121,7 +121,7 @@ public class CustomerListVo {
      */
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @JsonFormat(pattern = "yyyy-MM-dd", timezone="GMT+8")
-    @Excel(name = "下次沟通时间",width = 15)
+    @Excel(name = "下次沟通时间",width = 15,format = "yyyy/MM/dd")
     private Date interactTime;
     private String interactTimeStr;
 
@@ -136,7 +136,7 @@ public class CustomerListVo {
      */
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @JsonFormat(pattern = "yyyy-MM-dd", timezone="GMT+8")
-    @Excel(name = "邀约时间",width = 15)
+    @Excel(name = "邀约时间",width = 15,format = "yyyy/MM/dd")
     private Date inviteTime;
     private String inviteTimeStr;
 

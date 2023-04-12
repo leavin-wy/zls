@@ -385,13 +385,13 @@ public class CustomerServiceImpl extends BaseServiceImpl<CustomerMapper, Custome
         cust.setAddress("");
         cust.setSourceName("输入渠道:1=美团,2=扫街,3=自然到店,4=转介绍,5=其他");
         cust.setCustTypeName("输入客户类型:1=A,2=B,3=C,4=D,5=E,6=S,7=成交");
-        cust.setCompleteTimeStr("填写格式：2022-05-18");
+        cust.setCompleteTime(new Date());
         cust.setLastTandianTime(new Date());
         cust.setLastGoutongTime(new Date());
         cust.setLastGoutongDesc("");
-        cust.setInteractTimeStr("填写格式：2023-05-18");
+        cust.setInteractTime(new Date());
         cust.setInteractDesc("");
-        cust.setInviteTimeStr("填写格式：2023-05-18");
+        cust.setInviteTime(new Date());
         example.add(cust);
         try{
             Workbook workbook = ExcelSimpleUtil.exportExcel(excelBaseParam.getTitleName(), excelBaseParam.getSheetName(), example, CustomerListVo.class,true);
