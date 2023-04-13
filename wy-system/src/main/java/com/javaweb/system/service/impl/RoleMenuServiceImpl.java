@@ -130,7 +130,7 @@ public class RoleMenuServiceImpl extends BaseServiceImpl<RoleMenuMapper, RoleMen
     public JsonResult getRolePermissionByRoleId(Integer roleId) {
         // 查询条件
         QueryWrapper<Menu> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("status", 1);
+        //queryWrapper.eq("status", 1);
         queryWrapper.eq("mark", 1);
         queryWrapper.orderByAsc("sort");
         List<Menu> menuList = menuMapper.selectList(queryWrapper);

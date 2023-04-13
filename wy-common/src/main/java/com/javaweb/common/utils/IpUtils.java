@@ -295,6 +295,7 @@ public class IpUtils {
     }
 
     public static String getAddressByIp(String ip) {
+        String location = "内网";
         try {
             URL url = new URL("http://opendata.baidu.com/api.php?query="+ip+"&co=&resource_id=6006&t=1433920989928&ie=utf8&oe=utf-8&format=json");;
             URLConnection conn = url.openConnection();
@@ -308,17 +309,16 @@ public class IpUtils {
             JSONObject jsStr = JSONObject.parseObject(result.toString());
             JSONArray jsData = (JSONArray) jsStr.get("data");
             JSONObject data= (JSONObject) jsData.get(0);
-            String location = (String) data.get("location");
-            return location;
+            location = (String) data.get("location");
+            log.info("登录ip地址:{}",location);
         } catch (IOException e) {
             log.error("获取IP地址失败");
-        }finally {
-            return "内网IP";
         }
+        return location;
     }
 
     public static void main(String[] args) {
-        IpUtils.getAddressByIp("222.210.61.160");
+        IpUtils.getAddressByIp("182.150.22.198");
     }
 
 }

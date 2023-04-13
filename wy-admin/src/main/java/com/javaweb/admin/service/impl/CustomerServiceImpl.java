@@ -357,6 +357,7 @@ public class CustomerServiceImpl extends BaseServiceImpl<CustomerMapper, Custome
                         goutong.setCustId(customer.getId());
                         goutong.setGtTime(null==customerListVo.getLastGoutongTime()?new Date():customerListVo.getLastGoutongTime());
                         goutong.setGtDesc(StringUtils.isEmpty(customerListVo.getLastGoutongDesc())?"":customerListVo.getLastGoutongDesc());
+                        goutong.setReplyFlag(1);
                         goutong.setCreateUser(ShiroUtils.getAdminId());
                         goutong.setCreateTime(new Date());
                         goutongMapper.insert(goutong);
