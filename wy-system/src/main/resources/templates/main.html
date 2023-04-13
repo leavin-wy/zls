@@ -343,6 +343,30 @@
             </div>
         </div>
     </div>
+    <div class="layui-row layui-col-space10">
+        <div class="layui-col-md6 layui-col-sm6">
+            <div class="layui-card graphic-card" style="min-height: 200px">
+                <div class="layui-card-header"><font style="color: #e74c3c;font-weight: bold">本月新增分布(单位:人)</font></div>
+                <div class="layui-card-body dynamic-card-body mini-bar graphic-card-drxzfb">
+                    <table class="layui-table" lay-skin="line">
+                        <thead>
+                        <tr>
+                            <td>销售人员</td>
+                            <td>美团</td>
+                            <td>扫街</td>
+                            <td>自然到店</td>
+                            <td>转介绍</td>
+                            <td>其他</td>
+                            <td>合计</td>
+                        </tr>
+                        </thead>
+                        <tbody id="byxz">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- 快捷方式 -->
     <!--<div class="layui-row layui-col-space15">
         <div class="layui-col-sm6" style="padding-bottom: 0;">
@@ -442,6 +466,12 @@
         $.get("/maininitxzfb",{"flag":2}, function(res, success) {
             var data = res.data;
             resultBindXZFBFunc(data,["user","1001","1002","1003","1004","1005","total"],"bzxz");
+        });
+
+        //本月新增
+        $.get("/maininitxzfb",{"flag":3}, function(res, success) {
+            var data = res.data;
+            resultBindXZFBFunc(data,["user","1001","1002","1003","1004","1005","total"],"byxz");
         });
 
         var resultBindDRFunc = function (data,paramArr) {
