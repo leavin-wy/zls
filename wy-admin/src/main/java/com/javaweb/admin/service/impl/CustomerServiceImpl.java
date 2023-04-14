@@ -404,9 +404,9 @@ public class CustomerServiceImpl extends BaseServiceImpl<CustomerMapper, Custome
     }
 
     /**
-     * cron： 每5分钟扫描一次
+     * 每10分钟扫描一次今明天待沟通客户
      */
-    @Scheduled(cron = "0 0/5 * * * ?")
+    @Scheduled(cron = "0 0/10 * * * ?")
     @SuppressWarnings(value = "unchecked")
     @Override
     public void pushCustGontongNotice() {

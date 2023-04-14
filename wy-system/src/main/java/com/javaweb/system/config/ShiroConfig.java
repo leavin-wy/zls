@@ -364,7 +364,7 @@ public class ShiroConfig {
         //同一个用户最大的会话数，默认1；比如2的意思是同一个用户允许最多同时两个人登录；
         kickoutSessionControlFilter.setMaxSession(1);
         //被踢出后重定向到的地址；
-        kickoutSessionControlFilter.setKickoutUrl("/login");
+        kickoutSessionControlFilter.setKickoutUrl("/login?kickout=true");
         return kickoutSessionControlFilter;
     }
 

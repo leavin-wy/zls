@@ -269,6 +269,20 @@
             return false;
         });
 
+        //单点登录下线提示
+        var href = location.href;
+        console.info(href);
+        if(href.indexOf("kickout")>0){
+            layer.msg("您的账号在另一台设备上登录，如非本人操作，请尽快修改密码！",{offset: '100px'});
+            layer.open({
+                type: 0,
+                title :"下线提示",
+                closeBtn: 1,
+                anim: 6,
+                content: '您的账号在另一台设备上登录，如非本人操作，请尽快修改密码！'
+            });
+        }
+
         /* 图形验证码 */
         /*var captchaUrl = '/captcha';
         $('img.login-captcha').click(function () {

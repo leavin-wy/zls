@@ -25,6 +25,7 @@ import org.springframework.util.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -94,6 +95,8 @@ public class LoginServiceImpl implements ILoginService {
             CaptchaUtil.clear(request);  // 清除session中的验证码
             return JsonResult.error("验证码不正确");
         }
+        String host = request.getRemoteHost();
+        String redisKey = loginDto.getUsername()+"-"+host;
         try {
             //验证身份和登陆
             Subject subject = SecurityUtils.getSubject();
@@ -107,6 +110,13 @@ public class LoginServiceImpl implements ILoginService {
             // 返回结果
             Map<String, String> result = new HashMap<>();
             result.put("token", SecurityUtils.getSubject().getSession().getId().toString());
+
+
+            HttpSession session = request.getSession();
+            session.setAttribute("loginUserId", loginDto.getUsername());
+            session.setAttribute("kickout", false);
+            redisUtils.set("loginUser:" + loginDto.getUsername(), session.getId());
+            redisUtils.set(redisKey, 0);
             return JsonResult.success("操作成功", result);
         } catch (AuthenticationException e) {
             logger.error(e.getMessage());

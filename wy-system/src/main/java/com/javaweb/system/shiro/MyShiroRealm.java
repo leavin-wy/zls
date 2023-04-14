@@ -69,7 +69,7 @@ public class MyShiroRealm extends AuthorizingRealm {
                     continue;
                 }
                 permissions.add(menu.getPermission());
-                log.info("菜单权限：" + menu.getPermission());
+                //log.info("菜单权限：" + menu.getPermission());
             }
             simpleAuthorizationInfo.addStringPermissions(permissions);
         }
