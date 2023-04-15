@@ -60,7 +60,8 @@ public interface CustomerMapper extends BaseMapper<Customer> {
             "where c.id in (select g.cust_id from sys_goutong g\n" +
             "\t\t\t\t\t\t\twhere g.create_user = #{userId}\t\n" +
             "\t\t\t\t\t\t\tand date_format(g.create_time,'%Y-%m-%d') = #{today})\n" +
-            "and c.id not in (select cust_id from sys_tandian t)")
+            "and c.id not in (select cust_id from sys_tandian t " +
+            "\t\t\twhere date_format(t.create_time,'%Y-%m-%d') = #{today})")
     int selectWddlxCount(@Param("userId")Integer id, @Param("today")String today);
 
     /**
@@ -74,7 +75,8 @@ public interface CustomerMapper extends BaseMapper<Customer> {
             "\t\t\t\t\t\t\twhere g.create_user = #{userId}\t\n" +
             "\t\t\t\t\t\t\tand g.reply_flag = 2\n" +
             "\t\t\t\t\t\t\tand date_format(g.create_time,'%Y-%m-%d') = #{today})\n" +
-            "and c.id not in (select cust_id from sys_tandian t)")
+            "and c.id not in (select cust_id from sys_tandian t \n" +
+            "\t\t\twhere date_format(t.create_time,'%Y-%m-%d') = #{today})")
     int selectWddhfCount(@Param("userId")Integer id, @Param("today")String today);
 
     /**
@@ -84,8 +86,7 @@ public interface CustomerMapper extends BaseMapper<Customer> {
     @Select("select count(1) from sys_customer c\n" +
             "where c.id in (select cust_id from sys_tandian t\n" +
             "\t\t\t\t\t\t\twhere t.create_user = #{userId}\n" +
-            "\t\t\t\t\t\t\tand date_format(t.create_time,'%Y-%m-%d') = #{today})\n" +
-            "\n")
+            "\t\t\t\t\t\t\tand date_format(t.create_time,'%Y-%m-%d') = #{today})\n")
     int selectDdCount(@Param("userId")Integer id, @Param("today")String today);
 
     /**

@@ -152,13 +152,14 @@ public class IndexController {
 
     @ResponseBody
     @GetMapping(value = "/maininitbase")
-    public JsonResult maininitbase(@RequestParam(value = "flag", required = false, defaultValue = "")String flag) {
+    public JsonResult maininitbase(@RequestParam(value = "flag", required = true, defaultValue = "")String flag) {
         return indexService.maininitbase(flag);
     }
 
     @ResponseBody
     @GetMapping(value = "/maininitxzfb")
-    public JsonResult maininitxzfb(@RequestParam(value = "flag", required = false, defaultValue = "")String flag) {
-        return indexService.maininitxzfb(flag);
+    public JsonResult maininitxzfb(@RequestParam(value = "flag", required = true, defaultValue = "")String flag,
+                                   @RequestParam(value = "codes", required = true, defaultValue = "")String codes) {
+        return indexService.maininitxzfb(flag,codes.split(","));
     }
 }

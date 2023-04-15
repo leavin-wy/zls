@@ -17,5 +17,5 @@ public interface IIndexService {
     JsonResult maininitbase(String flag);
 
 
-    JsonResult maininitxzfb(String flag);
+    JsonResult maininitxzfb(String flag,String[] codes);
 }

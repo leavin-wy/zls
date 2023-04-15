@@ -67,13 +67,13 @@ public class IndexServiceImpl implements IIndexService {
     }
 
     /**
-     * 查询首页新增分布统计数据
+     * 查询首页统计数据
      * @param flag 1：当日  2：本周  3本月
      * @return
      */
     @Override
-    public JsonResult maininitxzfb(String flag) {
-        String[] codes = new String[]{"user","1001","1002","1003","1004","1005"};
+    public JsonResult maininitxzfb(String flag,String[] codes) {
+        //String[] codes = new String[]{"user","1001","1002","1003","1004","1005","2001","2002","2003","2004","2006","2007"};
         String today = DateUtils.getCurDateFormat(DateUtils.YYYY_MM_DD);
         String startDt = "";
         String endDt = "";
