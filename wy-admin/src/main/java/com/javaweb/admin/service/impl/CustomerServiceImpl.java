@@ -91,7 +91,7 @@ public class CustomerServiceImpl extends BaseServiceImpl<CustomerMapper, Custome
         // 查询条件
         LambdaQueryWrapper<Customer> queryWrapper = new LambdaQueryWrapper<>();
         if(StringUtils.isNotEmpty(customerQuery.getInteractTimeStr())){
-            queryWrapper.eq(Customer::getInteractTime,DateUtils.dateTime(DateUtils.YYYY_MM_DD,customerQuery.getInteractTimeStr()));
+            queryWrapper.apply(" id in (select cust_id from sys_goutong where DATE_FORMAT(interact_time,'%Y-%m-%d')='"+customerQuery.getInteractTimeStr()+"')");
         }
         // 姓名/昵称
         if (!StringUtils.isEmpty(customerQuery.getKeywords())) {
