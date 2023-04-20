@@ -40,6 +40,18 @@ public class Goutong extends BaseEntity {
     private Date gtTime;
 
     /**
+     * 下次沟通时间
+     */
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone="GMT+8")
+    private Date interactTime;
+
+    /**
+     * 下次沟通内容
+     */
+    private String interactDesc;
+
+    /**
      * 沟通内容
      */
     private String gtDesc;

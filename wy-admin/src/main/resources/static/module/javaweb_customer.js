@@ -67,7 +67,18 @@ layui.use(['func'], function () {
             , {field: 'tandianNum', width: 100, title: '探店次数', align: 'center'}
             , {field: 'lastGoutongTimeStr', width: 160, title: '最近沟通时间', align: 'center'}
             , {field: 'lastGoutongDesc', width: 200, title: '最近沟通内容', align: 'left'}
-            , {field: 'interactTime', width: 120, title: '下次沟通时间', align: 'center'}
+            , {field: 'replyFlag', width: 80, title: '是否回复', align: 'center', templet(d) {
+                    var cls = "";
+                    if (d.replyFlag == 1) {
+                        // 1,未回复
+                        cls = "layui-btn-normal";
+                    } else if (d.replyFlag == 2) {
+                        //已回复
+                        cls = "layui-btn-danger";
+                    }
+                    return '<span class="layui-btn ' + cls + ' layui-btn-xs">'+d.replyFlagName+'</span>';
+                }}
+            , {field: 'interactTimeStr', width: 120, title: '下次沟通时间', align: 'center'}
             , {field: 'interactDesc', width: 120, title: '下次沟通内容', align: 'center'}
             , {field: 'phone', width: 120, title: '联系电话', align: 'center'}
             , {field: 'address', width: 180, title: '家庭住址', align: 'center'}
@@ -135,7 +146,7 @@ layui.use(['func'], function () {
                 id: "larry_theme_R",
                 title: "导入失败的客户信息",
                 content:html,
-                area:['1000px'],
+                area:['1000px','500px'],
                 btn:'关闭',
                 offset:'auto',
                 shade:0,

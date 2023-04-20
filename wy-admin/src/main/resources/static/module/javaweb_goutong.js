@@ -17,6 +17,8 @@ layui.use(['func'], function () {
         , {field: 'gtTime', width: 160, title: '沟通时间', align: 'center'}
         , {field: 'gtDesc', width: 180, title: '沟通内容', align: 'center'}
         , {field: 'replyFlagStr', width: 120, title: '回复标志', align: 'center'}
+        , {field: 'interactTime', width: 120, title: '下次沟通时间', align: 'center'}
+        , {field: 'interactDesc', width: 180, title: '下次沟通内容', align: 'center'}
         , {field: 'createUserName', width: 100, title: '创建人', align: 'center'}
         , {field: 'createTime', width: 160, title: '创建时间', align: 'center'}
         , {fixed: 'right', width: 150, title: '功能操作', align: 'center', toolbar: '#toolBar'}

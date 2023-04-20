@@ -60,12 +60,6 @@
 		</div>
 		<div class="layui-form-item">
 			<div class="layui-inline">
-				<label class="layui-form-label">下次沟通时间：</label>
-				<div class="layui-input-inline">
-					<widget:dateSelect name="interactTime|下次沟通时间|date" th:value="${#dates.format(info['interactTime'], 'yyyy-MM-dd')}"/>
-				</div>
-			</div>
-			<div class="layui-inline">
 				<label class="layui-form-label">邀约时间：</label>
 				<div class="layui-input-inline">
 					<widget:dateSelect name="inviteTime|邀约时间|date|||0" th:value="${#dates.format(info['inviteTime'], 'yyyy-MM-dd')}"/>

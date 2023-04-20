@@ -1,5 +1,6 @@
 package com.javaweb.system.utils;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.javaweb.common.utils.SpringUtils;
 import com.javaweb.system.entity.Admin;
 import com.javaweb.system.entity.Dep;
@@ -13,6 +14,7 @@ import org.springframework.beans.BeanUtils;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class AdminUtils {
 
@@ -58,5 +60,13 @@ public class AdminUtils {
         List<Role> rolesByRoleIds = roleMapper.getRolesByRoleIds(roleIdList);
         Optional<Role> result = rolesByRoleIds.stream().filter(row->roleList.contains(row.getName())).findFirst();
         return result.isPresent();
+    }
+
+    public static List<Integer> getAdminsByDep(Integer deptId){
+        AdminMapper adminMapper = SpringUtils.getBean(AdminMapper.class);
+        QueryWrapper<Admin> queryWrapper = new QueryWrapper<>();
+        queryWrapper.in("dept_id", deptId);
+        List<Admin> admins = adminMapper.selectList(queryWrapper);
+        return admins.stream().map(a->a.getId()).collect(Collectors.toList());
     }
 }

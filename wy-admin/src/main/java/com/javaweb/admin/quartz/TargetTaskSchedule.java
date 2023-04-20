@@ -36,7 +36,7 @@ public class TargetTaskSchedule {
     @Autowired
     private TargetMapper targetMapper;
 
-    @Scheduled(cron = "0 0/1 6-23 * * ? ")
+    //@Scheduled(cron = "0 0/1 6-23 * * ? ")
     public void work(){
         List<Admin> admins = adminMapper.selectList(new QueryWrapper<>());
         for(Admin admin : admins){

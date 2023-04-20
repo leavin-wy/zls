@@ -85,11 +85,13 @@ public class Customer extends BaseEntity {
      */
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @JsonFormat(pattern = "yyyy-MM-dd", timezone="GMT+8")
+    @TableField(exist = false)
     private Date interactTime;
 
     /**
      * 下次沟通内容
      */
+    @TableField(exist = false)
     private String interactDesc;
 
     /**

@@ -117,6 +117,13 @@ public class CustomerListVo {
     private String lastGoutongTimeStr;//最后沟通时间
 
     /**
+     * 回复标志   1未回复   2已回复
+     */
+    private Integer replyFlag;
+    @Excel(name = "回复标志")
+    private String replyFlagName;
+
+    /**
      * 下次沟通时间
      */
     @DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -179,5 +186,7 @@ public class CustomerListVo {
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone="GMT+8")
     private Date updateTime;
+
+
 
 }

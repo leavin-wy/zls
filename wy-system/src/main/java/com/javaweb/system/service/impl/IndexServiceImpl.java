@@ -57,7 +57,7 @@ public class IndexServiceImpl implements IIndexService {
         }
         if(ShiroUtils.getAdminInfo().getDataType()==1){
             //全权用户看到所有数据
-            targets = targetMapper.selectBaseList(startDt,endDt);
+            targets = targetMapper.selectBaseList(startDt,endDt,AdminUtils.getAdminsByDep(ShiroUtils.getAdminInfo().getDeptId()));
         }else if(ShiroUtils.getAdminInfo().getDataType()==2){
             //私有权限只看自己的数据
             targets = targetMapper.selectBaseListByUser(ShiroUtils.getAdminId(),startDt,endDt);
@@ -92,8 +92,10 @@ public class IndexServiceImpl implements IIndexService {
         }
         List<Map<String, Object>> result = new ArrayList<>();
         if(ShiroUtils.getAdminInfo().getDataType()==1){
-            //全权用户看到所有数据
-            List<Admin> admins = adminMapper.selectList(new QueryWrapper<>());
+            //全权用户看当前部门下所有数据
+            LambdaQueryWrapper<Admin> queryWrapper = new LambdaQueryWrapper<>();
+            queryWrapper.in(Admin::getId,AdminUtils.getAdminsByDep(ShiroUtils.getAdminInfo().getDeptId()));
+            List<Admin> admins = adminMapper.selectList(queryWrapper);
             for(Admin admin : admins){
                 boolean isFlag = AdminUtils.hasRoleAnyMatch(admin.getId(), "运营","销售");
                 if(!isFlag) continue;

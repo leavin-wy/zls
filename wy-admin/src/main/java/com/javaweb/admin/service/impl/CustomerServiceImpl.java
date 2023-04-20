@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.javaweb.admin.constant.GoutongConstant;
 import com.javaweb.admin.entity.Goutong;
 import com.javaweb.admin.entity.Tandian;
 import com.javaweb.admin.mapper.GoutongMapper;
@@ -112,6 +113,9 @@ public class CustomerServiceImpl extends BaseServiceImpl<CustomerMapper, Custome
         if(2==ShiroUtils.getAdminInfo().getDataType()){
             //如果是私有权限，则只查自己创建的
             queryWrapper.eq(Customer::getCreateUser, ShiroUtils.getAdminId());
+        }else if(1==ShiroUtils.getAdminInfo().getDataType()){
+            //全权则看同部门下所有人数据
+            queryWrapper.in(Customer::getCreateUser,AdminUtils.getAdminsByDep(ShiroUtils.getAdminInfo().getDeptId()));
         }
         queryWrapper.eq(Customer::getMark, 1);
         queryWrapper.orderByDesc(Customer::getId);
@@ -163,6 +167,14 @@ public class CustomerServiceImpl extends BaseServiceImpl<CustomerMapper, Custome
                 if(null != lastGoutongInfo){
                     customerListVo.setLastGoutongTimeStr((String) lastGoutongInfo.get("gtTime"));
                     customerListVo.setLastGoutongDesc((String) lastGoutongInfo.get("gtDesc"));
+                    customerListVo.setInteractTimeStr((String) lastGoutongInfo.get("interactTime"));
+                    if(null!=lastGoutongInfo.get("replyFlag")){
+                        customerListVo.setReplyFlag((Integer) lastGoutongInfo.get("replyFlag"));
+                        customerListVo.setReplyFlagName(GoutongConstant.GOUTONG_REPLY_LIST.get((Integer) lastGoutongInfo.get("replyFlag")));
+                    }
+                    if(null!=lastGoutongInfo.get("interactDesc")){
+                        customerListVo.setInteractDesc((String) lastGoutongInfo.get("interactDesc"));
+                    }
                 }
                 customerListVoList.add(customerListVo);
             });
@@ -272,6 +284,9 @@ public class CustomerServiceImpl extends BaseServiceImpl<CustomerMapper, Custome
                     queryWrapper.eq(Customer::getCustName,customerListVo.getCustName());
                     queryWrapper.eq(Customer::getNickName,customerListVo.getNickName());
                     queryWrapper.eq(Customer::getSex,Integer.parseInt(customerListVo.getSexName()));
+                    if(null != customerListVo.getBirthday()){
+                        queryWrapper.apply(" date_format(birthday,'%Y/%m/%d') = '" + DateUtils.parseDateToStr("yyyy/MM/dd",customerListVo.getBirthday())+"'");
+                    }
                     Integer custCount = customerMapper.selectCount(queryWrapper);
                     if(custCount>0){
                         customerListVo.setErrorMsg("存在相同客户姓名、昵称、性别!");
@@ -287,6 +302,12 @@ public class CustomerServiceImpl extends BaseServiceImpl<CustomerMapper, Custome
                     if(StringUtils.isEmpty(customerListVo.getCustTypeName())
                             ||StringUtils.isEmpty(CustomerConstant.CUSTOMER_CUSTTYPE_LIST.get(Integer.parseInt(customerListVo.getCustTypeName())))){
                         customerListVo.setErrorMsg("请填写正确的客户类型!");
+                        errorList.add(customerListVo);
+                        continue;
+                    }
+                    if(StringUtils.isEmpty(customerListVo.getReplyFlagName())
+                            ||StringUtils.isEmpty(GoutongConstant.GOUTONG_REPLY_LIST.get(Integer.parseInt(customerListVo.getReplyFlagName())))){
+                        customerListVo.setErrorMsg("请填写正确的回复标志!");
                         errorList.add(customerListVo);
                         continue;
                     }
@@ -353,11 +374,14 @@ public class CustomerServiceImpl extends BaseServiceImpl<CustomerMapper, Custome
                     }
                     if(null!=customerListVo.getLastGoutongTime()
                             ||null!=customerListVo.getLastGoutongDesc()){
+                        //沟通记录
                         Goutong goutong = new Goutong();
                         goutong.setCustId(customer.getId());
                         goutong.setGtTime(null==customerListVo.getLastGoutongTime()?new Date():customerListVo.getLastGoutongTime());
+                        goutong.setInteractTime(null==customerListVo.getInteractTime()?new Date():customerListVo.getInteractTime());
+                        goutong.setInteractDesc(customerListVo.getInteractDesc());
                         goutong.setGtDesc(StringUtils.isEmpty(customerListVo.getLastGoutongDesc())?"":customerListVo.getLastGoutongDesc());
-                        goutong.setReplyFlag(1);
+                        goutong.setReplyFlag(Integer.valueOf(customerListVo.getReplyFlagName()));
                         goutong.setCreateUser(ShiroUtils.getAdminId());
                         goutong.setCreateTime(new Date());
                         goutongMapper.insert(goutong);
@@ -386,6 +410,7 @@ public class CustomerServiceImpl extends BaseServiceImpl<CustomerMapper, Custome
         cust.setAddress("");
         cust.setSourceName("输入渠道:1=美团,2=扫街,3=自然到店,4=转介绍,5=其他");
         cust.setCustTypeName("输入客户类型:1=A,2=B,3=C,4=D,5=E,6=S,7=成交");
+        cust.setReplyFlagName("输入回复标志:1=未回复,2=已回复");
         cust.setCompleteTime(new Date());
         cust.setLastTandianTime(new Date());
         cust.setLastGoutongTime(new Date());
@@ -406,19 +431,20 @@ public class CustomerServiceImpl extends BaseServiceImpl<CustomerMapper, Custome
     /**
      * 每10分钟扫描一次今明天待沟通客户
      */
-    @Scheduled(cron = "0 0/10 * * * ?")
+    @Scheduled(cron = "0 0/1 * * * ?")
     @SuppressWarnings(value = "unchecked")
     @Override
     public void pushCustGontongNotice() {
         logger.info("沟通计划消息推送定时任务执行开始......");
         LambdaQueryWrapper<Customer> queryWrapper = new LambdaQueryWrapper<>();
-        queryWrapper.ge(Customer::getInteractTime,new Date());
         //默认推送当天的
-        queryWrapper.le(Customer::getInteractTime,DateUtils.getDateByN(1));
-        queryWrapper.orderByAsc(Customer::getInteractTime);
+        queryWrapper.apply(" id in (select cust_id from sys_goutong where DATE_FORMAT(interact_time,'%Y-%m-%d')='"+DateUtils.getCurDateFormat(DateUtils.YYYY_MM_DD)+"')");
+        //queryWrapper.ge(Customer::getInteractTime,new Date());
+        //queryWrapper.lt(Customer::getInteractTime,DateUtils.getDateByN(1));
+        queryWrapper.orderByAsc(Customer::getCreateTime);
         List<Customer> list = customerMapper.selectList(queryWrapper);
         list.stream().forEach(customer -> {
-            customer.setInteractTimeStr(DateUtils.parseDateToStr(DateUtils.YYYY_MM_DD,customer.getInteractTime()));
+            customer.setInteractTimeStr(DateUtils.getCurDateFormat(DateUtils.YYYY_MM_DD));
         });
         try {
             WebSocketMessage<Customer> webSocketMessage = new WebSocketMessage();

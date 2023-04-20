@@ -28,7 +28,9 @@ public interface CustomerMapper extends BaseMapper<Customer> {
     @Select("SELECT TIMESTAMPDIFF(month,#{birthday},now()) AS diffMonth")
     Integer getAgeForMonth(@Param("birthday")Date birthday );
 
-    @Select("select date_format(gt_time,'%Y-%m-%d') 'gtTime', gt_desc 'gtDesc' " +
+    @Select("select date_format(gt_time,'%Y-%m-%d') 'gtTime'," +
+            "date_format(interact_time,'%Y-%m-%d') 'interactTime', " +
+            "gt_desc 'gtDesc',reply_flag 'replyFlag',interact_desc 'interactDesc' " +
             "from sys_goutong where cust_id = ${custId} order by gt_time desc limit 0,1")
     Map<String,Object> getLastGoutongInfo(@Param("custId")Integer custId);
 

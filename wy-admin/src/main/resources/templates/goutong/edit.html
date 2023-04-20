@@ -16,6 +16,12 @@
 			</div>
 		</div>
 		<div class="layui-inline">
+			<label class="layui-form-label">下次沟通时间：</label>
+			<div class="layui-input-inline">
+				<widget:dateSelect name="interactTime|下次沟通时间|date" th:value="${#dates.format(info['interactTime'], 'yyyy-MM-dd')}"/>
+			</div>
+		</div>
+		<div class="layui-inline">
 			<label class="layui-form-label">回复标志：</label>
 			<div class="layui-input-inline">
 				<widget:singleSelect name="replyFlag|1|回复标志|name|id" data="1=未回复,2=已回复" th:value="${info['replyFlag']}?:0"/>
@@ -25,6 +31,12 @@
 			<label class="layui-form-label">沟通内容：</label>
 			<div class="layui-input-block">
 				<textarea name="gtDesc" style="width: 400px;" placeholder="请输入沟通内容" class="layui-textarea" th:text="${info['gtDesc']}"></textarea>
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">下次沟通内容：</label>
+			<div class="layui-input-block">
+				<textarea name="interactDesc" style="width: 400px;" placeholder="请输入下次沟通内容" class="layui-textarea" th:text="${info['interactDesc']}"></textarea>
 			</div>
 		</div>
 		<div class="layui-form-item">
