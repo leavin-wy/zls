@@ -91,7 +91,16 @@ public class CustomerServiceImpl extends BaseServiceImpl<CustomerMapper, Custome
         // 查询条件
         LambdaQueryWrapper<Customer> queryWrapper = new LambdaQueryWrapper<>();
         if(StringUtils.isNotEmpty(customerQuery.getInteractTimeStr())){
+            //下次沟通时间
             queryWrapper.apply(" id in (select cust_id from sys_goutong where DATE_FORMAT(interact_time,'%Y-%m-%d')='"+customerQuery.getInteractTimeStr()+"')");
+        }
+        if(StringUtils.isNotEmpty(customerQuery.getGtTimeStr())){
+            //沟通时间
+            queryWrapper.apply(" id in (select cust_id from sys_goutong where DATE_FORMAT(gt_time,'%Y-%m-%d')='"+customerQuery.getGtTimeStr()+"')");
+        }
+        if(StringUtils.isNotEmpty(customerQuery.getInviteTimeStr())) {
+            //邀约时间
+            queryWrapper.apply(" DATE_FORMAT(invite_time,'%Y-%m-%d')='"+customerQuery.getInviteTimeStr()+"'");
         }
         // 姓名/昵称
         if (!StringUtils.isEmpty(customerQuery.getKeywords())) {
@@ -155,7 +164,7 @@ public class CustomerServiceImpl extends BaseServiceImpl<CustomerMapper, Custome
                 customerListVo.setLastTandianTimeStr(lastTandianTime);
                 //探店次数
                 Integer tandianNum = customerMapper.getTandianNum(customerListVo.getId());
-                customerListVo.setTandianNum(tandianNum);
+                customerListVo.setTandianNum(tandianNum+customerListVo.getTdNum());
                 //年龄
                 if(customerListVo.getBirthday()!=null){
                     Integer diffMonth = customerMapper.getAgeForMonth(customerListVo.getBirthday());
@@ -237,7 +246,6 @@ public class CustomerServiceImpl extends BaseServiceImpl<CustomerMapper, Custome
         String path = uploadFileConfig.getUploadFolder() + data.get("fileUrl").toString().substring(1);
         List<CustomerListVo> resultList = new ArrayList<>();
         try {
-            //resultList = ExcelSimpleUtil.importBigExcel(path,CustomerListVo.class,false);
             InputStream fileStream = new FileInputStream(path);
             resultList = ExcelSimpleUtil.importExcel(fileStream,CustomerListVo.class);
         } catch (Exception e) {
@@ -352,15 +360,12 @@ public class CustomerServiceImpl extends BaseServiceImpl<CustomerMapper, Custome
                         }
                     }*/
                     BeanUtils.copyProperties(customerListVo, customer);
-                    //customer.setBirthday(birthday);
                     customer.setSex(Integer.valueOf(customerListVo.getSexName()));
                     customer.setCustType(Integer.valueOf(customerListVo.getCustTypeName()));
                     customer.setSource(Integer.valueOf(customerListVo.getSourceName()));
-                    //customer.setCompleteTime(completeTime);
-                    //customer.setInteractTime(interactTime);
-                    //customer.setInviteTime(inviteTime);
                     customer.setCreateUser(ShiroUtils.getAdminId());
                     customer.setCreateTime(new Date());
+                    customer.setTdNum(customerListVo.getTdNum());
                     super.add(customer);
                     success++;
                     if(null!=customerListVo.getLastTandianTime()){

@@ -1,5 +1,7 @@
 package com.javaweb.admin.entity;
 
+import com.baomidou.mybatisplus.annotation.FieldStrategy;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 
 import java.math.BigDecimal;
@@ -44,6 +46,7 @@ public class Goutong extends BaseEntity {
      */
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @JsonFormat(pattern = "yyyy-MM-dd", timezone="GMT+8")
+    @TableField(updateStrategy = FieldStrategy.IGNORED)
     private Date interactTime;
 
     /**

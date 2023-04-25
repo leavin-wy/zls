@@ -1,5 +1,6 @@
 package com.javaweb.admin.entity;
 
+import com.baomidou.mybatisplus.annotation.FieldStrategy;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 
@@ -73,6 +74,7 @@ public class Customer extends BaseEntity {
      */
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @JsonFormat(pattern = "yyyy-MM-dd", timezone="GMT+8")
+    @TableField(updateStrategy = FieldStrategy.IGNORED)
     private Date completeTime;
 
     /**
@@ -99,7 +101,13 @@ public class Customer extends BaseEntity {
      */
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @JsonFormat(pattern = "yyyy-MM-dd", timezone="GMT+8")
+    @TableField(updateStrategy = FieldStrategy.IGNORED)
     private Date inviteTime;
+
+    /**
+     * 历史探店次数
+     */
+    private int tdNum;
 
     /**
      * 备注

@@ -33,6 +33,16 @@
                 </div>
             </div>
             <div class="layui-inline">
+                <div class="layui-input-inline">
+                    <input type="text" autocomplete="off" name="gtTimeStr" id="gtTimeStr" class="layui-input" placeholder="沟通时间">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <div class="layui-input-inline">
+                    <input type="text" autocomplete="off" name="inviteTimeStr" id="inviteTimeStr" class="layui-input" placeholder="邀约时间">
+                </div>
+            </div>
+            <div class="layui-inline">
                 <div class="layui-input-inline" style="width: auto;">
                     <widget:btnQuery name="查询"/>
                     <widget:btnAdd name="添加客户"/>
@@ -65,6 +75,16 @@
 
             laydate.render({
                 elem: '#interactTimeStr'
+                ,format:'yyyy-MM-dd'
+            });
+
+            laydate.render({
+                elem: '#gtTimeStr'
+                ,format:'yyyy-MM-dd'
+            });
+
+            laydate.render({
+                elem: '#inviteTimeStr'
                 ,format:'yyyy-MM-dd'
             });
 

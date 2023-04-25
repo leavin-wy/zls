@@ -2,6 +2,7 @@
 <div layout:fragment="content">
 	<form class="layui-form model-form" action="" style="width:80%;">
 		<input name="id" type="hidden" th:value="${info['id']}?:0">
+		<input name="tdNum" type="hidden" th:value="${info['tdNum']}">
 		<div class="layui-form-item">
 			<div class="layui-inline">
 				<label class="layui-form-label">客户名称<font color="red">*</font>：</label>
@@ -64,12 +65,6 @@
 				<div class="layui-input-inline">
 					<widget:dateSelect name="inviteTime|邀约时间|date|||0" th:value="${#dates.format(info['inviteTime'], 'yyyy-MM-dd')}"/>
 				</div>
-			</div>
-		</div>
-		<div class="layui-form-item">
-			<label class="layui-form-label">下次沟通内容：</label>
-			<div class="layui-input-block">
-				<textarea name="interactDesc" style="width: 400px;" placeholder="请输入下次沟通内容" class="layui-textarea" th:text="${info['interactDesc']}"></textarea>
 			</div>
 		</div>
 		<div class="layui-form-item">

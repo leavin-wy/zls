@@ -104,6 +104,12 @@ public class CustomerListVo {
     private Date completeTime;
     private String completeTimeStr;
 
+    /**
+     * 历史探店次数
+     */
+    @Excel(name = "探店次数",width = 15)
+    private int tdNum;
+
 
     @Excel(name = "最后探店时间",width = 15,format = "yyyy/MM/dd")
     private Date lastTandianTime;//最后探店时间
