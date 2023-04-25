@@ -21,6 +21,8 @@ public class OperLogConstant {
             put(1, "新增");
             put(2, "修改");
             put(3, "删除");
+            put(5,"下载");
+            put(6,"导入");
             put(10, "状态");
             put(11, "批量删除");
         }

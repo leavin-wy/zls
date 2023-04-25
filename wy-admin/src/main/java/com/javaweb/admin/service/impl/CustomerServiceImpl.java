@@ -289,7 +289,7 @@ public class CustomerServiceImpl extends BaseServiceImpl<CustomerMapper, Custome
                     }
                     Integer custCount = customerMapper.selectCount(queryWrapper);
                     if(custCount>0){
-                        customerListVo.setErrorMsg("存在相同客户姓名、昵称、性别!");
+                        customerListVo.setErrorMsg("存在相同姓名、昵称、性别、出生日期!");
                         errorList.add(customerListVo);
                         continue;
                     }
@@ -378,7 +378,7 @@ public class CustomerServiceImpl extends BaseServiceImpl<CustomerMapper, Custome
                         Goutong goutong = new Goutong();
                         goutong.setCustId(customer.getId());
                         goutong.setGtTime(null==customerListVo.getLastGoutongTime()?new Date():customerListVo.getLastGoutongTime());
-                        goutong.setInteractTime(null==customerListVo.getInteractTime()?new Date():customerListVo.getInteractTime());
+                        goutong.setInteractTime(customerListVo.getInteractTime());
                         goutong.setInteractDesc(customerListVo.getInteractDesc());
                         goutong.setGtDesc(StringUtils.isEmpty(customerListVo.getLastGoutongDesc())?"":customerListVo.getLastGoutongDesc());
                         goutong.setReplyFlag(Integer.valueOf(customerListVo.getReplyFlagName()));
