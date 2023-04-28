@@ -211,6 +211,9 @@ public class CustomerServiceImpl extends BaseServiceImpl<CustomerMapper, Custome
      */
     @Override
     public JsonResult edit(Customer entity) {
+        if(entity.getCustType() == 7 && entity.getCompleteTime() == null){
+            entity.setCompleteTime(new Date());
+        }
         return super.edit(entity);
     }
 
@@ -267,7 +270,6 @@ public class CustomerServiceImpl extends BaseServiceImpl<CustomerMapper, Custome
                 }
                 for(CustomerListVo customerListVo:insertList){
                     Customer customer = new Customer();
-                    //Date completeTime = DateUtils.parseDate(customerListVo.getCompleteTimeStr());
                     if(null!=customerListVo.getBirthday()){
                         customerListVo.setBirthdayStr(DateUtils.parseDateToStr(DateUtils.YYYY_MM_DD,customerListVo.getBirthday()));
                     }
@@ -319,46 +321,6 @@ public class CustomerServiceImpl extends BaseServiceImpl<CustomerMapper, Custome
                         errorList.add(customerListVo);
                         continue;
                     }
-                    /*if(null != customerListVo.getLastGoutongTime()){
-                        Date goutong = DateUtils.parseDate(customerListVo.getLastGoutongTime());
-                        if(goutong==null){
-                            customerListVo.setErrorMsg("沟通时间格式不正确!");
-                            errorList.add(customerListVo);
-                            continue;
-                        }
-                    }
-                    Date birthday = DateUtils.parseDate(customerListVo.getBirthdayStr());
-                    if(StringUtils.isNotEmpty(customerListVo.getBirthdayStr())){
-                        if(birthday==null){
-                            customerListVo.setErrorMsg("出生时间格式不正确!");
-                            errorList.add(customerListVo);
-                            continue;
-                        }
-                    }
-                    if(StringUtils.isNotEmpty(customerListVo.getCompleteTimeStr())){
-                        Date tandianTime = DateUtils.parseDate(customerListVo.getCompleteTimeStr());
-                        if(tandianTime==null){
-                            customerListVo.setErrorMsg("探店时间格式不正确!");
-                            errorList.add(customerListVo);
-                            continue;
-                        }
-                    }
-                    Date interactTime = DateUtils.parseDate(customerListVo.getInteractTimeStr());
-                    if(StringUtils.isNotEmpty(customerListVo.getInteractTimeStr())){
-                        if(interactTime==null){
-                            customerListVo.setErrorMsg("下次沟通时间格式不正确!");
-                            errorList.add(customerListVo);
-                            continue;
-                        }
-                    }
-                    Date inviteTime = DateUtils.parseDate(customerListVo.getInviteTimeStr());
-                    if(StringUtils.isNotEmpty(customerListVo.getInviteTimeStr())){
-                        if(inviteTime==null){
-                            customerListVo.setErrorMsg("邀请时间格式不正确!");
-                            errorList.add(customerListVo);
-                            continue;
-                        }
-                    }*/
                     BeanUtils.copyProperties(customerListVo, customer);
                     customer.setSex(Integer.valueOf(customerListVo.getSexName()));
                     customer.setCustType(Integer.valueOf(customerListVo.getCustTypeName()));
@@ -366,6 +328,10 @@ public class CustomerServiceImpl extends BaseServiceImpl<CustomerMapper, Custome
                     customer.setCreateUser(ShiroUtils.getAdminId());
                     customer.setCreateTime(new Date());
                     customer.setTdNum(customerListVo.getTdNum());
+                    if(customer.getCustType() == 7 && customer.getCompleteTime() == null){
+                        //如果是成交，且没有填成交日期，就默认当日成交
+                        customer.setCompleteTime(new Date());
+                    }
                     super.add(customer);
                     success++;
                     if(null!=customerListVo.getLastTandianTime()){
