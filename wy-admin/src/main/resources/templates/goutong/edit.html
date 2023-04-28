@@ -10,9 +10,9 @@
 			</div>
 		</div>-->
 		<div class="layui-form-item">
-			<label class="layui-form-label">沟通时间：</label>
+			<label class="layui-form-label">沟通时间<font color="red">*</font>：</label>
 			<div class="layui-input-block">
-				<widget:dateSelect name="gtTime|沟通时间|datetime" th:value="${#dates.format(info['gtTime'], 'yyyy-MM-dd HH:mm:ss')}"/>
+				<widget:dateSelect name="gtTime|沟通时间|datetime|||1" th:value="${#dates.format(info['gtTime'], 'yyyy-MM-dd HH:mm:ss')}"/>
 			</div>
 		</div>
 		<div class="layui-inline">
@@ -22,15 +22,15 @@
 			</div>
 		</div>
 		<div class="layui-inline">
-			<label class="layui-form-label">回复标志：</label>
+			<label class="layui-form-label">回复标志<font color="red">*</font>：</label>
 			<div class="layui-input-inline">
 				<widget:singleSelect name="replyFlag|1|回复标志|name|id" data="1=未回复,2=已回复" th:value="${info['replyFlag']}?:0"/>
 			</div>
 		</div>
 		<div class="layui-form-item">
-			<label class="layui-form-label">沟通内容：</label>
+			<label class="layui-form-label">沟通内容<font color="red">*</font>：</label>
 			<div class="layui-input-block">
-				<textarea name="gtDesc" style="width: 400px;" placeholder="请输入沟通内容" class="layui-textarea" th:text="${info['gtDesc']}"></textarea>
+				<textarea name="gtDesc" style="width: 400px;" lay-verify="required" placeholder="请输入沟通内容" class="layui-textarea" th:text="${info['gtDesc']}"></textarea>
 			</div>
 		</div>
 		<div class="layui-form-item">

@@ -10,9 +10,9 @@
 			</div>
 		</div>-->
 		<div class="layui-form-item">
-			<label class="layui-form-label">探店时间：</label>
+			<label class="layui-form-label">探店时间<font color="red">*</font>：</label>
 			<div class="layui-input-block">
-				<widget:dateSelect name="tdTime|探店时间|datetime" th:value="${#dates.format(info['tdTime'], 'yyyy-MM-dd HH:mm:ss')}"/>
+				<widget:dateSelect name="tdTime|探店时间|datetime|||1" th:value="${#dates.format(info['tdTime'], 'yyyy-MM-dd HH:mm:ss')}"/>
 			</div>
 		</div>
 		<div class="layui-form-item">
