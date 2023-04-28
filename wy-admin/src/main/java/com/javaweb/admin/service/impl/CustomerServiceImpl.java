@@ -434,9 +434,9 @@ public class CustomerServiceImpl extends BaseServiceImpl<CustomerMapper, Custome
     }
 
     /**
-     * 每10分钟扫描一次今明天待沟通客户
+     * 每5分钟扫描一次今天待沟通客户
      */
-    @Scheduled(cron = "0 0/1 * * * ?")
+    @Scheduled(cron = "0 0/5 * * * ?")
     @SuppressWarnings(value = "unchecked")
     @Override
     public void pushCustGontongNotice() {
@@ -444,10 +444,9 @@ public class CustomerServiceImpl extends BaseServiceImpl<CustomerMapper, Custome
         LambdaQueryWrapper<Customer> queryWrapper = new LambdaQueryWrapper<>();
         //默认推送当天的
         queryWrapper.apply(" id in (select cust_id from sys_goutong where DATE_FORMAT(interact_time,'%Y-%m-%d')='"+DateUtils.getCurDateFormat(DateUtils.YYYY_MM_DD)+"')");
-        //queryWrapper.ge(Customer::getInteractTime,new Date());
-        //queryWrapper.lt(Customer::getInteractTime,DateUtils.getDateByN(1));
         queryWrapper.orderByAsc(Customer::getCreateTime);
         List<Customer> list = customerMapper.selectList(queryWrapper);
+        logger.info("查询到["+list.size()+"]条待推送沟通计划");
         list.stream().forEach(customer -> {
             customer.setInteractTimeStr(DateUtils.getCurDateFormat(DateUtils.YYYY_MM_DD));
         });
