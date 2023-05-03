@@ -119,12 +119,12 @@ public class CustomerServiceImpl extends BaseServiceImpl<CustomerMapper, Custome
         if (!StringUtils.isEmpty(customerQuery.getSource())) {
             queryWrapper.eq(Customer::getSource, customerQuery.getSource());
         }
-        if(2==ShiroUtils.getAdminInfo().getDataType()){
-            //如果是私有权限，则只查自己创建的
-            queryWrapper.eq(Customer::getCreateUser, ShiroUtils.getAdminId());
-        }else if(1==ShiroUtils.getAdminInfo().getDataType()){
-            //全权则看同部门下所有人数据
+        if(AdminUtils.hasRoleAnyMatch(ShiroUtils.getAdminId(),"管理员","超级管理员")){
+            //管理员看同部门下所有人数据
             queryWrapper.in(Customer::getCreateUser,AdminUtils.getAdminsByDep(ShiroUtils.getAdminInfo().getDeptId()));
+        }else{
+            //其他人只查自己创建的
+            queryWrapper.eq(Customer::getCreateUser, ShiroUtils.getAdminId());
         }
         queryWrapper.eq(Customer::getMark, 1);
         queryWrapper.orderByDesc(Customer::getId);

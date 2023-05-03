@@ -6,6 +6,7 @@ import com.javaweb.common.utils.JsonResult;
 import com.javaweb.common.utils.StringUtils;
 import com.javaweb.system.entity.Admin;
 import com.javaweb.system.service.IIndexService;
+import com.javaweb.system.utils.AdminUtils;
 import com.javaweb.system.utils.ShiroUtils;
 import com.javaweb.system.dto.UpdatePasswordDto;
 import com.javaweb.system.dto.UpdateUserInfoDto;
@@ -82,6 +83,8 @@ public class IndexController {
     @GetMapping("/userInfo")
     public String userInfo(Model model) {
         Map<String, Object> info = adminService.info(ShiroUtils.getAdminId());
+        boolean isManager = AdminUtils.hasRoleAnyMatch(ShiroUtils.getAdminId(), "管理员", "超级管理员");
+        info.put("isManager",isManager);
         model.addAttribute("info", info);
         return "userInfo";
     }
@@ -102,6 +105,7 @@ public class IndexController {
         entity.setEmail(userInfoDto.getEmail());
         entity.setIntro(userInfoDto.getIntro());
         entity.setAddress(userInfoDto.getAddress());
+        entity.setDeptId(userInfoDto.getDeptId());
         Integer result = adminMapper.updateById(entity);
         if (result == 0) {
             return JsonResult.error("更新失败");

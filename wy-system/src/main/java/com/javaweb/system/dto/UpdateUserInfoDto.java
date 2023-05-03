@@ -28,4 +28,6 @@ public class UpdateUserInfoDto {
      */
     private String address;
 
+    private Integer deptId;
+
 }
