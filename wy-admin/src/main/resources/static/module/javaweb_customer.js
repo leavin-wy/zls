@@ -40,7 +40,11 @@ layui.use(['func'], function () {
                     }else if (d.source == 4) {
                         cls = "layui-btn-primary";
                     }else if (d.source == 5) {
-                        cls = "layui-btn-disabled";
+                        cls = "layui-btn layui-btn-primary layui-border_black";
+                    }else if (d.source == 6) {
+                        cls = "layui-btn-warm";
+                    }else if (d.source == 7) {
+                        cls = "layui-btn-danger";
                     }
                     return '<span class="layui-btn ' + cls + ' layui-btn-xs">'+d.sourceName+'</span>';
                 }}

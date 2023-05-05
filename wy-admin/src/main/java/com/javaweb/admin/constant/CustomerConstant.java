@@ -48,6 +48,8 @@ public class CustomerConstant {
         put(3, "自然到店");
         put(4, "转介绍");
         put(5, "其他");
+        put(6, "新生堂");
+        put(7, "影耀");
     }
     };
 }

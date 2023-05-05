@@ -57,7 +57,7 @@ public class TargetTaskSchedule {
             });
             //当日新增总数
             int allCount = sourceCount.stream().mapToInt(map -> ((Long) map.get("count")).intValue()).sum();
-            insertTarget(today,admin.getId(),admin.getRealname(),"1006","当日新增总数",allCount);
+            insertTarget(today,admin.getId(),admin.getRealname(),"3006","当日新增总数",allCount);
 
             //联系客资    2001-当日联系总数  2002-当日回复数  2003-未到店联系数  2004-未到店回复数  2005-成交数
             List<Map> goutongCount = customerMapper.selectGontongCount(admin.getId(),today);

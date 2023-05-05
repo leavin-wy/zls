@@ -85,7 +85,7 @@ public class CustomerListVo {
     private String custTypeName;
 
     /**
-     * 渠道：1=美团,2=扫街,3=自然到店,4=转介绍,5=其他
+     * 渠道：1=美团,2=扫街,3=自然到店,4=转介绍,5=其他,6=新生堂,7=影耀
      */
     private Integer source;
 

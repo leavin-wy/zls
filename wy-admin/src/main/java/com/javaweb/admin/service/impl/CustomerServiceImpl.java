@@ -379,7 +379,7 @@ public class CustomerServiceImpl extends BaseServiceImpl<CustomerMapper, Custome
         cust.setSexName("输入性别代码:1=男,2=女,3=未知");
         cust.setPhone("如：13888888888");
         cust.setAddress("");
-        cust.setSourceName("输入渠道:1=美团,2=扫街,3=自然到店,4=转介绍,5=其他");
+        cust.setSourceName("输入渠道:1=美团,2=扫街,3=自然到店,4=转介绍,5=其他,6=新生堂,7=影耀");
         cust.setCustTypeName("输入客户类型:1=A,2=B,3=C,4=D,5=E,6=S,7=成交");
         cust.setReplyFlagName("输入回复标志:1=未回复,2=已回复");
         cust.setCompleteTime(new Date());

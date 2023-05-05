@@ -164,7 +164,7 @@
                     <span class="layui-badge layui-badge-green pull-right">今日</span>
                 </div>
                 <div class="layui-card-body">
-                    <p class="lay-big-font"><span style="font-size: 28px;line-height: 1;" id="1006">0人</span></p>
+                    <p class="lay-big-font"><span style="font-size: 28px;line-height: 1;" id="3006">0人</span></p>
                     <!--<p>总客资<span class="pull-right">412 人</span></p>-->
                 </div>
             </div>
@@ -211,7 +211,7 @@
                     <span class="layui-badge layui-badge-green pull-right">本周</span>
                 </div>
                 <div class="layui-card-body">
-                    <p class="lay-big-font"><span style="font-size: 28px;line-height: 1;" id="1006_z">0人</span></p>
+                    <p class="lay-big-font"><span style="font-size: 28px;line-height: 1;" id="3006_z">0人</span></p>
                     <!--<p>总客资<span class="pull-right">412 人</span></p>-->
                 </div>
             </div>
@@ -258,7 +258,7 @@
                     <span class="layui-badge layui-badge-green pull-right">本月</span>
                 </div>
                 <div class="layui-card-body">
-                    <p class="lay-big-font"><span style="font-size: 28px;line-height: 1;" id="1006_y">0人</span></p>
+                    <p class="lay-big-font"><span style="font-size: 28px;line-height: 1;" id="3006_y">0人</span></p>
                     <!--<p>总客资<span class="pull-right">412 人</span></p>-->
                 </div>
             </div>
@@ -310,6 +310,8 @@
                             <td>扫街</td>
                             <td>自然到店</td>
                             <td>转介绍</td>
+                            <td>新生堂</td>
+                            <td>影耀</td>
                             <td>其他</td>
                             <td>合计</td>
                         </tr>
@@ -356,6 +358,8 @@
                             <td>扫街</td>
                             <td>自然到店</td>
                             <td>转介绍</td>
+                            <td>新生堂</td>
+                            <td>影耀</td>
                             <td>其他</td>
                             <td>合计</td>
                         </tr>
@@ -403,6 +407,8 @@
                             <td>自然到店</td>
                             <td>转介绍</td>
                             <td>其他</td>
+                            <td>新生堂</td>
+                            <td>影耀</td>
                             <td>合计</td>
                         </tr>
                         </thead>
@@ -511,23 +517,23 @@
         // 首页当日指标数据
         $.get("/maininitbase",{"flag":1}, function(res, success) {
             var data = res.data;
-            resultBindDRFunc(data,["1006","2001","2005","2006"]);
+            resultBindDRFunc(data,["3006","2001","2005","2006"]);
         });
         // 首页本周指标数据
         $.get("/maininitbase",{"flag":2}, function(res, success) {
             var data = res.data;
-            resultBindFunc(data,["1006_z","2001_z","2005_z","2006_z"]);
+            resultBindFunc(data,["3006_z","2001_z","2005_z","2006_z"]);
         });
         // 首页当月指标数据
         $.get("/maininitbase",{"flag":3}, function(res, success) {
             var data = res.data;
-            resultBindFunc(data,["1006_y","2001_y","2005_y","2006_y"]);
+            resultBindFunc(data,["3006_y","2001_y","2005_y","2006_y"]);
         });
 
         //当日新增
-        $.get("/maininitxzfb",{"flag":1,"codes":"1001,1002,1003,1004,1005,total"}, function(res, success) {
+        $.get("/maininitxzfb",{"flag":1,"codes":"1001,1002,1003,1004,1006,1007,1005,total"}, function(res, success) {
             var data = res.data;
-            resultBindXZFBFunc(data,["user","1001","1002","1003","1004","1005","total"],"drxz");
+            resultBindXZFBFunc(data,["user","1001","1002","1003","1004","1006","1007","1005","total"],"drxz");
         });
 
         //当日联系到店情况
@@ -543,9 +549,9 @@
         });
 
         //本周新增
-        $.get("/maininitxzfb",{"flag":2,"codes":"1001,1002,1003,1004,1005,total"}, function(res, success) {
+        $.get("/maininitxzfb",{"flag":2,"codes":"1001,1002,1003,1004,1006,1007,1005,total"}, function(res, success) {
             var data = res.data;
-            resultBindXZFBFunc(data,["user","1001","1002","1003","1004","1005","total"],"bzxz");
+            resultBindXZFBFunc(data,["user","1001","1002","1003","1004","1006","1007","1005","total"],"bzxz");
         });
 
         //本月联系到店情况
@@ -555,9 +561,9 @@
         });
 
         //本月新增
-        $.get("/maininitxzfb",{"flag":3,"codes":"1001,1002,1003,1004,1005,total"}, function(res, success) {
+        $.get("/maininitxzfb",{"flag":3,"codes":"1001,1002,1003,1004,1006,1007,1005,total"}, function(res, success) {
             var data = res.data;
-            resultBindXZFBFunc(data,["user","1001","1002","1003","1004","1005","total"],"byxz");
+            resultBindXZFBFunc(data,["user","1001","1002","1003","1004","1006","1007","1005","total"],"byxz");
         });
 
         var resultBindDRFunc = function (data,paramArr) {
