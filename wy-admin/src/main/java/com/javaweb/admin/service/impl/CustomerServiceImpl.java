@@ -98,13 +98,16 @@ public class CustomerServiceImpl extends BaseServiceImpl<CustomerMapper, Custome
             //沟通时间
             queryWrapper.apply(" id in (select cust_id from sys_goutong where DATE_FORMAT(gt_time,'%Y-%m-%d')='"+customerQuery.getGtTimeStr()+"')");
         }
+        if(StringUtils.isNotEmpty(customerQuery.getReplyFlag())){
+            queryWrapper.apply(" id in (select cust_id from sys_goutong where reply_flag="+customerQuery.getReplyFlag()+")");
+        }
         if(StringUtils.isNotEmpty(customerQuery.getInviteTimeStr())) {
             //邀约时间
             queryWrapper.apply(" DATE_FORMAT(invite_time,'%Y-%m-%d')='"+customerQuery.getInviteTimeStr()+"'");
         }
         // 姓名/昵称
         if (!StringUtils.isEmpty(customerQuery.getKeywords())) {
-            queryWrapper.like(Customer::getCustName, customerQuery.getKeywords()).or().like(Customer::getNickName, customerQuery.getKeywords());
+            queryWrapper.and(wrapper->wrapper.like(Customer::getCustName, customerQuery.getKeywords()).or().like(Customer::getNickName, customerQuery.getKeywords()));
         }
 
         // 性别：1=男,2=女,3=未知

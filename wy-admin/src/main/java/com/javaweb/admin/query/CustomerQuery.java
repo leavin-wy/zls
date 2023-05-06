@@ -37,4 +37,9 @@ public class CustomerQuery extends BaseQuery {
 
     private String inviteTimeStr;
 
+    /**
+     * 1=未回复,2=已回复
+     */
+    private String replyFlag;
+
 }
