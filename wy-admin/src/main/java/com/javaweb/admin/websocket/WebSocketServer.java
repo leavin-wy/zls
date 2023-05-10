@@ -149,7 +149,9 @@ public class WebSocketServer {
             if(ifSendMessage){
                 CompletableFuture<Void> completableFuture = CompletableFuture.runAsync(() -> {
                     List<T> filterList = new ArrayList<>();
-                    switch (adminInfoVo.getDataType()) {
+                    //除了管理员和超级管理员看全部，其他的看自己的。
+                    int i = AdminUtils.hasRoleAnyMatch(Integer.valueOf(userId),"管理员","超级管理员")?1:2;
+                    switch (i) {
                         case 1:
                             if(webSocketMessage.getList().size()<=20) filterList = webSocketMessage.getList();
                             else filterList = webSocketMessage.getList().subList(0, 20);//管理员只选20条进行推送
