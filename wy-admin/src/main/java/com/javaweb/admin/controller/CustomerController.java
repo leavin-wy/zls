@@ -9,6 +9,7 @@ import com.javaweb.common.enums.BusinessType;
 import com.javaweb.admin.entity.Customer;
 import com.javaweb.admin.query.CustomerQuery;
 import com.javaweb.admin.service.ICustomerService;
+import com.javaweb.common.utils.StringUtils;
 import com.javaweb.common.utils.easypoi.ExcelBaseParam;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,9 +74,13 @@ public class CustomerController extends BaseController {
         LambdaQueryWrapper<Customer> custQueryWrapper = new LambdaQueryWrapper<>();
         custQueryWrapper.eq(Customer::getCustName,entity.getCustName());
         custQueryWrapper.eq(Customer::getNickName,entity.getNickName());
+        custQueryWrapper.eq(Customer::getSex,entity.getSex());
+        if(null != entity.getBirthday()){
+            custQueryWrapper.eq(Customer::getBirthday,entity.getBirthday());
+        }
         Integer count = customerMapper.selectCount(custQueryWrapper);
         if(count>0){
-            return JsonResult.error("相同名字和昵称的宝宝已存在");
+            return JsonResult.error("存在相同名字/昵称/性别/出生日期的客资");
         }
         return customerService.edit(entity);
     }
