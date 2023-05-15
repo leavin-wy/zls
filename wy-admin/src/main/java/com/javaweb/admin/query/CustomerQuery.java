@@ -33,7 +33,9 @@ public class CustomerQuery extends BaseQuery {
 
     private String interactTimeStr;
 
-    private String gtTimeStr;
+    private String gtTimeStrStart;
+    private String gtTimeStrEnd;
+
 
     private String inviteTimeStr;
 
@@ -41,5 +43,10 @@ public class CustomerQuery extends BaseQuery {
      * 1=未回复,2=已回复
      */
     private String replyFlag;
+
+    /**
+     * 1=未到店,2=已到店
+     */
+    private String tandianFlag;
 
 }

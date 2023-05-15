@@ -34,7 +34,11 @@
             </div>
             <div class="layui-inline">
                 <div class="layui-input-inline">
-                    <input type="text" autocomplete="off" name="gtTimeStr" id="gtTimeStr" class="layui-input" placeholder="沟通时间">
+                    <input type="text" autocomplete="off" name="gtTimeStrStart" id="gtTimeStrStart" class="layui-input" placeholder="沟通开始时间">
+                </div>
+                <div style="float:left;margin: 8px;">至</div>
+                <div class="layui-input-inline">
+                    <input type="text" autocomplete="off" name="gtTimeStrEnd" id="gtTimeStrEnd" class="layui-input" placeholder="沟通结束时间">
                 </div>
             </div>
             <div class="layui-inline">
@@ -45,6 +49,11 @@
             <div class="layui-inline">
                 <div class="layui-input-inline">
                     <widget:singleSelect name="replyFlag|0|回复标志|name|id" data="1=未回复,2=已回复" value="0"/>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <div class="layui-input-inline">
+                    <widget:singleSelect name="tandianFlag|0|到店标志|name|id" data="1=未到店,2=已到店" value="0"/>
                 </div>
             </div>
             <div class="layui-inline">
@@ -84,7 +93,12 @@
             });
 
             laydate.render({
-                elem: '#gtTimeStr'
+                elem: '#gtTimeStrStart'
+                ,format:'yyyy-MM-dd'
+            });
+
+            laydate.render({
+                elem: '#gtTimeStrEnd'
                 ,format:'yyyy-MM-dd'
             });
 

@@ -90,13 +90,27 @@ public class CustomerServiceImpl extends BaseServiceImpl<CustomerMapper, Custome
         CustomerQuery customerQuery = (CustomerQuery) query;
         // 查询条件
         LambdaQueryWrapper<Customer> queryWrapper = new LambdaQueryWrapper<>();
+        if(StringUtils.isNotEmpty(customerQuery.getTandianFlag())){
+            //是否有探店
+            if(StringUtils.equals("1",customerQuery.getTandianFlag())){
+                queryWrapper.apply(" id not in (select cust_id from sys_tandian)");
+            }else if(StringUtils.equals("2",customerQuery.getTandianFlag())){
+                queryWrapper.apply(" id in (select cust_id from sys_tandian)");
+            }
+        }
         if(StringUtils.isNotEmpty(customerQuery.getInteractTimeStr())){
             //下次沟通时间
             queryWrapper.apply(" id in (select cust_id from sys_goutong where DATE_FORMAT(interact_time,'%Y-%m-%d')='"+customerQuery.getInteractTimeStr()+"')");
         }
-        if(StringUtils.isNotEmpty(customerQuery.getGtTimeStr())){
+        if(StringUtils.isNotEmpty(customerQuery.getGtTimeStrStart())&&StringUtils.isEmpty(customerQuery.getGtTimeStrEnd())){
             //沟通时间
-            queryWrapper.apply(" id in (select cust_id from sys_goutong where DATE_FORMAT(gt_time,'%Y-%m-%d')='"+customerQuery.getGtTimeStr()+"')");
+            queryWrapper.apply(" id in (select cust_id from sys_goutong where DATE_FORMAT(gt_time,'%Y-%m-%d')>='"+customerQuery.getGtTimeStrStart()+"')");
+        }else if(StringUtils.isEmpty(customerQuery.getGtTimeStrStart())&&StringUtils.isNotEmpty(customerQuery.getGtTimeStrEnd())){
+            //沟通时间
+            queryWrapper.apply(" id in (select cust_id from sys_goutong where DATE_FORMAT(gt_time,'%Y-%m-%d')<='"+customerQuery.getGtTimeStrEnd()+"')");
+        }else if(StringUtils.isNotEmpty(customerQuery.getGtTimeStrStart())&&StringUtils.isNotEmpty(customerQuery.getGtTimeStrEnd())){
+            //沟通时间
+            queryWrapper.apply(" id in (select cust_id from sys_goutong where DATE_FORMAT(gt_time,'%Y-%m-%d')>='"+customerQuery.getGtTimeStrStart()+"' and DATE_FORMAT(gt_time,'%Y-%m-%d')<='"+customerQuery.getGtTimeStrEnd()+"')");
         }
         if(StringUtils.isNotEmpty(customerQuery.getReplyFlag())){
             queryWrapper.apply(" id in (select cust_id from sys_goutong where reply_flag="+customerQuery.getReplyFlag()+")");
