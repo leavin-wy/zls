@@ -104,15 +104,31 @@ layui.use(['func'], function () {
             }
         })
 
-       /* $(".btnDownload").click(function () {
-            window.location.href = "/customer/downloadExcel";
-        });*/
+        $(".btnDownload").click(function () {
+            let data = layui.form.val(`custForm`);
+            var str = "";
+            for (var val in data) {
+                str += "&"+val+"="+data[val];
+            }
+            var url = "/customer/custExport";
+            if(str.length>1){
+                url += "?"+str.substr(1);
+            }
+            //console.info(url);
+            layer.confirm('您确定要下载客户信息吗？', {icon: 3, title: '下载提示'}, function (index) {
+                window.location.href = url;
+                var msgId = layer.msg('正在下载，请稍候···', {
+                    icon: 16,
+                    shade: 0.4,
+                    time: 1500
+                });
+            });
+        });
 
         //上传excel
         func.uploadExcel({
             done:function (res) {
                 var data = res.data;
-                console.info(data)
                 if(data != null && data.length > 0){
                     openErrorInfo(data);
                 }

@@ -1,6 +1,7 @@
 package com.javaweb.admin.service;
 
 import com.javaweb.admin.entity.Customer;
+import com.javaweb.admin.query.CustomerQuery;
 import com.javaweb.common.common.IBaseService;
 import com.javaweb.common.utils.JsonResult;
 import com.javaweb.common.utils.easypoi.ExcelBaseParam;

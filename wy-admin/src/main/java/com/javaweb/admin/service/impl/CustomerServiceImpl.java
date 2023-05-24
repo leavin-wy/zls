@@ -100,7 +100,7 @@ public class CustomerServiceImpl extends BaseServiceImpl<CustomerMapper, Custome
         }
         if(StringUtils.isNotEmpty(customerQuery.getInteractTimeStr())){
             //下次沟通时间
-            queryWrapper.apply(" id in (select cust_id from sys_goutong where DATE_FORMAT(interact_time,'%Y-%m-%d')='"+customerQuery.getInteractTimeStr()+"')");
+            queryWrapper.apply(" id in (select g.cust_id from sys_goutong g inner join (select max(id) id,cust_id from sys_goutong group by cust_id) t where g.id = t.id and DATE_FORMAT(g.interact_time,'%Y-%m-%d')='"+customerQuery.getInteractTimeStr()+"')");
         }
         if(StringUtils.isNotEmpty(customerQuery.getGtTimeStrStart())&&StringUtils.isEmpty(customerQuery.getGtTimeStrEnd())){
             //沟通时间
@@ -113,7 +113,7 @@ public class CustomerServiceImpl extends BaseServiceImpl<CustomerMapper, Custome
             queryWrapper.apply(" id in (select cust_id from sys_goutong where DATE_FORMAT(gt_time,'%Y-%m-%d')>='"+customerQuery.getGtTimeStrStart()+"' and DATE_FORMAT(gt_time,'%Y-%m-%d')<='"+customerQuery.getGtTimeStrEnd()+"')");
         }
         if(StringUtils.isNotEmpty(customerQuery.getReplyFlag())){
-            queryWrapper.apply(" id in (select cust_id from sys_goutong where reply_flag="+customerQuery.getReplyFlag()+")");
+            queryWrapper.apply(" id in (select g.cust_id from sys_goutong g inner join (select max(id) id,cust_id from sys_goutong group by cust_id) t where g.id = t.id and  g.reply_flag="+customerQuery.getReplyFlag()+")");
         }
         if(StringUtils.isNotEmpty(customerQuery.getInviteTimeStr())) {
             //邀约时间
@@ -475,5 +475,4 @@ public class CustomerServiceImpl extends BaseServiceImpl<CustomerMapper, Custome
         goutongMapper.delete(goutongWrapper);
         return JsonResult.success("删除成功");
     }
-
 }
