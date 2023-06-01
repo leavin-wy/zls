@@ -93,9 +93,9 @@ public class CustomerServiceImpl extends BaseServiceImpl<CustomerMapper, Custome
         if(StringUtils.isNotEmpty(customerQuery.getTandianFlag())){
             //是否有探店
             if(StringUtils.equals("1",customerQuery.getTandianFlag())){
-                queryWrapper.apply(" id not in (select cust_id from sys_tandian)");
+                queryWrapper.apply(" id not in (select cust_id from sys_tandian) and td_num = 0");
             }else if(StringUtils.equals("2",customerQuery.getTandianFlag())){
-                queryWrapper.apply(" id in (select cust_id from sys_tandian)");
+                queryWrapper.apply(" (id in (select cust_id from sys_tandian) or td_num > 0)");
             }
         }
         if(StringUtils.isNotEmpty(customerQuery.getInteractTimeStr())){
