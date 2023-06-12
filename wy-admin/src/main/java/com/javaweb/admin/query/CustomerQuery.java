@@ -36,6 +36,8 @@ public class CustomerQuery extends BaseQuery {
     private String gtTimeStrStart;
     private String gtTimeStrEnd;
 
+    private String createTimeStrStart;
+    private String createTimeStrEnd;
 
     private String inviteTimeStr;
 

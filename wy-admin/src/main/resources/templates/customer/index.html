@@ -43,6 +43,15 @@
             </div>
             <div class="layui-inline">
                 <div class="layui-input-inline">
+                    <input type="text" autocomplete="off" name="createTimeStrStart" id="createTimeStrStart" class="layui-input" placeholder="录入开始时间">
+                </div>
+                <div style="float:left;margin: 8px;">至</div>
+                <div class="layui-input-inline">
+                    <input type="text" autocomplete="off" name="createTimeStrEnd" id="createTimeStrEnd" class="layui-input" placeholder="录入结束时间">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <div class="layui-input-inline">
                     <input type="text" autocomplete="off" name="inviteTimeStr" id="inviteTimeStr" class="layui-input" placeholder="邀约时间">
                 </div>
             </div>
@@ -100,6 +109,16 @@
 
             laydate.render({
                 elem: '#gtTimeStrEnd'
+                ,format:'yyyy-MM-dd'
+            });
+
+            laydate.render({
+                elem: '#createTimeStrStart'
+                ,format:'yyyy-MM-dd'
+            });
+
+            laydate.render({
+                elem: '#createTimeStrEnd'
                 ,format:'yyyy-MM-dd'
             });
 

@@ -119,6 +119,17 @@ public class CustomerServiceImpl extends BaseServiceImpl<CustomerMapper, Custome
             //邀约时间
             queryWrapper.apply(" DATE_FORMAT(invite_time,'%Y-%m-%d')='"+customerQuery.getInviteTimeStr()+"'");
         }
+
+        if(StringUtils.isNotEmpty(customerQuery.getCreateTimeStrStart())) {
+            //客资录入开始时间
+            queryWrapper.apply(" DATE_FORMAT(create_time,'%Y-%m-%d')>='"+customerQuery.getCreateTimeStrStart()+"'");
+        }
+
+        if(StringUtils.isNotEmpty(customerQuery.getCreateTimeStrEnd())) {
+            //客资录入开始时间
+            queryWrapper.apply(" DATE_FORMAT(create_time,'%Y-%m-%d')<='"+customerQuery.getCreateTimeStrEnd()+"'");
+        }
+
         // 姓名/昵称
         if (!StringUtils.isEmpty(customerQuery.getKeywords())) {
             queryWrapper.and(wrapper->wrapper.like(Customer::getCustName, customerQuery.getKeywords()).or().like(Customer::getNickName, customerQuery.getKeywords()));

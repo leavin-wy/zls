@@ -8,6 +8,7 @@ layui.use(['func'], function () {
     //声明变量
     var func = layui.func
         , $ = layui.$
+        ,table = layui.table
         ,l = layui.layer;
 
     if (A == 'index') {
@@ -176,5 +177,8 @@ layui.use(['func'], function () {
         //【设置弹框】
         func.setWin("客户信息",900, 570);
 
+        reloadTable = function () {
+            table.reload("tableList");
+        }
     }
 });
