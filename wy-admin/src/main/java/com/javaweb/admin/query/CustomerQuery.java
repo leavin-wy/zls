@@ -14,7 +14,9 @@ import lombok.Data;
 @Data
 public class CustomerQuery extends BaseQuery {
 
-    private String keywords;
+   private Integer userId;
+
+   private String keywords;
 
     /**
      * 性别：1=男,2=女,3=未知

@@ -74,6 +74,8 @@ layui.use(['func'], function () {
             , {field: 'lastGoutongDesc', width: 200, title: '最近沟通内容', align: 'left'}
             , {field: 'replyFlag', width: 80, title: '是否回复', align: 'center', templet(d) {
                     var cls = "";
+                    if(d.replyFlag == null) return "";
+
                     if (d.replyFlag == 1) {
                         // 1,未回复
                         cls = "layui-btn-normal";

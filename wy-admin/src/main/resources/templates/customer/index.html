@@ -29,6 +29,12 @@
             </div>
             <div class="layui-inline">
                 <div class="layui-input-inline">
+                    <widget:singleSelect name="userId|0|创建人|name|id" sql="SELECT id,`realname` as name FROM sys_admin WHERE mark=1 ORDER BY id desc;" value="0"/>
+                </div>
+            </div>
+
+            <div class="layui-inline">
+                <div class="layui-input-inline">
                     <input type="text" autocomplete="off" name="interactTimeStr" id="interactTimeStr" class="layui-input" placeholder="下次沟通时间">
                 </div>
             </div>

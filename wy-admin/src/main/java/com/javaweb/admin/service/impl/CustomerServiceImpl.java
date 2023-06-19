@@ -98,6 +98,9 @@ public class CustomerServiceImpl extends BaseServiceImpl<CustomerMapper, Custome
                 queryWrapper.apply(" (id in (select cust_id from sys_tandian) or td_num > 0)");
             }
         }
+        if(customerQuery.getUserId()!=null&&customerQuery.getUserId()>0){
+            queryWrapper.eq(Customer::getCreateUser,customerQuery.getUserId());
+        }
         if(StringUtils.isNotEmpty(customerQuery.getInteractTimeStr())){
             //下次沟通时间
             queryWrapper.apply(" id in (select g.cust_id from sys_goutong g inner join (select max(id) id,cust_id from sys_goutong group by cust_id) t where g.id = t.id and DATE_FORMAT(g.interact_time,'%Y-%m-%d')='"+customerQuery.getInteractTimeStr()+"')");
@@ -212,6 +215,8 @@ public class CustomerServiceImpl extends BaseServiceImpl<CustomerMapper, Custome
                     if(null!=lastGoutongInfo.get("interactDesc")){
                         customerListVo.setInteractDesc((String) lastGoutongInfo.get("interactDesc"));
                     }
+                }else{
+                    customerListVo.setReplyFlagName("");
                 }
                 customerListVoList.add(customerListVo);
             });
