@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.javaweb.admin.constant.CustomerConstant;
 import com.javaweb.admin.constant.GoutongConstant;
 import com.javaweb.admin.mapper.CustomerMapper;
+import com.javaweb.admin.vo.CustomerDownListVo;
 import com.javaweb.admin.vo.CustomerListVo;
 import com.javaweb.common.utils.DateUtils;
 import com.javaweb.common.utils.JsonResult;
@@ -191,9 +192,11 @@ public class CustomerController extends BaseController {
         if(StringUtils.isNotEmpty(customerQuery.getTandianFlag())){
             //是否有探店
             if(StringUtils.equals("1",customerQuery.getTandianFlag())){
-                queryWrapper.apply(" id not in (select cust_id from sys_tandian)");
+                queryWrapper.eq(Customer::getTdNum,0);
             }else if(StringUtils.equals("2",customerQuery.getTandianFlag())){
-                queryWrapper.apply(" id in (select cust_id from sys_tandian)");
+                queryWrapper.eq(Customer::getTdNum,1);
+            }else if(StringUtils.equals("3",customerQuery.getTandianFlag())){
+                queryWrapper.gt(Customer::getTdNum,1);
             }
         }
         if(StringUtils.isNotEmpty(customerQuery.getInteractTimeStr())){
@@ -245,10 +248,10 @@ public class CustomerController extends BaseController {
         queryWrapper.orderByDesc(Customer::getId);
 
         List<Customer> customers = customerMapper.selectList(queryWrapper);
-        List<CustomerListVo> customerListVoList = new ArrayList<>();
+        List<CustomerDownListVo> customerListVoList = new ArrayList<>();
         if (!CollectionUtils.isEmpty(customers)) {
             customers.forEach(item -> {
-                CustomerListVo customerListVo = new CustomerListVo();
+                CustomerDownListVo customerListVo = new CustomerDownListVo();
                 // 拷贝属性
                 BeanUtils.copyProperties(item, customerListVo);
                 // 性别描述
@@ -277,8 +280,8 @@ public class CustomerController extends BaseController {
                     customerListVo.setLastTandianTime(DateUtils.dateTime("yyyy-MM-dd",lastTandianTime));
                 }
                 //探店次数
-                Integer tandianNum = customerMapper.getTandianNum(customerListVo.getId());
-                customerListVo.setTdNum(tandianNum+customerListVo.getTdNum());
+                //Integer tandianNum = customerMapper.getTandianNum(customerListVo.getId());
+                //customerListVo.setTdNum(customerListVo.getTdNum());
                 //年龄
                 if(customerListVo.getBirthday()!=null){
                     Integer diffMonth = customerMapper.getAgeForMonth(customerListVo.getBirthday());
@@ -310,7 +313,7 @@ public class CustomerController extends BaseController {
                 .setFileName("导出客资信息记录")
                 .setSheetName("客资信息");
         try{
-            Workbook workbook = ExcelSimpleUtil.exportExcel(excelBaseParam.getTitleName(), excelBaseParam.getSheetName(), customerListVoList, CustomerListVo.class,true);
+            Workbook workbook = ExcelSimpleUtil.exportExcel(excelBaseParam.getTitleName(), excelBaseParam.getSheetName(), customerListVoList, CustomerDownListVo.class,true);
             ExcelDownloadUtil.downloadExcel(workbook,excelBaseParam.getFileName()+".xlsx",excelBaseParam.getResponse());
         }catch (IOException e){
             logger.error("excel导出出错!",e);

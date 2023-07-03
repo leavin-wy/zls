@@ -19,6 +19,7 @@ import com.javaweb.admin.vo.TandianListVo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -98,7 +99,12 @@ public class TandianServiceImpl extends BaseServiceImpl<TandianMapper, Tandian> 
      * @return
      */
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public JsonResult edit(Tandian entity) {
+        if(entity.getId()==null||entity.getId()<1){
+            //新增探店，探店次数加1
+            tandianMapper.updateTdNumAdd(entity.getCustId());
+        }
         return super.edit(entity);
     }
 

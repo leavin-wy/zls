@@ -36,7 +36,10 @@ public class TargetTaskSchedule {
     @Autowired
     private TargetMapper targetMapper;
 
-    @Scheduled(cron = "0 0/5 6-23 * * ? ")
+    /**
+     * 定时计算首页数据，3分钟处理一次
+     */
+    @Scheduled(cron = "0 0/3 6-23 * * ? ")
     public void work(){
         List<Admin> admins = adminMapper.selectList(new QueryWrapper<>());
         for(Admin admin : admins){

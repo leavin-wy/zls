@@ -69,7 +69,7 @@ layui.use(['func'], function () {
                     return '<span class="layui-btn ' + cls + ' layui-btn-xs">'+d.custTypeName+'</span>';
             }}
             , {field: 'lastTandianTimeStr', width: 160, title: '最近探店时间', align: 'center'}
-            , {field: 'tandianNum', width: 100, title: '探店次数', align: 'center'}
+            , {field: 'tdNum', width: 100, title: '探店次数', align: 'center'}
             , {field: 'lastGoutongTimeStr', width: 160, title: '最近沟通时间', align: 'center'}
             , {field: 'lastGoutongDesc', width: 200, title: '最近沟通内容', align: 'left'}
             , {field: 'replyFlag', width: 80, title: '是否回复', align: 'center', templet(d) {

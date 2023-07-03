@@ -49,7 +49,7 @@ public class CustomerQuery extends BaseQuery {
     private String replyFlag;
 
     /**
-     * 1=未到店,2=已到店
+     * 1=未到店,2=首次到店,3=多次到店
      */
     private String tandianFlag;
 

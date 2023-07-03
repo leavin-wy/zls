@@ -93,9 +93,11 @@ public class CustomerServiceImpl extends BaseServiceImpl<CustomerMapper, Custome
         if(StringUtils.isNotEmpty(customerQuery.getTandianFlag())){
             //是否有探店
             if(StringUtils.equals("1",customerQuery.getTandianFlag())){
-                queryWrapper.apply(" id not in (select cust_id from sys_tandian) and td_num = 0");
+                queryWrapper.eq(Customer::getTdNum,0);
             }else if(StringUtils.equals("2",customerQuery.getTandianFlag())){
-                queryWrapper.apply(" (id in (select cust_id from sys_tandian) or td_num > 0)");
+                queryWrapper.eq(Customer::getTdNum,1);
+            }else if(StringUtils.equals("3",customerQuery.getTandianFlag())){
+                queryWrapper.gt(Customer::getTdNum,1);
             }
         }
         if(customerQuery.getUserId()!=null&&customerQuery.getUserId()>0){
@@ -194,8 +196,8 @@ public class CustomerServiceImpl extends BaseServiceImpl<CustomerMapper, Custome
                 String lastTandianTime = customerMapper.getLastTandianTime(customerListVo.getId());
                 customerListVo.setLastTandianTimeStr(lastTandianTime);
                 //探店次数
-                Integer tandianNum = customerMapper.getTandianNum(customerListVo.getId());
-                customerListVo.setTandianNum(tandianNum+customerListVo.getTdNum());
+                //Integer tandianNum = customerMapper.getTandianNum(customerListVo.getId());
+                //customerListVo.setTandianNum(customerListVo.getTdNum());
                 //年龄
                 if(customerListVo.getBirthday()!=null){
                     Integer diffMonth = customerMapper.getAgeForMonth(customerListVo.getBirthday());

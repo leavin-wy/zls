@@ -1,6 +1,7 @@
 package com.javaweb.admin.controller;
 
 
+import com.javaweb.admin.mapper.TandianMapper;
 import com.javaweb.common.utils.JsonResult;
 import com.javaweb.common.annotation.Log;
 import com.javaweb.common.enums.BusinessType;
@@ -10,6 +11,7 @@ import com.javaweb.admin.service.ITandianService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,6 +34,8 @@ public class TandianController extends BaseController {
 
     @Autowired
     private ITandianService tandianService;
+    @Autowired
+    private TandianMapper tandianMapper;
 
     /**
      * 获取数据列表
@@ -114,7 +118,14 @@ public class TandianController extends BaseController {
     @Log(title = "探店记录", businessType = BusinessType.DELETE)
     @ResponseBody
     @GetMapping("/delete/{id}")
+    @Transactional(rollbackFor = Exception.class)
     public JsonResult delete(@PathVariable("id") Integer id) {
+        Tandian entity = tandianService.getById(id);
+        if (entity == null) {
+            return JsonResult.error("记录不存在");
+        }
+        //删除探店记录，探店次数减1
+        tandianMapper.updateTdNumReduce(entity.getCustId());
         return tandianService.delRealById(id);
     }
 	
