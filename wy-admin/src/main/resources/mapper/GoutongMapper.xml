@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.javaweb.admin.mapper.GoutongMapper">
-
+    <select id="selectPage" resultType="com.javaweb.admin.entity.Goutong">
+        select c.cust_name,g.*
+        from sys_goutong g
+        INNER JOIN sys_customer c
+        on g.cust_id = c.id
+        ${ew.customSqlSegment}
+    </select>
 </mapper>

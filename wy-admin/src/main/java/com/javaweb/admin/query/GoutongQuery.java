@@ -14,4 +14,13 @@ import lombok.Data;
 @Data
 public class GoutongQuery extends BaseQuery {
     Integer custId ;
+
+    private String keywords;
+    private String gtTimeStrStart;
+    private String gtTimeStrEnd;
+
+    /**
+     * 1=未回复,2=已回复
+     */
+    private String replyFlag;
 }

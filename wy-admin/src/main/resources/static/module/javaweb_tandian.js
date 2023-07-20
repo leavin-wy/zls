@@ -11,8 +11,7 @@ layui.use(['func'], function () {
 
     //【TABLE列数组】
     var cols = [
-        {type: 'checkbox', fixed: 'left'}
-        , {field: 'id', width: 80, title: 'ID', align: 'center', sort: true, fixed: 'left'}
+        {width: 60, title: '序号', type:'numbers'}
         /*, {field: 'custId', width: 100, title: '客户id', align: 'center'}*/
         , {field: 'tdTime', width: 180, title: '探店时间', align: 'center'}
         , {field: 'remark', width: 200, title: '备注', align: 'center'}

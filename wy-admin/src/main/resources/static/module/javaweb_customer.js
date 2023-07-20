@@ -14,8 +14,8 @@ layui.use(['func'], function () {
     if (A == 'index') {
         //【TABLE列数组】
         var cols = [
-              /*{type: 'checkbox', fixed: 'left'}
-            , */{field: 'id', width: 60, title: 'ID', align: 'center', sort: true, fixed: 'left'}
+            {width: 60, title: '序号', type:'numbers', fixed: 'left'}
+            /*{field: 'id', width: 60, title: 'ID', align: 'center', sort: true, fixed: 'left'}*/
             , {field: 'custName', width: 90, title: '客户名称', align: 'center', fixed: 'left'}
             , {field: 'nickName', width: 90, title: '客户昵称', align: 'center', fixed: 'left'}
             , {field: 'sex', width: 80, title: '性别', align: 'center', templet(d) {

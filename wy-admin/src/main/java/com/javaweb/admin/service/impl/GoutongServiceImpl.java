@@ -3,6 +3,7 @@ package com.javaweb.admin.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.javaweb.admin.entity.Customer;
 import com.javaweb.common.common.BaseQuery;
 import com.javaweb.system.common.BaseServiceImpl;
 import com.javaweb.common.config.CommonConfig;
@@ -16,6 +17,7 @@ import com.javaweb.admin.query.GoutongQuery;
 import com.javaweb.admin.service.IGoutongService;
 import com.javaweb.system.utils.AdminUtils;
 import com.javaweb.admin.vo.GoutongListVo;
+import com.javaweb.system.utils.ShiroUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -50,10 +52,33 @@ public class GoutongServiceImpl extends BaseServiceImpl<GoutongMapper, Goutong> 
         // 查询条件
         QueryWrapper<Goutong> queryWrapper = new QueryWrapper<>();
         if(goutongQuery.getCustId()!=null&&goutongQuery.getCustId()>0){
-            queryWrapper.eq("cust_id",goutongQuery.getCustId());
+            queryWrapper.eq("g.cust_id",goutongQuery.getCustId());
         }
-        queryWrapper.eq("mark", 1);
-        queryWrapper.orderByDesc("id");
+        if (!StringUtils.isEmpty(goutongQuery.getKeywords())) {
+            queryWrapper.and(wrapper->wrapper.like("c.cust_name", goutongQuery.getKeywords()).or().like("c.nick_name", goutongQuery.getKeywords()));
+        }
+        if(StringUtils.isNotEmpty(goutongQuery.getGtTimeStrStart())&&StringUtils.isEmpty(goutongQuery.getGtTimeStrEnd())){
+            //沟通时间
+            queryWrapper.apply(" DATE_FORMAT(g.create_time,'%Y-%m-%d')>='"+goutongQuery.getGtTimeStrStart()+"')");
+        }else if(StringUtils.isEmpty(goutongQuery.getGtTimeStrStart())&&StringUtils.isNotEmpty(goutongQuery.getGtTimeStrEnd())){
+            //沟通时间
+            queryWrapper.apply(" DATE_FORMAT(g.create_time,'%Y-%m-%d')<='"+goutongQuery.getGtTimeStrEnd()+"')");
+        }else if(StringUtils.isNotEmpty(goutongQuery.getGtTimeStrStart())&&StringUtils.isNotEmpty(goutongQuery.getGtTimeStrEnd())){
+            //沟通时间
+            queryWrapper.apply(" DATE_FORMAT(g.create_time,'%Y-%m-%d')>='"+goutongQuery.getGtTimeStrStart()+"' and DATE_FORMAT(g.create_time,'%Y-%m-%d')<='"+goutongQuery.getGtTimeStrEnd()+"'");
+        }
+        if(StringUtils.isNotEmpty(goutongQuery.getReplyFlag())){
+            queryWrapper.eq("g.reply_flag",goutongQuery.getReplyFlag());
+        }
+        if(AdminUtils.hasRoleAnyMatch(ShiroUtils.getAdminId(),"管理员","超级管理员")){
+            //管理员看同部门下所有人数据
+            queryWrapper.in("g.create_user",AdminUtils.getAdminsByDep(ShiroUtils.getAdminInfo().getDeptId()));
+        }else{
+            //其他人只查自己创建的
+            queryWrapper.eq("g.create_user", ShiroUtils.getAdminId());
+        }
+        queryWrapper.eq("g.mark", 1);
+        queryWrapper.orderByDesc("g.id");
 
         // 查询数据
         IPage<Goutong> page = new Page<>(goutongQuery.getPage(), goutongQuery.getLimit());

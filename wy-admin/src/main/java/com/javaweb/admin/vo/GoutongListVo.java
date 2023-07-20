@@ -17,6 +17,7 @@ import java.util.Date;
  */
 @Data
 public class GoutongListVo {
+    private String custName;
 
     /**
      * 沟通记录ID

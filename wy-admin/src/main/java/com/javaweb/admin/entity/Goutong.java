@@ -29,6 +29,9 @@ import org.springframework.format.annotation.DateTimeFormat;
 @TableName("sys_goutong")
 public class Goutong extends BaseEntity {
 
+    @TableField(exist = false)
+    private String custName;
+
     /**
      * 客户id
      */
