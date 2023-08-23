@@ -7,16 +7,6 @@
         <div class="layui-form-item">
             <div class="layui-inline">
                 <div class="layui-input-inline">
-                    <input type="text" name="keywords" placeholder="请输入姓名/昵称" autocomplete="off" class="layui-input">
-                </div>
-            </div>
-            <div class="layui-inline">
-                <div class="layui-input-inline">
-                    <widget:singleSelect name="replyFlag|0|回复标志|name|id" data="1=未回复,2=已回复" value="0"/>
-                </div>
-            </div>
-            <div class="layui-inline">
-                <div class="layui-input-inline">
                     <input type="text" autocomplete="off" name="gtTimeStrStart" id="gtTimeStrStart" class="layui-input" placeholder="沟通开始时间">
                 </div>
                 <div style="float:left;margin: 8px;">至</div>
@@ -27,6 +17,8 @@
             <div class="layui-inline">
                 <div class="layui-input-inline" style="width: auto;">
                     <widget:btnQuery name="查询"/>
+                    <widget:btnFunc name="添加|addGoutong|layui-icon-add|layui-bg-blue|1"/>
+                    <widget:btnFunc name="关闭|close|layui-icon-close|layui-bg-black|1"/>
                     <button type="reset" class="layui-btn btnOption layui-bg-black layui-btn-small btnReset"><i class="layui-icon layui-icon-util"></i>重置</button>
                     <!--<widget:btnFunc name="添加|addGoutong|layui-icon-add|layui-bg-blue|1"/>
                     <widget:btnFunc name="关闭|close|layui-icon-close|layui-bg-black|1"/>
@@ -41,10 +33,10 @@
     <table class="layui-hide" id="tableList" lay-filter="tableList"></table>
 
     <!-- 表格操作列 -->
-    <!--<script type="text/html" id="toolBar">
+    <script type="text/html" id="toolBar">
         <widget:btnEdit name="编辑"/>
         <widget:btnDel name="删除"/>
-    </script>-->
+    </script>
 
     <script type="text/javascript">
         layui.use(['func'], function () {

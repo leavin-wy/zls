@@ -120,6 +120,12 @@ public class GoutongController extends BaseController {
     @GetMapping("/indexGt")
     public String indexGt(Integer custId, Model model) {
         model.addAttribute("custId",custId);
+        return "goutong/index";
+    }
+
+    @GetMapping("/index")
+    @Override
+    public String index(Model model) {
         return "goutong/indexGt";
     }
 

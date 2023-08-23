@@ -7,6 +7,16 @@
         <div class="layui-form-item">
             <div class="layui-inline">
                 <div class="layui-input-inline">
+                    <input type="text" name="keywords" placeholder="请输入姓名/昵称" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <div class="layui-input-inline">
+                    <widget:singleSelect name="replyFlag|0|回复标志|name|id" data="1=未回复,2=已回复" value="0"/>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <div class="layui-input-inline">
                     <input type="text" autocomplete="off" name="gtTimeStrStart" id="gtTimeStrStart" class="layui-input" placeholder="沟通开始时间">
                 </div>
                 <div style="float:left;margin: 8px;">至</div>
@@ -17,8 +27,8 @@
             <div class="layui-inline">
                 <div class="layui-input-inline" style="width: auto;">
                     <widget:btnQuery name="查询"/>
-                    <widget:btnFunc name="添加|addGoutong|layui-icon-add|layui-bg-blue|1"/>
-                    <widget:btnFunc name="关闭|close|layui-icon-close|layui-bg-black|1"/>
+                    <!--<widget:btnFunc name="添加|addGoutong|layui-icon-add|layui-bg-blue|1"/>
+                    <widget:btnFunc name="关闭|close|layui-icon-close|layui-bg-black|1"/>-->
                 </div>
             </div>
         </div>
@@ -28,10 +38,10 @@
     <table class="layui-hide" id="tableList" lay-filter="tableList"></table>
 
     <!-- 表格操作列 -->
-    <script type="text/html" id="toolBar">
+    <!--<script type="text/html" id="toolBar">
         <widget:btnEdit name="编辑"/>
         <widget:btnDel name="删除"/>
-    </script>
+    </script>-->
 
     <script type="text/javascript">
         layui.use(['func'], function () {
@@ -52,8 +62,6 @@
                 ,format:'yyyy-MM-dd'
             });
 
-            //form.render();
-
             //【TABLE列数组】
             var cols = [
                 {width: 60, title: '序号', type:'numbers'}
@@ -65,23 +73,12 @@
                 , {field: 'interactDesc', width: 180, title: '下次沟通内容', align: 'center'}
                 , {field: 'createUserName', width: 100, title: '创建人', align: 'center'}
                 , {field: 'createTime', width: 160, title: '创建时间', align: 'center'}
-                , {fixed: 'right', width: 150, title: '功能操作', align: 'center', toolbar: '#toolBar'}
             ];
 
             //【渲染TABLE】
             var url = "/goutong/list?custId=" + $("#custId").val();
             func.tableIns(cols, "tableList", null, url);
 
-            $(".btnAddGoutong").click(function () {
-                func.showWin("添加沟通记录", "/goutong/addGoutong?custId="+$("#custId").val(),600,500);
-            });
-
-            $(".btnClose").click(function () {
-                parent.reloadTable();//刷新父页面的表格
-                var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
-                //parent.location.reload();//刷新父页面，注意一定要在关闭当前iframe层之前执行刷新
-                parent.layer.close(index); //再执行关闭
-            });
 
             //【设置弹框】
             func.setWin("沟通记录", 600, 500);

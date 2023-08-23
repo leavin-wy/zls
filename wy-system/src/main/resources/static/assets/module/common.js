@@ -261,9 +261,10 @@
                                     parent.location.reload();
                                 }
                                 if(optionsArr[1]==0){
-                                    if(o.isFunction(parent.reload_row)){
+                                    /*if(o.isFunction(parent.reload_row)){
                                         parent.reload_row(s); // 如果想要不整个刷新页面,js里面要定义该方法的实现 s是数据
-                                    }
+                                    }*/
+                                    parent.reloadTable();//只刷新父页面的表格,js里面要定义该方法的实现
                                     parent.layer.closeAll("iframe");//关闭弹窗
                                 }
                             }), 100), k && k(n, e), !1
