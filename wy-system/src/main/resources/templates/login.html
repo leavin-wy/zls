@@ -209,6 +209,7 @@
         $('img.login-captcha').click(function () {
             this.src = '/captcha?t=' + (new Date).getTime();
         }).trigger('click');
+
         $('.login-wrapper').removeClass('layui-hide');
         //提交请求时 提交单选框的值  is方法为筛选 是否为选中状态 返回值是布尔类型
         var rememberMe = $("#rememberMe").is(':checked');

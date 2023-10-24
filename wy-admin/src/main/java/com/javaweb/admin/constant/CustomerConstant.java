@@ -35,6 +35,7 @@ public class CustomerConstant {
         put(5, "E");
         put(6, "S");
         put(7, "成交");
+        put(8, "F");
 
     }
     };
