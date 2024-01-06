@@ -229,7 +229,7 @@ public class CustomerController extends BaseController {
         if (!StringUtils.isEmpty(customerQuery.getSex())) {
             queryWrapper.eq(Customer::getSex, customerQuery.getSex());
         }
-        // 客户类型： 1=A,2=B,3=C,4=D,5=E,6=S,7=成交,8=F
+        // 客户类型： 1=A,2=B,3=C,4=D,5=E,6=S,7=成交,8=F,9=C+
         if (!StringUtils.isEmpty(customerQuery.getCustType())) {
             queryWrapper.eq(Customer::getCustType, customerQuery.getCustType());
         }

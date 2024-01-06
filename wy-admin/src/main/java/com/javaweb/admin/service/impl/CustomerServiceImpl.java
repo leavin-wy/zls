@@ -144,7 +144,7 @@ public class CustomerServiceImpl extends BaseServiceImpl<CustomerMapper, Custome
         if (!StringUtils.isEmpty(customerQuery.getSex())) {
             queryWrapper.eq(Customer::getSex, customerQuery.getSex());
         }
-        // 客户类型： 1=A,2=B,3=C,4=D,5=E,6=S,7=成交,8=F
+        // 客户类型： 1=A,2=B,3=C,4=D,5=E,6=S,7=成交,8=F,9=C+
         if (!StringUtils.isEmpty(customerQuery.getCustType())) {
             queryWrapper.eq(Customer::getCustType, customerQuery.getCustType());
         }
@@ -415,7 +415,7 @@ public class CustomerServiceImpl extends BaseServiceImpl<CustomerMapper, Custome
         cust.setPhone("如：13888888888");
         cust.setAddress("");
         cust.setSourceName("输入渠道:1=美团,2=扫街,3=自然到店,4=转介绍,5=其他,6=新生堂,7=影耀");
-        cust.setCustTypeName("输入客户类型:1=A,2=B,3=C,4=D,5=E,6=S,7=成交,8=F");
+        cust.setCustTypeName("输入客户类型:1=A,2=B,3=C,4=D,5=E,6=S,7=成交,8=F,9=C+");
         cust.setReplyFlagName("输入回复标志:1=未回复,2=已回复");
         cust.setCompleteTime(new Date());
         cust.setLastTandianTime(new Date());
