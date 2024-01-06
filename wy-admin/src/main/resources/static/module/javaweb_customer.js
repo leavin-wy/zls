@@ -88,7 +88,7 @@ layui.use(['func'], function () {
             , {field: 'interactTimeStr', width: 120, title: '下次沟通时间', align: 'center'}
             , {field: 'interactDesc', width: 120, title: '下次沟通内容', align: 'center'}
             , {field: 'phone', width: 120, title: '联系电话', align: 'center'}
-            , {field: 'address', width: 180, title: '家庭住址', align: 'center'}
+            , {field: 'address', width: 180, title: '客户重点信息', align: 'center'}
             , {field: 'inviteTime', width: 120, title: '邀约时间', align: 'center'}
             , {field: 'completeTime', width: 120, title: '成交时间', align: 'center'}
             , {field: 'createUserName', width: 100, title: '创建人', align: 'center'}

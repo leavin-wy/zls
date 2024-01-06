@@ -24,7 +24,7 @@ public class CustomerQuery extends BaseQuery {
     private String sex;
 
     /**
-     * 客户类型： 1=A,2=B,3=C,4=D,5=E,6=S,7=成交,8=F,9=C+
+     * 客户类型： 1=A,2=B,3=C,4=D,5=E,6=S,7=成交,8=F,9=C+,10=成交未入读
      */
     private String custType;
 

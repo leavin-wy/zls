@@ -37,7 +37,7 @@ public class CustomerConstant {
         put(7, "成交");
         put(8, "F");
         put(9, "C+");
-
+        put(10,"成交未入读");
     }
     };
     /**

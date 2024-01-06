@@ -60,12 +60,12 @@ public class Customer extends BaseEntity {
     private String phone;
 
     /**
-     * 家庭住址
+     * 客户重点信息
      */
     private String address;
 
     /**
-     * 客户类型： 1=A,2=B,3=C,4=D,5=E,6=S,7=成交,8=F,9=C+
+     * 客户类型： 1=A,2=B,3=C,4=D,5=E,6=S,7=成交,8=F,9=C+,10=成交未入读
      */
     private Integer custType;
 

@@ -49,7 +49,7 @@
 			<div class="layui-inline">
 				<label class="layui-form-label">客户类型<font color="red">*</font>：</label>
 				<div class="layui-input-inline">
-					<widget:singleSelect name="custType|1|客户类型|name|id" data="1=A,2=B,3=C,4=D,5=E,6=S,7=成交,8=F,9=C+" th:value="${info['custType']}?:0"/>
+					<widget:singleSelect name="custType|1|客户类型|name|id" data="1=A,2=B,3=C,4=D,5=E,6=S,7=成交,8=F,9=C+,10=成交未入读" th:value="${info['custType']}?:0"/>
 				</div>
 			</div>
 			<div class="layui-inline">
@@ -68,9 +68,9 @@
 			</div>
 		</div>
 		<div class="layui-form-item">
-			<label class="layui-form-label">家庭住址：</label>
+			<label class="layui-form-label">客户重点信息：</label>
 			<div class="layui-input-block">
-				<textarea name="address" style="width: 400px;" placeholder="请输入家庭住址" class="layui-textarea" th:text="${info['address']}"></textarea>
+				<textarea name="address" style="width: 400px;" placeholder="请输入客户重点信息" class="layui-textarea" th:text="${info['address']}"></textarea>
 			</div>
 		</div>
 		<div class="layui-form-item">
