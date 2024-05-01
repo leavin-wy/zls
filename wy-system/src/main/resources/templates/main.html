@@ -312,6 +312,7 @@
                             <td>转介绍</td>
                             <td>新生堂</td>
                             <td>影耀</td>
+                            <td>未成转</td>
                             <td>其他</td>
                             <td>合计</td>
                         </tr>
@@ -360,6 +361,7 @@
                             <td>转介绍</td>
                             <td>新生堂</td>
                             <td>影耀</td>
+                            <td>未成转</td>
                             <td>其他</td>
                             <td>合计</td>
                         </tr>
@@ -408,6 +410,7 @@
                             <td>转介绍</td>
                             <td>新生堂</td>
                             <td>影耀</td>
+                            <td>未成转</td>
                             <td>其他</td>
                             <td>合计</td>
                         </tr>
@@ -531,9 +534,9 @@
         });
 
         //当日新增
-        $.get("/maininitxzfb",{"flag":1,"codes":"1001,1002,1003,1004,1006,1007,1005,total"}, function(res, success) {
+        $.get("/maininitxzfb",{"flag":1,"codes":"1001,1002,1003,1004,1006,1007,1008,1005,total"}, function(res, success) {
             var data = res.data;
-            resultBindXZFBFunc(data,["user","1001","1002","1003","1004","1006","1007","1005","total"],"drxz");
+            resultBindXZFBFunc(data,["user","1001","1002","1003","1004","1006","1007","1008","1005","total"],"drxz");
         });
 
         //当日联系到店情况
@@ -549,9 +552,9 @@
         });
 
         //本周新增
-        $.get("/maininitxzfb",{"flag":2,"codes":"1001,1002,1003,1004,1006,1007,1005,total"}, function(res, success) {
+        $.get("/maininitxzfb",{"flag":2,"codes":"1001,1002,1003,1004,1006,1007,1008,1005,total"}, function(res, success) {
             var data = res.data;
-            resultBindXZFBFunc(data,["user","1001","1002","1003","1004","1006","1007","1005","total"],"bzxz");
+            resultBindXZFBFunc(data,["user","1001","1002","1003","1004","1006","1007","1008","1005","total"],"bzxz");
         });
 
         //本月联系到店情况
@@ -561,9 +564,9 @@
         });
 
         //本月新增
-        $.get("/maininitxzfb",{"flag":3,"codes":"1001,1002,1003,1004,1006,1007,1005,total"}, function(res, success) {
+        $.get("/maininitxzfb",{"flag":3,"codes":"1001,1002,1003,1004,1006,1007,1008,1005,total"}, function(res, success) {
             var data = res.data;
-            resultBindXZFBFunc(data,["user","1001","1002","1003","1004","1006","1007","1005","total"],"byxz");
+            resultBindXZFBFunc(data,["user","1001","1002","1003","1004","1006","1007","1008","1005","total"],"byxz");
         });
 
         var resultBindDRFunc = function (data,paramArr) {

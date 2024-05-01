@@ -52,6 +52,7 @@ public class CustomerConstant {
         put(5, "其他");
         put(6, "新生堂");
         put(7, "影耀");
+        put(8, "未成转");
     }
     };
 }
