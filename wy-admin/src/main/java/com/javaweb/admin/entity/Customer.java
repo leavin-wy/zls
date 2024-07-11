@@ -32,6 +32,8 @@ public class Customer extends BaseEntity {
     @TableField(exist = false)
     private String interactTimeStr;
 
+    private Integer introduce;
+
     /**
      * 客户名称
      */

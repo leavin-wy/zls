@@ -41,7 +41,7 @@
 			<div class="layui-inline">
 				<label class="layui-form-label">渠道<font color="red">*</font>：</label>
 				<div class="layui-input-inline">
-					<widget:singleSelect name="source|1|渠道|name|id" data="1=美团,2=扫街,3=自然到店,4=转介绍,5=其他,6=新生堂,7=影耀,8=未成转" th:value="${info['source']}?:0"/>
+					<widget:singleSelect name="source|1|渠道|name|id" data="1=美团,2=扫街,3=自然到店,4=转介绍,5=其他,6=新生堂,7=影耀,8=未成转,9=小红书" th:value="${info['source']}?:0"/>
 				</div>
 			</div>
 		</div>
@@ -64,6 +64,12 @@
 				<label class="layui-form-label">邀约时间：</label>
 				<div class="layui-input-inline">
 					<widget:dateSelect name="inviteTime|邀约时间|date|||0" th:value="${#dates.format(info['inviteTime'], 'yyyy-MM-dd')}"/>
+				</div>
+			</div>
+			<div class="layui-inline">
+				<label class="layui-form-label">转介绍人数：</label>
+				<div class="layui-input-inline">
+					<input name="introduce" th:value="${info['introduce']}" autocomplete="off" placeholder="请输入转介绍人数" class="layui-input" type="text">
 				</div>
 			</div>
 		</div>

@@ -23,7 +23,6 @@ public class CustomerListVo {
 
     private String age;
 
-
     /**
      * 客户信息ID
      */
@@ -85,7 +84,7 @@ public class CustomerListVo {
     private String custTypeName;
 
     /**
-     * 渠道：1=美团,2=扫街,3=自然到店,4=转介绍,5=其他,6=新生堂,7=影耀,8=未成转
+     * 渠道：1=美团,2=扫街,3=自然到店,4=转介绍,5=其他,6=新生堂,7=影耀,8=未成转,9=小红书
      */
     private Integer source;
 
@@ -94,6 +93,10 @@ public class CustomerListVo {
      */
     @Excel(name = "渠道",width = 30)
     private String sourceName;
+
+    @Excel(name = "转介绍人数",width = 15)
+    private Integer introduce;
+
 
     /**
      * 成交时间

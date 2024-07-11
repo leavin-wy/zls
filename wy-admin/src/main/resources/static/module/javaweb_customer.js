@@ -17,7 +17,7 @@ layui.use(['func'], function () {
             {width: 60, title: '序号', type:'numbers', fixed: 'left'}
             /*{field: 'id', width: 60, title: 'ID', align: 'center', sort: true, fixed: 'left'}*/
             , {field: 'custName', width: 90, title: '客户名称', align: 'center', fixed: 'left'}
-            , {field: 'nickName', width: 90, title: '客户昵称', align: 'center', fixed: 'left'}
+            , {field: 'nickName', width: 90, title: '客户昵称', align: 'center'}
             , {field: 'sex', width: 80, title: '性别', align: 'center', templet(d) {
                 var cls = "";
                 if (d.sex == 1) {
@@ -49,6 +49,7 @@ layui.use(['func'], function () {
                     }
                     return '<span class="layui-btn ' + cls + ' layui-btn-xs">'+d.sourceName+'</span>';
                 }}
+            , {field: 'introduce', width: 80, title: '转介绍数', align: 'center'}
             , {field: 'custType', width: 100, title: '客户类型', align: 'center', templet(d) {
                 var cls = "";
                 if (d.custType == 1) {
