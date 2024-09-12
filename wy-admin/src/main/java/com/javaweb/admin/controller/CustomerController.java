@@ -314,8 +314,11 @@ public class CustomerController extends BaseController {
                 .setSheetName("客资信息");
         try{
             String fileName = excelBaseParam.getFileName()+"_"+DateUtils.dateTimeNow()+".xlsx";
+            logger.info("导出客资文件："+fileName);
             Workbook workbook = ExcelSimpleUtil.exportExcel(excelBaseParam.getTitleName(), excelBaseParam.getSheetName(), customerListVoList, CustomerDownListVo.class,true);
+            logger.info("开始下载客资文件："+fileName);
             ExcelDownloadUtil.downloadExcel(workbook,fileName,excelBaseParam.getResponse());
+            logger.info("完成下载客资文件："+fileName);
         }catch (IOException e){
             logger.error("excel导出出错!",e);
         }

@@ -37,9 +37,16 @@
     </Appenders>
 
     <Loggers>
-        <Root level="INFO" includeLocation="true">
+        <!--<logger name="io.lettuce.core" level="info"></logger>
+        <logger name="org.springframework" level="info"></logger>
+        <logger name="org.apache.http" level="info"></logger>-->
+        <Root level="info" includeLocation="true">
             <AppenderRef ref="AsyncAppender"/>
             <AppenderRef ref="Console"/>
         </Root>
+        <Logger name="com.baomidou.mybatisplus" level="debug" additivity="false">
+            <AppenderRef ref="AsyncAppender"/>
+            <AppenderRef ref="Console"/>
+        </Logger>
     </Loggers>
 </Configuration>

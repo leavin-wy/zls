@@ -121,10 +121,10 @@ layui.use(['func'], function () {
             //console.info(url);
             layer.confirm('您确定要下载客户信息吗？', {icon: 3, title: '下载提示'}, function (index) {
                 window.location.href = url;
-                var msgId = layer.msg('正在下载，请稍候···', {
+                var msgId = layer.msg('文件正在下载，请勿重复点击.....', {
                     icon: 16,
                     shade: 0.4,
-                    time: 1500
+                    time: 2000
                 });
             });
         });
