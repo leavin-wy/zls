@@ -62,7 +62,7 @@ spring:
         # 登录名
         login-username: admin
         # 登录密码
-        login-password: 123456
+        login-password: applive@2024
   transaction:
     rollback-on-commit-failure: true
 
